@@ -1,4 +1,4 @@
-public class Duke {
+public class SuperIdol {
     public static void main(String[] args) {
         String logo = " ____                       ___    _       _ \n"
                 + "/ ___| _   _ _ __   ___ _ _|_ _|__| | ___ | |\n"
