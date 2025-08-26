@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 public class SuperIdol {
 
-    private static String[] toDoList = new String[100];
-    private static int listCount = 0;
+    private static Task[] toDoList = new Task[100];
 
     public static void main(String[] args) {
         String logo = " ____                       ___    _       _ \n"
@@ -25,6 +24,16 @@ public class SuperIdol {
             else if (command.equals("list")) {
                 showList();
             }
+            else if (command.matches("^mark [0-9]+$") || command.matches("^unmark [0-9]+$")) {
+                String[] commandPart = command.split(" ");
+                int taskId = Integer.parseInt(commandPart[1]);
+                if (commandPart[0].equals("mark")) {
+                    mark(taskId);
+                }
+                else {
+                    unmark(taskId);
+                }
+            }
             else {
                 addToList(command);
             }
@@ -38,16 +47,40 @@ public class SuperIdol {
     }
 
     public static void addToList(String command) {
-        toDoList[listCount] = command;
-        listCount++;
+        if (command.isBlank()) {
+            return;
+        }
+        Task newTask = new Task(command);
+        toDoList[Task.taskCount] = newTask;
+        Task.taskCount++;
         talk("added: " + command);
     }
 
     public static void showList() {
         System.out.println("____________________________________________________________");
-        for (int i = 0; i < listCount; i++) {
-            System.out.println((i+1) + ". " + toDoList[i]);
+        for (int i = 0; i < Task.taskCount; i++) {
+            System.out.println((i+1) + ". " + toDoList[i].getTask());
         }
         System.out.println("____________________________________________________________");
+    }
+
+    public static void mark(int taskId) {
+        if (taskId >= 1 && taskId <= Task.taskCount) {
+            System.out.println("____________________________________________________________");
+            toDoList[taskId - 1].mark();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(toDoList[taskId - 1].getTask());
+            System.out.println("____________________________________________________________");
+        }
+    }
+
+    public static void unmark(int taskId) {
+        if (taskId >= 1 && taskId <= Task.taskCount) {
+            System.out.println("____________________________________________________________");
+            toDoList[taskId - 1].unmark();
+            System.out.println("OK, I've marked this task as not done yet:");
+            System.out.println(toDoList[taskId - 1].getTask());
+            System.out.println("____________________________________________________________");
+        }
     }
 }
