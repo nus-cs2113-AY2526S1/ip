@@ -18,8 +18,7 @@ public class Task {
     public String getTask() {
         if (this.isDone) {
             return "[X] " + this.task;
-        }
-        else {
+        } else {
             return "[ ] " + this.task;
         }
     }
