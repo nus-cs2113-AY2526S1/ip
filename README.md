@@ -1,3 +1,29 @@
+# NUS CS2113 individual project (iP)
+
+> by Yik Jin ([@yikjin](https://github.com/yikjin))
+
+This repository hosts my own [individual project (iP)](
+https://nus-cs2113-ay2526s1.github.io/website/admin/ip-overview.html) code for
+[NUS' "CS2113: Software Engineering & Object-Oriented Programming" course](
+https://nusmods.com/courses/CS2113/software-engineering-object-oriented-programming).
+
+## License
+
+This is NOT an open source project. See [LICENSE.md](./LICENSE.md) for more details.
+
+## Security policy
+
+The security policy for this project can be found in [SECURITY.md](./SECURITY.md).
+
+## Code of conduct
+
+The code of conduct for this project can be found in [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
+
+---
+
+<details>
+<summary>View README from upstream template iP</summary>
+
 # Duke project template
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are
@@ -31,3 +57,5 @@ Prerequisites: JDK 17, update Intellij to the most recent version.
 **Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move
 Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle)
 expect to find Java files.
+
+</details>
