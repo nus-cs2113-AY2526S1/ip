@@ -1,0 +1,7 @@
+[commit]
+    gpgSign = true
+[merge]
+    ff = false
+[tag]
+    forceSignAnnotated = true
+    gpgSign = true
