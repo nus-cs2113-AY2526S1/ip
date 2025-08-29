@@ -4,7 +4,7 @@ public class Nova {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         int taskCount = 0;
 
         System.out.println("""
@@ -29,11 +29,28 @@ public class Nova {
             if (userInput.equals("list")) {
                 System.out.println("____________________________________________________________");
                 for (int i = 0; i < taskCount; i++) {
-                    System.out.println(" " + (i+1) + ". " + tasks[i]);
+                    System.out.println(" " + (i+1) + ". " + tasks[i].toString());
                 }
                 System.out.println("____________________________________________________________");
+            } else if (userInput.startsWith("mark")) {
+                int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+                Task t = tasks[taskNumber - 1];
+                t.markAsDone();
+                System.out.println("____________________________________________________________");
+                System.out.println(" Nice! I've marked this task as done:");
+                System.out.println("    " + t);
+                System.out.println("____________________________________________________________");
+            } else if (userInput.startsWith("unmark")) {
+                int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+                Task t = tasks[taskNumber - 1];
+                t.markAsNotDone();
+                System.out.println("____________________________________________________________");
+                System.out.println(" OK, I've maked this task as not done yet:");
+                System.out.println("    " + t);
+                System.out.println("____________________________________________________________");
             } else {
-                tasks[taskCount] = userInput;
+                Task newTask = new Task(userInput);
+                tasks[taskCount] = newTask;
                 taskCount++;
                 System.out.println("____________________________________________________________");
                 System.out.println(" added: " + userInput);
@@ -42,3 +59,4 @@ public class Nova {
         }
     }
 }
+
