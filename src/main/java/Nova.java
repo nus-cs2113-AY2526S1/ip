@@ -29,7 +29,7 @@ public class Nova {
             if (userInput.equals("list")) {
                 System.out.println("____________________________________________________________");
                 for (int i = 0; i < taskCount; i++) {
-                    System.out.println(" " + (i+1) + ". " + tasks[i].toString());
+                    System.out.println(" " + (i + 1) + ". " + tasks[i].toString());
                 }
                 System.out.println("____________________________________________________________");
             } else if (userInput.startsWith("mark")) {
