@@ -29,11 +29,79 @@ final class Kuro {
             return;
         }
 
+        System.out.println("Here are the tasks in your list:");
+
         for (int i = 0; i < Kuro.latestTaskIndex; i++) {
             final int listNumber = i + 1;
-            final String taskName = Kuro.tasks[i].getName();
+            final Task task = Kuro.tasks[i];
 
-            System.out.printf("%d. %s", listNumber, taskName);
+            System.out.printf("%d.[%c] %s", listNumber, task.getStatusIcon(), task.getName());
+            System.out.println();
+        }
+    }
+
+    private static void setTaskDone(final String[] taskIds) {
+        if (taskIds.length < 1) {
+            System.out.println("usage: mark [taskId]...");
+            return;
+        }
+
+        System.out.println("Nice! I've marked this task as done:");
+
+        for (final String taskIdString : taskIds) {
+            final int taskId;
+
+            try {
+                taskId = Integer.parseInt(taskIdString);
+            } catch (final NumberFormatException ignored) {
+                System.out.printf("error: '%s' is not an integer!", taskIdString);
+                System.out.println();
+                continue;
+            }
+
+            if (taskId < 1 || taskId > Kuro.latestTaskIndex) {
+                System.out.printf("error: task id %d is invalid!", taskId);
+                System.out.println();
+                continue;
+            }
+
+            final Task task = Kuro.tasks[taskId - 1];
+            task.setDone(true);
+
+            System.out.printf("[%c] %s", task.getStatusIcon(), task.getName());
+            System.out.println();
+        }
+    }
+
+    private static void setTaskUndone(final String[] taskIds) {
+        if (taskIds.length < 1) {
+            System.out.println("usage: unmark [taskId]...");
+            return;
+        }
+
+        System.out.println("OK, I've marked this task as not done yet:");
+
+        for (final String taskIdString : taskIds) {
+            final int taskId;
+
+            try {
+                taskId = Integer.parseInt(taskIdString);
+            } catch (final NumberFormatException ignored) {
+                System.out.printf("error: '%s' is not an integer!", taskIdString);
+                System.out.println();
+                continue;
+            }
+
+            if (taskId < 1 || taskId > Kuro.latestTaskIndex) {
+                System.out.printf("error: task id %d is invalid!", taskId);
+                System.out.println();
+                continue;
+            }
+
+            final Task task = Kuro.tasks[taskId - 1];
+            task.setDone(false);
+
+            System.out.printf("[%c] %s", task.getStatusIcon(), task.getName());
             System.out.println();
         }
     }
@@ -57,8 +125,13 @@ final class Kuro {
         try (final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8)) {
             do {
                 final String inputLine = scanner.nextLine().strip();
+                final String[] inputTokens = inputLine.split(" ", 2);
+                final String inputCommand = inputTokens.length > 0 ? inputTokens[0] : "";
+                final String[] inputArguments = inputTokens.length > 1
+                        ? inputTokens[1].split(" ")
+                        : new String[] {};
 
-                switch (inputLine) {
+                switch (inputCommand) {
                 case "bye":
                     // Exit the chat session
                     return;
@@ -66,9 +139,15 @@ final class Kuro {
                     // List all stored tasks
                     Kuro.listTasks();
                     break;
+                case "mark":
+                    Kuro.setTaskDone(inputArguments);
+                    break;
+                case "unmark":
+                    Kuro.setTaskUndone(inputArguments);
+                    break;
                 default:
                     // Add a task
-                    Kuro.addTask(inputLine);
+                    Kuro.addTask(inputCommand);
                     break;
                 }
             } while (true);

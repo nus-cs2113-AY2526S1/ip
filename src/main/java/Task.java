@@ -1,16 +1,20 @@
 final class Task {
-    private String name;
+    private String name = "";
+    private boolean isDone = false;
 
     Task() {
-        this.name = "";
     }
 
     Task(final String name) {
         this.name = name;
     }
 
+    char getStatusIcon() {
+        return this.isDone ? 'X' : ' ';
+    }
+
     public String toString() {
-        return this.name;
+        return this.name + (this.isDone ? " (done)" : "");
     }
 
     String getName() {
@@ -19,5 +23,13 @@ final class Task {
 
     void setName(final String name) {
         this.name = name;
+    }
+
+    boolean isDone() {
+        return this.isDone;
+    }
+
+    void setDone(final boolean done) {
+        this.isDone = done;
     }
 }
