@@ -7,23 +7,16 @@ public class SuperIdol {
     private static Task[] toDoList = new Task[100];
 
     public static void main(String[] args) {
-        String logo = " ____                       ___    _       _ \n"
-                + "/ ___| _   _ _ __   ___ _ _|_ _|__| | ___ | |\n"
-                + "\\___ \\| | | | '_ \\ / _ \\ '__| |/ _` |/ _ \\| |\n"
-                + " ___) | |_| | |_) |  __/ |  | | (_| | (_) | |\n"
-                + "|____/ \\__,_| .__/ \\___|_| |___\\__,_|\\___/|_|\n"
-                + "            |_|                              \n";
-        System.out.println("Hello! I'm SuperIdol\n" + logo);
-        System.out.println("What can I do for you?");
+        greeting();
 
         Scanner in = new Scanner(System.in);
+        String command =  in.nextLine();
+        String commandKeyWord = command.split(" ")[0];
+
         while (true) {
-            String command =  in.nextLine();
-            String commandKeyWord = command.split(" ")[0];
             switch (commandKeyWord) {
             case "exit":
-                talk("Bye. Hope to see you again soon!");
-                System.exit(0);
+                exit();
                 break;
             case "list":
                 showList();
@@ -47,6 +40,22 @@ public class SuperIdol {
                 addTask(command);
             }
         }
+    }
+
+    public static void greeting() {
+        String logo = " ____                       ___    _       _\n"
+                + "/ ___| _   _ _ __   ___ _ _|_ _|__| | ___ | |\n"
+                + "\\___ \\| | | | '_ \\ / _ \\ '__| |/ _` |/ _ \\| |\n"
+                + " ___) | |_| | |_) |  __/ |  | | (_| | (_) | |\n"
+                + "|____/ \\__,_| .__/ \\___|_| |___\\__,_|\\___/|_|\n"
+                + "            |_|\n";
+        System.out.println("Hello! I'm SuperIdol\n" + logo);
+        System.out.println("What can I do for you?");
+    }
+
+    public static void exit() {
+        talk("Bye. Hope to see you again soon!");
+        System.exit(0);
     }
 
     public static void talk(String response) {
@@ -103,8 +112,11 @@ public class SuperIdol {
     }
 
     public static void addToList(Task newTask, String task) {
+        // add task to the list
         toDoList[Task.taskCount] = newTask;
         Task.taskCount++;
+
+        // print the result
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
         System.out.println(toDoList[Task.taskCount - 1].getTask());
@@ -115,7 +127,7 @@ public class SuperIdol {
     public static void showList() {
         System.out.println("____________________________________________________________");
         for (int i = 0; i < Task.taskCount; i++) {
-            System.out.println((i+1) + ". " + toDoList[i].getTask());
+            System.out.println((i + 1) + ". " + toDoList[i].getTask());
         }
         System.out.println("____________________________________________________________");
     }
