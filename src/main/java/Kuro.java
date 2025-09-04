@@ -147,7 +147,7 @@ final class Kuro {
                     break;
                 default:
                     // Add a task
-                    Kuro.addTask(inputCommand);
+                    Kuro.addTask(inputLine);
                     break;
                 }
             } while (true);
