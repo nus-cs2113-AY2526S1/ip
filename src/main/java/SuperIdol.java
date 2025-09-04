@@ -10,10 +10,11 @@ public class SuperIdol {
         greeting();
 
         Scanner in = new Scanner(System.in);
-        String command =  in.nextLine();
-        String commandKeyWord = command.split(" ")[0];
+
 
         while (true) {
+            String command =  in.nextLine();
+            String commandKeyWord = command.split(" ")[0];
             switch (commandKeyWord) {
             case "exit":
                 exit();
@@ -38,6 +39,7 @@ public class SuperIdol {
                 break;
             default:
                 addTask(command);
+                break;
             }
         }
     }
