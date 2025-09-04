@@ -1,0 +1,8 @@
+todo sleep now
+todo wake up
+deadline do assignment /by Sunday
+event project meeting /from Mon 2pm /to 4pm
+mark 1
+mark 4
+list
+bye
