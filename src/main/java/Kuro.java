@@ -1,11 +1,16 @@
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 final class Kuro {
-    private static final int MAX_TASKS = 100;
-    private static final Task[] tasks = new Task[Kuro.MAX_TASKS];
-    private static int latestTaskIndex = 0;
+    private static final int TASKS_INIT_SIZE = 10;
+    private static final ArrayList<Task> tasks = new ArrayList<>(Kuro.TASKS_INIT_SIZE);
+
+    public static void main(final String[] args) {
+        Kuro.greet();
+        Kuro.startChatSession();
+    }
 
     private static void greet() {
         final String nameLogo = """
@@ -23,107 +28,12 @@ final class Kuro {
         System.out.println("What can I do for you?");
     }
 
-    private static void listTasks() {
-        if (Kuro.latestTaskIndex == 0) {
-            System.out.println("error: no tasks added!");
-            return;
-        }
-
-        System.out.println("Here are the tasks in your list:");
-
-        for (int i = 0; i < Kuro.latestTaskIndex; i++) {
-            final int listNumber = i + 1;
-            final Task task = Kuro.tasks[i];
-
-            System.out.printf("%d.[%c] %s", listNumber, task.getStatusIcon(), task.getName());
-            System.out.println();
-        }
-    }
-
-    private static void setTaskDone(final String[] taskIds) {
-        if (taskIds.length < 1) {
-            System.out.println("usage: mark [taskId]...");
-            return;
-        }
-
-        System.out.println("Nice! I've marked this task as done:");
-
-        for (final String taskIdString : taskIds) {
-            final int taskId;
-
-            try {
-                taskId = Integer.parseInt(taskIdString);
-            } catch (final NumberFormatException ignored) {
-                System.out.printf("error: '%s' is not an integer!", taskIdString);
-                System.out.println();
-                continue;
-            }
-
-            if (taskId < 1 || taskId > Kuro.latestTaskIndex) {
-                System.out.printf("error: task id %d is invalid!", taskId);
-                System.out.println();
-                continue;
-            }
-
-            final Task task = Kuro.tasks[taskId - 1];
-            task.setDone(true);
-
-            System.out.printf("[%c] %s", task.getStatusIcon(), task.getName());
-            System.out.println();
-        }
-    }
-
-    private static void setTaskUndone(final String[] taskIds) {
-        if (taskIds.length < 1) {
-            System.out.println("usage: unmark [taskId]...");
-            return;
-        }
-
-        System.out.println("OK, I've marked this task as not done yet:");
-
-        for (final String taskIdString : taskIds) {
-            final int taskId;
-
-            try {
-                taskId = Integer.parseInt(taskIdString);
-            } catch (final NumberFormatException ignored) {
-                System.out.printf("error: '%s' is not an integer!", taskIdString);
-                System.out.println();
-                continue;
-            }
-
-            if (taskId < 1 || taskId > Kuro.latestTaskIndex) {
-                System.out.printf("error: task id %d is invalid!", taskId);
-                System.out.println();
-                continue;
-            }
-
-            final Task task = Kuro.tasks[taskId - 1];
-            task.setDone(false);
-
-            System.out.printf("[%c] %s", task.getStatusIcon(), task.getName());
-            System.out.println();
-        }
-    }
-
-    private static void addTask(final String taskName) {
-        if (Kuro.latestTaskIndex >= Kuro.MAX_TASKS) {
-            System.out.println("error: maximum task count reached!");
-            return;
-        }
-
-        final Task task = new Task(taskName);
-
-        Kuro.tasks[Kuro.latestTaskIndex] = task;
-        Kuro.latestTaskIndex++;
-
-        System.out.printf("added: %s", task.getName());
-        System.out.println();
-    }
-
     private static void startChatSession() {
         try (final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8)) {
             do {
+                System.out.println();
+                System.out.print("> ");
+
                 final String inputLine = scanner.nextLine().strip();
                 final String[] inputTokens = inputLine.split(" ", 2);
                 final String inputCommand = inputTokens.length > 0 ? inputTokens[0] : "";
@@ -133,20 +43,18 @@ final class Kuro {
 
                 switch (inputCommand) {
                 case "bye":
-                    // Exit the chat session
-                    return;
+                    Kuro.quit();
+                    return;  // Exit the chat session
                 case "list":
-                    // List all stored tasks
                     Kuro.listTasks();
                     break;
                 case "mark":
-                    Kuro.setTaskDone(inputArguments);
+                    Kuro.setTasksDone(inputArguments);
                     break;
                 case "unmark":
-                    Kuro.setTaskUndone(inputArguments);
+                    Kuro.setTasksDone(inputArguments, false);
                     break;
-                default:
-                    // Add a task
+                default:  // Add a task
                     Kuro.addTask(inputLine);
                     break;
                 }
@@ -161,9 +69,70 @@ final class Kuro {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void main(final String[] args) {
-        Kuro.greet();
-        Kuro.startChatSession();
-        Kuro.quit();
+    private static void listTasks() {
+        if (Kuro.tasks.isEmpty()) {
+            System.out.println("error: no tasks added!");
+            return;
+        }
+
+        final int numTasks = Kuro.tasks.size();
+        System.out.println("Here are the tasks in your list:");
+
+        for (int i = 0; i < numTasks; i++) {
+            final int listNumber = i + 1;
+            final Task task = Kuro.tasks.get(i);
+
+            System.out.printf("%d. [%c] %s", listNumber, task.getStatusIcon(), task.getName());
+            System.out.println();
+        }
+    }
+
+    private static void setTasksDone(final String[] taskIds) {
+        Kuro.setTasksDone(taskIds, true);
+    }
+
+    private static void setTasksDone(final String[] taskIds, final boolean isDone) {
+        if (taskIds.length < 1) {
+            System.out.printf("usage: %s [taskId]...", isDone ? "mark" : "unmark");
+            System.out.println();
+            return;
+        }
+
+        System.out.println(isDone
+                ? "Nice! I've marked this task as done:"
+                : "OK, I've marked this task as not done yet:");
+
+        for (final String taskIdString : taskIds) {
+            final int taskId;
+
+            try {
+                taskId = Integer.parseInt(taskIdString);
+            } catch (final NumberFormatException ignored) {
+                System.out.printf("error: '%s' is not an integer!", taskIdString);
+                System.out.println();
+                continue;
+            }
+
+            if (taskId < 1 || taskId > Kuro.tasks.size()) {
+                System.out.printf("error: task id %d is invalid!", taskId);
+                System.out.println();
+                continue;
+            }
+
+            final Task task = Kuro.tasks.get(taskId - 1);
+            task.setDone(isDone);
+
+            System.out.printf("[%c] %s", task.getStatusIcon(), task.getName());
+            System.out.println();
+        }
+    }
+
+    private static void addTask(final String taskName) {
+        final Task task = new Task(taskName);
+
+        Kuro.tasks.add(task);
+
+        System.out.printf("added: %s", task.getName());
+        System.out.println();
     }
 }
