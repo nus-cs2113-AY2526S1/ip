@@ -1,3 +1,10 @@
+package superidol.ui;
+
+import superidol.task.Deadline;
+import superidol.task.Event;
+import superidol.task.Task;
+import superidol.task.Todo;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +29,7 @@ public class SuperIdol {
             case "list":
                 showList();
                 break;
-            case "mark":
+            case "setIsDone":
                 mark(command);
                 break;
             case "unmark":
@@ -75,7 +82,7 @@ public class SuperIdol {
             String time = matcher.group(3).trim();
 
             Deadline newTask = new Deadline(deadline, time);
-            addToList(newTask, deadline);
+            addToList(newTask);
         }
         else {
             talk("Wrong input! \"deadline <task> /by <time>\"");
@@ -92,7 +99,7 @@ public class SuperIdol {
             String endTime = matcher.group(4).trim();
 
             Event event = new Event(task, startTime, endTime);
-            addToList(event, task);
+            addToList(event);
         }
         else {
             talk("Wrong input! \"event <task> /from <start> /to <end>\"");
@@ -105,15 +112,15 @@ public class SuperIdol {
         // remove "todo"
         String task = command.substring(4).trim();
         Todo todo = new Todo(task);
-        addToList(todo, task);
+        addToList(todo);
     }
 
     public static void addTask(String command) {
         Task newTask = new Task(command);
-        addToList(newTask, command);
+        addToList(newTask);
     }
 
-    public static void addToList(Task newTask, String task) {
+    public static void addToList(Task newTask) {
         // add task to the list
         toDoList[Task.taskCount] = newTask;
         Task.taskCount++;
@@ -137,7 +144,7 @@ public class SuperIdol {
     public static void mark(String command) {
         int taskId = Integer.parseInt(command.split(" ")[1]);
         if (taskId >= 1 && taskId <= Task.taskCount) {
-            toDoList[taskId - 1].mark();
+            toDoList[taskId - 1].setIsDone();
             System.out.println("____________________________________________________________");
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(toDoList[taskId - 1].getTask());

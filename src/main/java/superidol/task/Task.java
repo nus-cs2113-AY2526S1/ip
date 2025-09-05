@@ -1,3 +1,5 @@
+package superidol.task;
+
 public class Task {
     public static int taskCount = 0;
     private String task;
@@ -7,7 +9,7 @@ public class Task {
         this.task = task;
     }
 
-    public void mark() {
+    public void setIsDone() {
         this.isDone = true;
     }
 
