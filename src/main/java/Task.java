@@ -7,12 +7,8 @@ public class Task {
         this.task = task;
     }
 
-    public void mark() {
-        this.isDone = true;
-    }
-
-    public void unmark() {
-        this.isDone = false;
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public String getTask() {

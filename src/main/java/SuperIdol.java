@@ -13,35 +13,46 @@ public class SuperIdol {
 
 
         while (true) {
-            String command =  in.nextLine();
-            String commandKeyWord = command.split(" ")[0];
-            switch (commandKeyWord) {
-            case "exit":
-                exit();
-                break;
-            case "list":
-                showList();
-                break;
-            case "mark":
-                mark(command);
-                break;
-            case "unmark":
-                unmark(command);
-                break;
-            case "todo":
-                addTodo(command);
-                break;
-            case "deadline":
-                addDeadline(command);
-                break;
-            case "event":
-                addEvent(command);
-                break;
-            default:
-                addTask(command);
-                break;
+            String command =  in.nextLine().trim();
+            try {
+                String commandKeyWord = command.split(" ")[0];
+                switch (commandKeyWord) {
+                case "exit":
+                    exit();
+                    break;
+                case "list":
+                    showList();
+                    break;
+                case "mark":
+                    mark(command, true);
+                    break;
+                case "unmark":
+                    mark(command, false);
+                    break;
+                case "todo":
+                    addTodo(command);
+                    break;
+                case "deadline":
+                    addDeadline(command);
+                    break;
+                case "event":
+                    addEvent(command);
+                    break;
+                default:
+                    reponse();
+                    break;
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                reponse();
             }
         }
+    }
+
+    public static void reponse() {
+        talk("OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+            + "try: todo <task>\n"
+            + "try: deadline <task> /by <time>\n"
+            + "try: event <task> /from <start> /to <end>");
     }
 
     public static void greeting() {
@@ -76,9 +87,8 @@ public class SuperIdol {
 
             Deadline newTask = new Deadline(deadline, time);
             addToList(newTask, deadline);
-        }
-        else {
-            talk("Wrong input! \"deadline <task> /by <time>\"");
+        } else {
+            talk("Wrong input! Try \"deadline <task> /by <time>\"");
         }
     }
 
@@ -93,19 +103,20 @@ public class SuperIdol {
 
             Event event = new Event(task, startTime, endTime);
             addToList(event, task);
+        } else {
+            talk("Wrong input! Try \"event <task> /from <start> /to <end>\"");
         }
-        else {
-            talk("Wrong input! \"event <task> /from <start> /to <end>\"");
-        }
-
-
     }
 
     public static void addTodo(String command) {
         // remove "todo"
         String task = command.substring(4).trim();
-        Todo todo = new Todo(task);
-        addToList(todo, task);
+        if (task.isBlank()) {
+            talk("Wrong input! Try \"todo <task>\"");
+        } else {
+            Todo todo = new Todo(task);
+            addToList(todo, task);
+        }
     }
 
     public static void addTask(String command) {
@@ -127,32 +138,35 @@ public class SuperIdol {
     }
 
     public static void showList() {
-        System.out.println("____________________________________________________________");
-        for (int i = 0; i < Task.taskCount; i++) {
-            System.out.println((i + 1) + ". " + toDoList[i].getTask());
-        }
-        System.out.println("____________________________________________________________");
-    }
-
-    public static void mark(String command) {
-        int taskId = Integer.parseInt(command.split(" ")[1]);
-        if (taskId >= 1 && taskId <= Task.taskCount) {
-            toDoList[taskId - 1].mark();
+        if (Task.taskCount == 0) {
+            talk("There are no tasks in the list.\n" + "Try add some.");
+        } else {
             System.out.println("____________________________________________________________");
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(toDoList[taskId - 1].getTask());
+            for (int i = 0; i < Task.taskCount; i++) {
+                System.out.println((i + 1) + ". " + toDoList[i].getTask());
+            }
             System.out.println("____________________________________________________________");
         }
     }
 
-    public static void unmark(String command) {
-        int taskId = Integer.parseInt(command.split(" ")[1]);
-        if (taskId >= 1 && taskId <= Task.taskCount) {
-            toDoList[taskId - 1].unmark();
-            System.out.println("____________________________________________________________");
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(toDoList[taskId - 1].getTask());
-            System.out.println("____________________________________________________________");
+    public static void mark(String command, boolean isDone) {
+        try {
+            int taskId = Integer.parseInt(command.split(" ")[1]);
+            if (taskId >= 1 && taskId <= Task.taskCount) {
+                toDoList[taskId - 1].setIsDone(isDone);
+                if (isDone) {
+                    talk("Nice! I've marked this task as done:\n"
+                            + toDoList[taskId - 1].getTask());
+                } else {
+                    talk("OK, I've marked this task as not done yet:\n"
+                            + toDoList[taskId - 1].getTask());
+                }
+            } else {
+                talk("You only have " + Task.taskCount + " task(s) in the list.");
+            }
+        } catch (NumberFormatException e) {
+            talk("Wrong input! Try \"(un)mark <task_index>\"");
         }
+
     }
 }
