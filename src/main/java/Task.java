@@ -1,5 +1,5 @@
-final class Task {
-    private String name;
+abstract class Task {
+    private final String name;
     private boolean isDone;
 
     Task(final String name) {
@@ -7,25 +7,13 @@ final class Task {
         this.isDone = false;
     }
 
-    char getStatusIcon() {
-        return this.isDone ? 'X' : ' ';
-    }
-
     @Override
     public String toString() {
-        return this.name + (this.isDone ? " (done)" : "");
+        return "[" + this.getStatusIcon() + "] " + this.name;
     }
 
-    String getName() {
-        return this.name;
-    }
-
-    void setName(final String name) {
-        this.name = name;
-    }
-
-    boolean isDone() {
-        return this.isDone;
+    char getStatusIcon() {
+        return this.isDone ? 'X' : ' ';
     }
 
     void setDone(final boolean done) {
