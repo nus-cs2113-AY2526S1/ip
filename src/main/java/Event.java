@@ -3,13 +3,6 @@ public class Event extends Task {
     protected String from;
     protected String to;
 
-    public String getFrom() {
-        return from;
-    }
-    public String getTo() {
-        return to;
-    }
-
     Event(String description, String from, String to) {
         super(description);
         this.from = from;
@@ -18,7 +11,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E] [" + getStatusIcon() + "] " + description + " (from: " + from + " to: " + to + ")";
+        return "[E] " + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 
 

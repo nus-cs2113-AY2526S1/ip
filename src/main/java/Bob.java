@@ -24,8 +24,9 @@ public class Bob {
         System.out.println("What can I do for you?");
         printLineSeparator();
         boolean endConvo = false;
+        Scanner scanner = new Scanner(System.in);
         while (!endConvo) {
-            Scanner scanner = new Scanner(System.in);
+            //Scanner scanner = new Scanner(System.in);
             String sentence = scanner.nextLine();
             String[] sentenceArray = sentence.split("\\s+");
 
@@ -86,18 +87,9 @@ public class Bob {
             } else if (sentence.equals("list")) {
                 printLineSeparator();
                 for  (int i = 0; i < instructions.size(); i++) {
-                    switch (instructions.get(i)) {
-                    case Todo _ ->
-                            System.out.println(i + 1 + ". [T] [" + instructions.get(i).getStatusIcon() + "] " + instructions.get(i).description);
-                    case Deadline deadline ->
-                            System.out.println(i + 1 + ". [D] [" + instructions.get(i).getStatusIcon() + "] " + instructions.get(i).description + " (by: " + deadline.getBy() + ")");
-                    case Event event ->
-                            System.out.println(i + 1 + ". [E] [" + instructions.get(i).getStatusIcon() + "] " + instructions.get(i).description + " (from: " + event.getFrom() + " to: " + event.getTo() + ")");
-                    default ->
-                            System.out.println(i + 1 + ". [" + instructions.get(i).getStatusIcon() + "] " + instructions.get(i).description);
+                    System.out.println((i + 1) + ". " + instructions.get(i));
                     }
-                    }
-                    }
+                }
                 printLineSeparator();
             }
         }
