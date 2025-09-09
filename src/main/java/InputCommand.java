@@ -9,17 +9,17 @@ enum InputCommand {
     }
 
     static InputCommand parse(final String command) {
-        for (final InputCommand enumCommand : InputCommand.values()) {
+        for (final InputCommand enumCommand : values()) {
             if (enumCommand.enumValue.equalsIgnoreCase(command)) {
                 return enumCommand;
             }
         }
 
-        return InputCommand.INVALID;
+        return INVALID;
     }
 
     @Override
     public String toString() {
-        return this.enumValue;
+        return enumValue;
     }
 }

@@ -6,7 +6,7 @@ final class Ui implements Closeable {
     private final Scanner scanner;
 
     Ui() {
-        this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+        scanner = new Scanner(System.in, StandardCharsets.UTF_8);
     }
 
     static void greet() {
@@ -78,16 +78,16 @@ final class Ui implements Closeable {
         System.out.println();
         System.out.print("> ");
 
-        return this.scanner.nextLine();
+        return scanner.nextLine();
     }
 
     @Override
     public void close() {
-        this.scanner.close();
+        scanner.close();
     }
 
     @Override
     public String toString() {
-        return this.scanner.toString();
+        return scanner.toString();
     }
 }

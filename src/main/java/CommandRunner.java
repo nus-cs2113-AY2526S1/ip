@@ -5,48 +5,48 @@ final class CommandRunner {
     private static boolean isTerminateGiven = false;
 
     static void runCommand(final String command) {
-        CommandRunner.PARSER.parse(command);
+        PARSER.parse(command);
 
-        final String[] posArgs = CommandRunner.PARSER.getPositionalArgs();
+        final String[] posArgs = PARSER.getPositionalArgs();
         final String posArgsAsString = String.join(" ", posArgs);
-        final Map<String, String[]> namedArgs = CommandRunner.PARSER.getNamedArgs();
+        final Map<String, String[]> namedArgs = PARSER.getNamedArgs();
 
-        switch (CommandRunner.PARSER.getCommand()) {
+        switch (PARSER.getCommand()) {
         case BYE:
-            CommandRunner.bye();
+            bye();
             break;
         case DEADLINE:
-            CommandRunner.addDeadline(posArgsAsString, namedArgs);
+            addDeadline(posArgsAsString, namedArgs);
             break;
         case EVENT:
-            CommandRunner.addEvent(posArgsAsString, namedArgs);
+            addEvent(posArgsAsString, namedArgs);
             break;
         case LIST:
-            CommandRunner.listTasks();
+            listTasks();
             break;
         case MARK:
-            CommandRunner.markTasksAsDone(posArgs);
+            markTasksAsDone(posArgs);
             break;
         case UNMARK:
-            CommandRunner.markTasksAsDone(posArgs, false);
+            markTasksAsDone(posArgs, false);
             break;
         case TODO:
         default:
-            CommandRunner.addTodo(posArgsAsString);
+            addTodo(posArgsAsString);
             break;
         }
     }
 
     static void bye() {
         Ui.bye();
-        CommandRunner.isTerminateGiven = true;
+        isTerminateGiven = true;
     }
 
     private static void addDeadline(final String deadlineName, final Map<String, String[]> deadlineArgs) {
         final String by = InputParser.mapArgsToString(deadlineArgs.get("by"));
         final Deadline deadline = new Deadline(deadlineName, by);
 
-        CommandRunner.addTask(deadline);
+        addTask(deadline);
     }
 
     private static void addEvent(final String eventName, final Map<String, String[]> eventArgs) {
@@ -54,7 +54,7 @@ final class CommandRunner {
         final String to = InputParser.mapArgsToString(eventArgs.get("to"));
         final Event event = new Event(eventName, from, to);
 
-        CommandRunner.addTask(event);
+        addTask(event);
     }
 
     private static void listTasks() {
@@ -75,7 +75,7 @@ final class CommandRunner {
     }
 
     private static void markTasksAsDone(final String[] taskIds) {
-        CommandRunner.markTasksAsDone(taskIds, true);
+        markTasksAsDone(taskIds, true);
     }
 
     private static void markTasksAsDone(final String[] taskIds, final boolean isDone) {
@@ -114,7 +114,7 @@ final class CommandRunner {
 
     private static void addTodo(final String todoName) {
         final Todo todo = new Todo(todoName);
-        CommandRunner.addTask(todo);
+        addTask(todo);
     }
 
     private static void addTask(final Task task) {
@@ -123,6 +123,6 @@ final class CommandRunner {
     }
 
     static boolean isTerminateGiven() {
-        return CommandRunner.isTerminateGiven;
+        return isTerminateGiven;
     }
 }

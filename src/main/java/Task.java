@@ -4,19 +4,19 @@ abstract class Task {
 
     Task(final String name) {
         this.name = name;
-        this.isDone = false;
+        isDone = false;
     }
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.name;
+        return "[" + getStatusIcon() + "] " + name;
     }
 
     char getStatusIcon() {
-        return this.isDone ? 'X' : ' ';
+        return isDone ? 'X' : ' ';
     }
 
     void setDone(final boolean done) {
-        this.isDone = done;
+        isDone = done;
     }
 }
