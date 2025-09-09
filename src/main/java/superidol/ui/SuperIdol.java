@@ -113,13 +113,7 @@ public class SuperIdol {
         } else {
             talk("Wrong input! Try \"event <task> /from <start> /to <end>\"");
         }
-        else {
-            talk("Wrong input! \"event <task> /from <start> /to <end>\"");
-        }
-
-
     }
-
     public static void addTodo(String command) {
         // remove "todo"
         String task = command.substring(4).trim();
