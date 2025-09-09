@@ -1,3 +1,5 @@
+package superidol.task;
+
 public class Deadline extends Task{
     private String time;
 

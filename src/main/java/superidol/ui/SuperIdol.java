@@ -1,3 +1,10 @@
+package superidol.ui;
+
+import superidol.task.Deadline;
+import superidol.task.Event;
+import superidol.task.Task;
+import superidol.task.Todo;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -106,6 +113,11 @@ public class SuperIdol {
         } else {
             talk("Wrong input! Try \"event <task> /from <start> /to <end>\"");
         }
+        else {
+            talk("Wrong input! \"event <task> /from <start> /to <end>\"");
+        }
+
+
     }
 
     public static void addTodo(String command) {
