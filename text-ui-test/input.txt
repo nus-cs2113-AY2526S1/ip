@@ -1,5 +1,18 @@
+dance
+list
 todo borrow book
 list
 deadline return book /by Sunday
+deadline a
+list
+mark 1
+mark abc
+event b
+list
+unmark 1
 event project meeting /from Mon 2pm /to 4pm
+mark -1
+mark 3
+unmark 2
+list
 exit
