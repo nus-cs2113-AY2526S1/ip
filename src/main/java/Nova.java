@@ -50,7 +50,7 @@ public class Nova {
 
 
     private static void printLineSeparator() {
-        System.out.println("____________________________________________________________");
+        System.out.println("=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*");
     }
 
     private static void printMarkError() {
@@ -62,6 +62,12 @@ public class Nova {
     private static void printWelcomeMessage() {
         printLineSeparator();
         System.out.print("""
+                  _   _   ____  __      __    _
+                 | \\ | | / __ \\ \\ \\    / /   / \\
+                 |  \\| || |  | | \\ \\  / /   / _ \\
+                 | |\\  || |  | |  \\ \\/ /   / ___ \\
+                 |_| \\_| \\____/    \\__/   /_/   \\_\\
+                
                  Hello! I'm Nova
                  What can I do for you?
                 """);
