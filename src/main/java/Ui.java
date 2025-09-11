@@ -1,13 +1,8 @@
-import java.io.Closeable;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-final class Ui implements Closeable {
-    private final Scanner scanner;
-
-    Ui() {
-        this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-    }
+final class Ui {
+    private static final Scanner SCANNER = new Scanner(System.in, StandardCharsets.UTF_8);
 
     static void greet() {
         final String nameLogo = """
@@ -39,22 +34,8 @@ final class Ui implements Closeable {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    static void errInvalidTaskId(final int taskId) {
-        System.out.printf("error: task ID %d is invalid!", taskId);
-        System.out.println();
-    }
-
-    static void errInvalidTaskId(final String taskId) {
-        System.out.printf("error: task ID '%s' is invalid!", taskId);
-        System.out.println();
-    }
-
-    static void errNoTasks() {
-        System.out.println("error: no tasks added!");
-    }
-
-    static void errNoTaskIds() {
-        System.out.println("error: no task IDs provided!");
+    static void errException(final AppException message) {
+        System.out.println(message.toString());
     }
 
     static void listTasksBegin() {
@@ -74,20 +55,19 @@ final class Ui implements Closeable {
         System.out.println("OK, I've marked this task as not done yet:");
     }
 
-    String getUserPrompt() {
+    static String getUserPrompt() {
         System.out.println();
         System.out.print("> ");
 
-        return this.scanner.nextLine();
+        return SCANNER.nextLine();
     }
 
-    @Override
-    public void close() {
-        this.scanner.close();
+    static void close() {
+        SCANNER.close();
     }
 
     @Override
     public String toString() {
-        return this.scanner.toString();
+        return SCANNER.toString();
     }
 }

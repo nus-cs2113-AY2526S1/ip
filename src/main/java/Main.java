@@ -1,20 +1,20 @@
 import java.util.NoSuchElementException;
 
-final class Kuro {
-    private static final Ui UI = new Ui();
-
+final class Main {
     public static void main(final String[] args) {
         Ui.greet();
-        Kuro.commandRepl();
+        commandRepl();
 
-        Kuro.UI.close();
+        Ui.close();
     }
 
     private static void commandRepl() {
         do {
             try {
-                final String inputLine = Kuro.UI.getUserPrompt();
+                final String inputLine = Ui.getUserPrompt();
                 CommandRunner.runCommand(inputLine);
+            } catch (final AppException message) {
+                Ui.errException(message);
             } catch (final NoSuchElementException ignored) {
                 // Ensure the code does not error out when passing in input via command line, and the input does not end
                 // with "bye"

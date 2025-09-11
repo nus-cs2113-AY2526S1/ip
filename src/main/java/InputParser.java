@@ -13,26 +13,30 @@ final class InputParser {
     private final ArrayList<String> positionalArgs;
     private final Map<String, String[]> namedArgs;
     private InputCommand command;
+    private String rawCommand;
 
     InputParser() {
-        this.command = InputCommand.INVALID;
-        this.positionalArgs = new ArrayList<>(InputParser.INIT_POS_ARGS_CAPACITY);
-        this.namedArgs = new HashMap<>(InputParser.INIT_NAMED_ARGS_CAPACITY);
+        rawCommand = "";
+        command = InputCommand.INVALID;
+        positionalArgs = new ArrayList<>(INIT_POS_ARGS_CAPACITY);
+        namedArgs = new HashMap<>(INIT_NAMED_ARGS_CAPACITY);
     }
 
     static String mapArgsToString(final String[] args) {
         if (args == null) {
             return "";
         }
+
         return String.join(" ", args);
     }
 
     void parse(final String input) {
-        final String[] tokens = InputParser.SPACES.split(input);
+        final String[] tokens = SPACES.split(input);
 
-        this.command = InputCommand.INVALID;
-        this.positionalArgs.clear();
-        this.namedArgs.clear();
+        rawCommand = "";
+        command = InputCommand.INVALID;
+        positionalArgs.clear();
+        namedArgs.clear();
 
         boolean isCommandParsing = true;
         boolean isPosArgsParsed = false;
@@ -41,23 +45,23 @@ final class InputParser {
 
         for (final String token : tokens) {
             if (isCommandParsing) {
-                this.command = InputCommand.parse(token);
-
-                if (this.command == InputCommand.INVALID) {
-                    this.positionalArgs.add(token);
+                if (token.isEmpty()) {
+                    continue;
                 }
 
+                rawCommand = token;
+                command = InputCommand.parse(token);
                 isCommandParsing = false;
             } else if (!isPosArgsParsed) {
                 if (token.charAt(0) == '/') {
                     isPosArgsParsed = true;
                     namedArgName = token.substring(1);
                 } else {
-                    this.positionalArgs.add(token);
+                    positionalArgs.add(token);
                 }
             } else {
                 if (token.charAt(0) == '/') {
-                    this.namedArgs.put(namedArgName, namedArgValue.toArray(InputParser.EMPTY_STRING_ARRAY));
+                    namedArgs.put(namedArgName, namedArgValue.toArray(EMPTY_STRING_ARRAY));
 
                     namedArgName = token.substring(1);
                     namedArgValue.clear();
@@ -68,24 +72,28 @@ final class InputParser {
         }
 
         if (isPosArgsParsed && !namedArgName.isEmpty()) {
-            this.namedArgs.put(namedArgName, namedArgValue.toArray(InputParser.EMPTY_STRING_ARRAY));
+            namedArgs.put(namedArgName, namedArgValue.toArray(EMPTY_STRING_ARRAY));
         }
     }
 
     @Override
     public String toString() {
-        return this.command + ": " + this.positionalArgs + " | " + this.namedArgs;
+        return rawCommand + "(" + command + "): " + positionalArgs + " | " + namedArgs;
+    }
+
+    String getRawCommand() {
+        return rawCommand;
     }
 
     InputCommand getCommand() {
-        return this.command;
+        return command;
     }
 
     String[] getPositionalArgs() {
-        return this.positionalArgs.toArray(InputParser.EMPTY_STRING_ARRAY);
+        return positionalArgs.toArray(EMPTY_STRING_ARRAY);
     }
 
     Map<String, String[]> getNamedArgs() {
-        return Collections.unmodifiableMap(this.namedArgs);
+        return Collections.unmodifiableMap(namedArgs);
     }
 }

@@ -4,63 +4,107 @@ final class CommandRunner {
     private static final InputParser PARSER = new InputParser();
     private static boolean isTerminateGiven = false;
 
-    static void runCommand(final String command) {
-        CommandRunner.PARSER.parse(command);
+    static void runCommand(final String commandStr) {
+        PARSER.parse(commandStr);
 
-        final String[] posArgs = CommandRunner.PARSER.getPositionalArgs();
-        final String posArgsAsString = String.join(" ", posArgs);
-        final Map<String, String[]> namedArgs = CommandRunner.PARSER.getNamedArgs();
+        final String rawCommand = PARSER.getRawCommand();
+        final InputCommand command = PARSER.getCommand();
 
-        switch (CommandRunner.PARSER.getCommand()) {
+        if (rawCommand.isEmpty()) {
+            throw new MissingCommandException();
+        }
+
+        if (command == InputCommand.INVALID) {
+            throw new InvalidCommandException(rawCommand);
+        }
+
+        final String[] posArgs = PARSER.getPositionalArgs();
+        final String posArgsAsString = InputParser.mapArgsToString(posArgs);
+        final Map<String, String[]> namedArgs = PARSER.getNamedArgs();
+
+        switch (command) {
         case BYE:
-            CommandRunner.bye();
+            bye();
             break;
         case DEADLINE:
-            CommandRunner.addDeadline(posArgsAsString, namedArgs);
+            addDeadline(posArgsAsString, namedArgs);
             break;
         case EVENT:
-            CommandRunner.addEvent(posArgsAsString, namedArgs);
+            addEvent(posArgsAsString, namedArgs);
             break;
         case LIST:
-            CommandRunner.listTasks();
+            listTasks();
             break;
         case MARK:
-            CommandRunner.markTasksAsDone(posArgs);
+            markTasksAsDone(posArgs);
             break;
         case UNMARK:
-            CommandRunner.markTasksAsDone(posArgs, false);
+            markTasksAsDone(posArgs, false);
             break;
         case TODO:
-        default:
-            CommandRunner.addTodo(posArgsAsString);
+            addTodo(posArgsAsString);
             break;
+        default:
+            throw new InvalidCommandException(rawCommand);
         }
     }
 
     static void bye() {
         Ui.bye();
-        CommandRunner.isTerminateGiven = true;
+        isTerminateGiven = true;
     }
 
     private static void addDeadline(final String deadlineName, final Map<String, String[]> deadlineArgs) {
-        final String by = InputParser.mapArgsToString(deadlineArgs.get("by"));
-        final Deadline deadline = new Deadline(deadlineName, by);
+        if (deadlineName.isEmpty()) {
+            throw new MissingTaskNameException("deadline");
+        }
 
-        CommandRunner.addTask(deadline);
+        final String[] byArr = deadlineArgs.get("by");
+        if (byArr == null) {
+            throw new MissingOptionNameException("deadline", "by", "string");
+        }
+
+        final String by = InputParser.mapArgsToString(byArr);
+        if (by.isEmpty()) {
+            throw new MissingOptionValueException("deadline", "by", "string");
+        }
+
+        final Deadline deadline = new Deadline(deadlineName, by);
+        addTask(deadline);
     }
 
     private static void addEvent(final String eventName, final Map<String, String[]> eventArgs) {
-        final String from = InputParser.mapArgsToString(eventArgs.get("from"));
-        final String to = InputParser.mapArgsToString(eventArgs.get("to"));
-        final Event event = new Event(eventName, from, to);
+        if (eventName.isEmpty()) {
+            throw new MissingTaskNameException("event");
+        }
 
-        CommandRunner.addTask(event);
+        final String[] fromArr = eventArgs.get("from");
+        if (fromArr == null) {
+            throw new MissingOptionNameException("event", "from", "string");
+        }
+
+        final String from = InputParser.mapArgsToString(fromArr);
+        if (from.isEmpty()) {
+            throw new MissingOptionValueException("event", "from", "string");
+        }
+
+        final String[] toArr = eventArgs.get("to");
+        if (toArr == null) {
+            throw new MissingOptionNameException("event", "to", "string");
+        }
+
+        final String to = InputParser.mapArgsToString(toArr);
+        if (to.isEmpty()) {
+            throw new MissingOptionValueException("event", "to", "string");
+        }
+
+        final Event event = new Event(eventName, from, to);
+        addTask(event);
     }
 
     private static void listTasks() {
         if (!TaskManager.hasTasks()) {
-            Ui.errNoTasks();
-            return;
+            throw new EmptyTaskListException();
         }
 
         final int numTasks = TaskManager.getNumTasks();
@@ -75,13 +119,12 @@ final class CommandRunner {
     }
 
     private static void markTasksAsDone(final String[] taskIds) {
-        CommandRunner.markTasksAsDone(taskIds, true);
+        markTasksAsDone(taskIds, true);
     }
 
     private static void markTasksAsDone(final String[] taskIds, final boolean isDone) {
         if (taskIds.length < 1) {
-            Ui.errNoTaskIds();
-            return;
+            throw new MissingTaskIdsException();
         }
 
         if (isDone) {
@@ -91,30 +134,36 @@ final class CommandRunner {
         }
 
         for (final String taskIdString : taskIds) {
-            final int taskId;
-
-            try {
-                taskId = Integer.parseInt(taskIdString);
-            } catch (final NumberFormatException ignored) {
-                Ui.errInvalidTaskId(taskIdString);
-                continue;
-            }
-
-            if (taskId < 1 || taskId > TaskManager.getNumTasks()) {
-                Ui.errInvalidTaskId(taskId);
-                continue;
-            }
-
-            final Task task = TaskManager.getTask(taskId - 1);
-            task.setDone(isDone);
-
-            Ui.listTaskDetails(taskId, task);
+            markSingleTaskAsDone(taskIdString, isDone);
         }
     }
 
+    private static void markSingleTaskAsDone(final String taskIdStr, final boolean isDone) {
+        final int taskId;
+
+        try {
+            taskId = Integer.parseInt(taskIdStr);
+        } catch (final NumberFormatException ignored) {
+            throw new InvalidTaskIdException(taskIdStr);
+        }
+
+        if (taskId < 1 || taskId > TaskManager.getNumTasks()) {
+            throw new InvalidTaskIdException(taskId);
+        }
+
+        final Task task = TaskManager.getTask(taskId - 1);
+        task.setDone(isDone);
+
+        Ui.listTaskDetails(taskId, task);
+    }
+
     private static void addTodo(final String todoName) {
+        if (todoName.isEmpty()) {
+            throw new MissingTaskNameException("todo");
+        }
+
         final Todo todo = new Todo(todoName);
-        CommandRunner.addTask(todo);
+        addTask(todo);
     }
 
     private static void addTask(final Task task) {
@@ -123,6 +172,6 @@ final class CommandRunner {
     }
 
     static boolean isTerminateGiven() {
-        return CommandRunner.isTerminateGiven;
+        return isTerminateGiven;
     }
 }
