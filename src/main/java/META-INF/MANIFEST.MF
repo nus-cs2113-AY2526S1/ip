@@ -1,0 +1,2 @@
+Manifest-Version: 1.0
+Main-Class: arpa.home.yikjin.app.kuro.Main
