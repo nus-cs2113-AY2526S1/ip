@@ -1,0 +1,24 @@
+package arpa.home.yikjin.app.kuro.task;
+
+public abstract class Task {
+    private final String name;
+    private boolean isDone;
+
+    Task(final String name) {
+        this.name = name;
+        isDone = false;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + name;
+    }
+
+    char getStatusIcon() {
+        return isDone ? 'X' : ' ';
+    }
+
+    public void setDone(final boolean done) {
+        isDone = done;
+    }
+}
