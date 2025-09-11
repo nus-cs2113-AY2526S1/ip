@@ -11,40 +11,43 @@ public class Nova {
         printWelcomeMessage();
 
         while (true) {
-            String userInput = scanner.nextLine().trim();
-            String[] userInputArray = userInput.split(" ", 2);
-            String command = userInputArray[0];
+            try {
+                String userInput = scanner.nextLine().trim();
+                String[] userInputArray = userInput.split(" ", 2);
+                String command = userInputArray[0];
 
-            switch (command) {
-            case "bye":
-                printByeMessage();
-                return;
-            case "list":
-                printAllTask();
-                break;
-            case "mark":
-                if (userInputArray.length < 2) {
-                    printMarkError();
-                } else {
+                switch (command) {
+                case "bye":
+                    printByeMessage();
+                    return;
+                case "list":
+                    printAllTask();
+                    break;
+                case "mark":
+                    if (userInputArray.length < 2) {
+                        throw new NovaException(" OOPS!!! You must specify a task number to mark.");
+                    }
                     handleMark(userInputArray[1], true);
-                }
-                break;
-            case "unmark":
-                if (userInputArray.length < 2) {
-                    printMarkError();
-                } else {
+                    break;
+                case "unmark":
+                    if (userInputArray.length < 2) {
+                        throw new NovaException(" OOPS!!! You must specify a task number to unmark.");
+                    }
                     handleMark(userInputArray[1], false);
+                    break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    addTask(command, userInputArray.length > 1 ? userInputArray[1] : "");
+                    break;
+                default:
+                    throw new NovaException("OOPS! I don't understand that command.");
                 }
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                addTask(command, userInputArray.length > 1 ? userInputArray[1] : "");
-                break;
-            default:
-                printInvalidError();
+            } catch (NovaException e) {
+                printLineSeparator();
+                System.out.println(" " + e.getMessage());
+                printLineSeparator();
             }
-
         }
     }
 
@@ -96,7 +99,7 @@ public class Nova {
         printLineSeparator();
     }
 
-    private static void handleMark(String userInput, boolean done) {
+    private static void handleMark(String userInput, boolean done) throws NovaException {
         try {
             int taskNumber = Integer.parseInt(userInput);
 
@@ -114,30 +117,17 @@ public class Nova {
             System.out.println("    " + currentTask);
             printLineSeparator();
         } catch (NumberFormatException e) {
-            printLineSeparator();
-            System.out.println(" Invalid task number!");
-            printLineSeparator();
-        } catch (IllegalArgumentException e) {
-            printLineSeparator();
-            System.out.println(" " + e.getMessage());
-            printLineSeparator();
+            throw new NovaException(" Invalid task number format!");
         }
     }
 
-    private static void printMarkError() {
-        printLineSeparator();
-        System.out.println(" OOPS!!! You must specify a task number to unmark/unmark.");
-        printLineSeparator();
-    }
-
-    private static void addTask(String command, String userInput) {
+    private static void addTask(String command, String userInput) throws NovaException {
         Task newTask = null;
 
         switch (command) {
         case "todo":
             if (userInput.isEmpty()) {
-                printWrongTodoFormatError();
-                return;
+                throw new NovaException(" OOPS!!! Please use the format: todo <desc>");
             }
             newTask = new Todo(userInput);
             break;
@@ -148,7 +138,7 @@ public class Nova {
                 String by = userInputArray[1].trim();
                 newTask = new Deadline(description, by);
             } catch (Exception e) {
-                printWrongDeadlineFormatError();
+                throw new NovaException(" OOPS!!! Please use the format: deadline <desc> /by <time>");
             }
             break;
         case "event":
@@ -159,57 +149,26 @@ public class Nova {
                 String to = userInputArray[2].trim();
                 newTask = new Event(description, from, to);
             } catch (Exception e) {
-                printWrongEventFormatError();
+                throw new NovaException("OOPS!!! Please use the format: event <desc> /from <start> /to <end>");
             }
             break;
         }
         if (newTask != null) {
             if (taskCount >= maxTaskCount) {
-                printTaskFull();
-                return;
+                throw new NovaException("You have reached the limit of " + maxTaskCount + " tasks! Unable to add more.");
             }
             tasks[taskCount++] = newTask;
             printTaskAdded(newTask, taskCount);
         }
     }
 
-    private static void checkMarkNumber(int taskNumber) {
+    private static void checkMarkNumber(int taskNumber) throws NovaException {
         if (taskCount == 0) {
-            throw new IllegalArgumentException("List is empty, no tasks to mark!");
+            throw new NovaException("List is empty, no tasks to mark!");
         }
         if (taskNumber < 1 || taskNumber > taskCount) {
-            throw new IllegalArgumentException("Invalid task number! Please enter a number from 1 to " + taskCount + ".");
+            throw new NovaException("Invalid task number! Please enter a number from 1 to " + taskCount + ".");
         }
-    }
-
-    public static void printTaskFull() {
-        printLineSeparator();
-        System.out.println(" You have reached the limit of " + maxTaskCount + " tasks! Unable to add more tasks!");
-        printLineSeparator();
-    }
-
-    private static void printWrongEventFormatError() {
-        printLineSeparator();
-        System.out.println(" OOPS!!! Please use the format: event <desc> /from <start> /to <end>");
-        printLineSeparator();
-    }
-
-    private static void printWrongDeadlineFormatError() {
-        printLineSeparator();
-        System.out.println(" OOPS!!! Please use the format: deadline <desc> /by <time>");
-        printLineSeparator();
-    }
-
-    private static void printInvalidError() {
-        printLineSeparator();
-        System.out.println(" OOPS! I don't understand that command.");
-        printLineSeparator();
-    }
-
-    private static void printWrongTodoFormatError() {
-        printLineSeparator();
-        System.out.println(" OOPS!!! Please use the format: todo <desc>");
-        printLineSeparator();
     }
 }
 
