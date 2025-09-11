@@ -13,8 +13,10 @@ final class InputParser {
     private final ArrayList<String> positionalArgs;
     private final Map<String, String[]> namedArgs;
     private InputCommand command;
+    private String rawCommand;
 
     InputParser() {
+        rawCommand = "";
         command = InputCommand.INVALID;
         positionalArgs = new ArrayList<>(INIT_POS_ARGS_CAPACITY);
         namedArgs = new HashMap<>(INIT_NAMED_ARGS_CAPACITY);
@@ -24,12 +26,14 @@ final class InputParser {
         if (args == null) {
             return "";
         }
+
         return String.join(" ", args);
     }
 
     void parse(final String input) {
         final String[] tokens = SPACES.split(input);
 
+        rawCommand = "";
         command = InputCommand.INVALID;
         positionalArgs.clear();
         namedArgs.clear();
@@ -41,12 +45,12 @@ final class InputParser {
 
         for (final String token : tokens) {
             if (isCommandParsing) {
-                command = InputCommand.parse(token);
-
-                if (command == InputCommand.INVALID) {
-                    positionalArgs.add(token);
+                if (token.isEmpty()) {
+                    continue;
                 }
 
+                rawCommand = token;
+                command = InputCommand.parse(token);
                 isCommandParsing = false;
             } else if (!isPosArgsParsed) {
                 if (token.charAt(0) == '/') {
@@ -74,7 +78,11 @@ final class InputParser {
 
     @Override
     public String toString() {
-        return command + ": " + positionalArgs + " | " + namedArgs;
+        return rawCommand + "(" + command + "): " + positionalArgs + " | " + namedArgs;
+    }
+
+    String getRawCommand() {
+        return rawCommand;
     }
 
     InputCommand getCommand() {

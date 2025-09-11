@@ -1,0 +1,15 @@
+import java.io.Serial;
+
+abstract class AppException extends RuntimeException {
+    @Serial
+    private static final long serialVersionUID = 0L;
+
+    AppException(final String message) {
+        super(message);
+    }
+
+    @Override
+    public String toString() {
+        return "error: " + getLocalizedMessage();
+    }
+}
