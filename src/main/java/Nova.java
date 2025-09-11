@@ -42,7 +42,7 @@ public class Nova {
                 addTask(command, userInputArray.length > 1 ? userInputArray[1] : "");
                 break;
             default:
-                System.out.println(" OOPS! I don't understand that command.");
+                printInvalidError();
             }
 
         }
@@ -50,18 +50,19 @@ public class Nova {
 
 
     private static void printLineSeparator() {
-        System.out.println("____________________________________________________________");
+        System.out.println("=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*");
     }
 
-    private static void printMarkError() {
-        printLineSeparator();
-        System.out.println(" OOPS!!! You must specify a task number to unmark.");
-        printLineSeparator();
-    }
 
     private static void printWelcomeMessage() {
         printLineSeparator();
         System.out.print("""
+                  _   _   ____  __      __    _
+                 | \\ | | / __ \\ \\ \\    / /   / \\
+                 |  \\| || |  | | \\ \\  / /   / _ \\
+                 | |\\  || |  | |  \\ \\/ /   / ___ \\
+                 |_| \\_| \\____/    \\__/   /_/   \\_\\
+                
                  Hello! I'm Nova
                  What can I do for you?
                 """);
@@ -84,9 +85,13 @@ public class Nova {
 
     public static void printAllTask() {
         printLineSeparator();
-        System.out.println(" Here are the tasks in your list:");
-        for (int i = 0; i < taskCount; i++) {
-            System.out.println(" " + (i + 1) + ". " + tasks[i].toString());
+        if  (taskCount == 0) {
+            System.out.println(" No tasks in this list.");
+        } else {
+            System.out.println(" Here are the tasks in your list:");
+            for (int i = 0; i < taskCount; i++) {
+                System.out.println(" " + (i + 1) + ". " + tasks[i].toString());
+            }
         }
         printLineSeparator();
     }
@@ -94,6 +99,9 @@ public class Nova {
     private static void handleMark(String userInput, boolean done) {
         try {
             int taskNumber = Integer.parseInt(userInput);
+
+            checkMarkNumber(taskNumber);
+
             Task currentTask = tasks[taskNumber - 1];
             printLineSeparator();
             if (done) {
@@ -106,8 +114,20 @@ public class Nova {
             System.out.println("    " + currentTask);
             printLineSeparator();
         } catch (NumberFormatException e) {
+            printLineSeparator();
             System.out.println(" Invalid task number!");
+            printLineSeparator();
+        } catch (IllegalArgumentException e) {
+            printLineSeparator();
+            System.out.println(" " + e.getMessage());
+            printLineSeparator();
         }
+    }
+
+    private static void printMarkError() {
+        printLineSeparator();
+        System.out.println(" OOPS!!! You must specify a task number to unmark/unmark.");
+        printLineSeparator();
     }
 
     private static void addTask(String command, String userInput) {
@@ -116,7 +136,7 @@ public class Nova {
         switch (command) {
         case "todo":
             if (userInput.isEmpty()) {
-                printEmptyError();
+                printWrongTodoFormatError();
                 return;
             }
             newTask = new Todo(userInput);
@@ -144,9 +164,28 @@ public class Nova {
             break;
         }
         if (newTask != null) {
+            if (taskCount >= maxTaskCount) {
+                printTaskFull();
+                return;
+            }
             tasks[taskCount++] = newTask;
             printTaskAdded(newTask, taskCount);
         }
+    }
+
+    private static void checkMarkNumber(int taskNumber) {
+        if (taskCount == 0) {
+            throw new IllegalArgumentException("List is empty, no tasks to mark!");
+        }
+        if (taskNumber < 1 || taskNumber > taskCount) {
+            throw new IllegalArgumentException("Invalid task number! Please enter a number from 1 to " + taskCount + ".");
+        }
+    }
+
+    public static void printTaskFull() {
+        printLineSeparator();
+        System.out.println(" You have reached the limit of " + maxTaskCount + " tasks! Unable to add more tasks!");
+        printLineSeparator();
     }
 
     private static void printWrongEventFormatError() {
@@ -161,9 +200,15 @@ public class Nova {
         printLineSeparator();
     }
 
-    private static void printEmptyError() {
+    private static void printInvalidError() {
         printLineSeparator();
-        System.out.println(" OOPS!!! The description of a todo cannot be empty.");
+        System.out.println(" OOPS! I don't understand that command.");
+        printLineSeparator();
+    }
+
+    private static void printWrongTodoFormatError() {
+        printLineSeparator();
+        System.out.println(" OOPS!!! Please use the format: todo <desc>");
         printLineSeparator();
     }
 }
