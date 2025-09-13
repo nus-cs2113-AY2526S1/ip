@@ -34,6 +34,8 @@ public class Parser {
             return new Command(CommandType.DEADLINE, arguments);
         case "event":
             return new Command(CommandType.EVENT, arguments);
+        case "delete":
+            return new Command(CommandType.DELETE, arguments);
         default:
             return new Command(CommandType.INVALID, userInput);
         }

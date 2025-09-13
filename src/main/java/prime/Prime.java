@@ -36,13 +36,13 @@ public class Prime {
                 case LIST:
                     taskManager.listTasks(ui);
                     break;
-                case MARK:
+                case DELETE:
+                    int deleteTaskNo = Integer.parseInt(command.getArguments());
+                    taskManager.deleteTask(deleteTaskNo, ui);
+                    break;
+                case MARK, UNMARK:
                     int markTaskNo = Integer.parseInt(command.getArguments());
                     taskManager.toggleMark(markTaskNo, ui);
-                    break;
-                case UNMARK:
-                    int unmarkTaskNo = Integer.parseInt(command.getArguments());
-                    taskManager.toggleMark(unmarkTaskNo, ui);
                     break;
                 case TODO:
                     if (command.getArguments().isEmpty()) {

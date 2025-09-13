@@ -22,6 +22,16 @@ public class TaskManager {
         }
     }
 
+    public void deleteTask(int taskNo, UserInterface ui) throws PrimeException {
+        if (taskNo < 1 || taskNo > tasks.size()) {
+            throw new InvalidTaskNumberException(taskNo, tasks.size());
+        }
+        Task task = tasks.remove(taskNo - 1);
+        ui.printIndented("Got it. I've deleted this task:");
+        ui.printIndented(task.toString());
+        ui.printIndented("Now you have " + tasks.size() + " tasks in your task list.");
+    }
+
     public void listTasks(UserInterface ui) {
         if (tasks.isEmpty()) {
             ui.printIndented("No tasks have been added in your list yet.");
