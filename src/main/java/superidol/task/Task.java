@@ -1,9 +1,9 @@
 package superidol.task;
 
-public class Task {
+public abstract class Task {
     public static int taskCount = 0;
-    private String task;
-    private boolean isDone = false;
+    protected String task;
+    protected boolean isDone = false;
 
     public Task(String task) {
         this.task = task;
@@ -20,4 +20,6 @@ public class Task {
             return "[ ] " + this.task;
         }
     }
+
+    public abstract String saveData();
 }

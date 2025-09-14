@@ -5,10 +5,16 @@ import superidol.task.Event;
 import superidol.task.Task;
 import superidol.task.Todo;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import java.io.File;
+import java.io.FileWriter;
+
 
 public class SuperIdol {
 
@@ -17,8 +23,21 @@ public class SuperIdol {
     public static void main(String[] args) {
         greeting();
 
-        Scanner in = new Scanner(System.in);
+        File f = new File("./todolist.txt");
 
+        if (!f.exists()) {
+            try {
+                if (!f.createNewFile()) {
+                    talk("Cannot create new file");
+                }
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        loadSavedFile(f);
+
+        Scanner in = new Scanner(System.in);
 
         while (true) {
             String command =  in.nextLine().trim();
@@ -26,7 +45,7 @@ public class SuperIdol {
                 String commandKeyWord = command.split(" ")[0];
                 switch (commandKeyWord) {
                 case "exit":
-                    exit();
+                    exit(f);
                     break;
                 case "list":
                     showList();
@@ -77,8 +96,9 @@ public class SuperIdol {
         System.out.println("What can I do for you?");
     }
 
-    public static void exit() {
+    public static void exit(File f) {
         talk("Bye. Hope to see you again soon!");
+        saveToFile(f);
         System.exit(0);
     }
 
@@ -97,7 +117,7 @@ public class SuperIdol {
             String time = matcher.group(3).trim();
 
             Deadline newTask = new Deadline(deadline, time);
-            addToList(newTask, deadline);
+            addToList(newTask, true);
         } else {
             talk("Wrong input! Try \"deadline <task> /by <time>\"");
         }
@@ -113,7 +133,7 @@ public class SuperIdol {
             String endTime = matcher.group(4).trim();
 
             Event event = new Event(task, startTime, endTime);
-            addToList(event, task);
+            addToList(event, true);
         } else {
             talk("Wrong input! Try \"event <task> /from <start> /to <end>\"");
         }
@@ -126,21 +146,23 @@ public class SuperIdol {
             talk("Wrong input! Try \"todo <task>\"");
         } else {
             Todo todo = new Todo(task);
-            addToList(todo, task);
+            addToList(todo, true);
         }
     }
 
-    public static void addToList(Task newTask, String task) {
+    public static void addToList(Task newTask, boolean announce) {
         // add task to the list
         toDoList.add(newTask);
         Task.taskCount++;
 
         // print the result
-        System.out.println("____________________________________________________________");
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newTask.getTask());
-        System.out.println("Now you have " + Task.taskCount + " tasks in the list.");
-        System.out.println("____________________________________________________________");
+        if (announce) {
+            System.out.println("____________________________________________________________");
+            System.out.println("Got it. I've added this task:");
+            System.out.println(newTask.getTask());
+            System.out.println("Now you have " + Task.taskCount + " tasks in the list.");
+            System.out.println("____________________________________________________________");
+        }
     }
 
     public static void showList() {
@@ -190,6 +212,78 @@ public class SuperIdol {
             }
         } catch (NumberFormatException e) {
             talk("Wrong input! Try \"delete <task_index>\"");
+        }
+    }
+
+    public static void loadSavedFile(File f) {
+        if (!f.exists()) {
+            return;
+        }
+
+        try {
+            Scanner s = new Scanner(f);
+            System.out.println("____________________________________________________________");
+            System.out.println("Loading local save");
+            while (s.hasNext()) {
+                loadTask(s.nextLine());
+            }
+            System.out.println("Try command: list");
+            System.out.println("____________________________________________________________");
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void loadTask(String data) {
+        String parts[] = data.split("\\|");
+        boolean isDone;
+        if (parts[1].equals("0")) {
+            isDone = false;
+        } else if (parts[1].equals("1")) {
+            isDone = true;
+        } else {
+            System.out.println("Invalid data: " + data);
+            return;
+        }
+        switch (parts[0]) {
+        case "T":
+            if (parts.length == 3) {
+                Todo todo = new Todo(parts[2], isDone);
+                addToList(todo, false);
+            } else {
+                System.out.println("Invalid data: " + data);
+            }
+            break;
+        case "D":
+            if (parts.length == 4) {
+                Deadline deadline = new Deadline(parts[2], parts[3], isDone);
+                addToList(deadline, false);
+            } else {
+                System.out.println("Invalid data: " + data);
+            }
+            break;
+        case "E":
+            if (parts.length == 5) {
+                Event event = new Event(parts[2], parts[3], parts[4], isDone);
+                addToList(event, false);
+            } else {
+                System.out.println("Invalid data: " + data);
+            }
+            break;
+        default:
+            System.out.println("Invalid data: " + data);
+        }
+    }
+
+    public static void saveToFile(File f){
+        try {
+            FileWriter fw = new FileWriter(f);
+            for (Task task : toDoList) {
+                fw.write(task.saveData() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            talk("Cannot open file");
         }
     }
 }
