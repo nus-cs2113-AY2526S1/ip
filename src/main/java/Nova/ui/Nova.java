@@ -7,11 +7,10 @@ import Nova.task.Task;
 import Nova.task.Todo;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Nova {
-    private static final int maxTaskCount = 100;
-    private static final Task[] tasks = new Task[maxTaskCount];
-    private static int taskCount = 0;
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -96,12 +95,12 @@ public class Nova {
 
     public static void printAllTask() {
         printLineSeparator();
-        if  (taskCount == 0) {
+        if  (tasks.isEmpty()) {
             System.out.println(" No tasks in this list.");
         } else {
             System.out.println(" Here are the tasks in your list:");
-            for (int i = 0; i < taskCount; i++) {
-                System.out.println(" " + (i + 1) + ". " + tasks[i].toString());
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(" " + (i + 1) + ". " + tasks.get(i).toString());
             }
         }
         printLineSeparator();
@@ -113,7 +112,7 @@ public class Nova {
 
             checkMarkNumber(taskNumber);
 
-            Task currentTask = tasks[taskNumber - 1];
+            Task currentTask = tasks.get(taskNumber - 1);
             printLineSeparator();
             if (done) {
                 currentTask.markAsDone();
@@ -162,20 +161,17 @@ public class Nova {
             break;
         }
         if (newTask != null) {
-            if (taskCount >= maxTaskCount) {
-                throw new NovaException("You have reached the limit of " + maxTaskCount + " tasks! Unable to add more.");
-            }
-            tasks[taskCount++] = newTask;
-            printTaskAdded(newTask, taskCount);
+            tasks.add(newTask);
+            printTaskAdded(newTask, tasks.size());
         }
     }
 
     private static void checkMarkNumber(int taskNumber) throws NovaException {
-        if (taskCount == 0) {
+        if (tasks.isEmpty()) {
             throw new NovaException("List is empty, no tasks to mark!");
         }
-        if (taskNumber < 1 || taskNumber > taskCount) {
-            throw new NovaException("Invalid task number! Please enter a number from 1 to " + taskCount + ".");
+        if (taskNumber < 1 || taskNumber > tasks.size()) {
+            throw new NovaException("Invalid task number! Please enter a number from 1 to " + tasks.size() + ".");
         }
     }
 }
