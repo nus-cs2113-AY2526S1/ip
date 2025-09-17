@@ -35,6 +35,7 @@ public class TaskManager {
             throw new InvalidTaskNumberException(taskNo, tasks.size());
         }
         Task task = tasks.remove(taskNo - 1);
+        storage.save(tasks);
         ui.printIndented("Got it. I've deleted this task:");
         ui.printIndented(task.toString());
         ui.printIndented("Now you have " + tasks.size() + " tasks in your task list.");
