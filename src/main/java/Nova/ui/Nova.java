@@ -47,6 +47,12 @@ public class Nova {
                 case "event":
                     addTask(command, userInputArray.length > 1 ? userInputArray[1] : "");
                     break;
+                case "delete":
+                    if (userInputArray.length < 2) {
+                        throw new NovaException(" OOPS!!! You must specify a task number to delete.");
+                    }
+                    deleteTask(userInputArray[1]);
+                    break;
                 default:
                     throw new NovaException("OOPS! I don't understand that command.");
                 }
@@ -93,11 +99,20 @@ public class Nova {
         printLineSeparator();
     }
 
+    private static void printTaskDeleted(Task task, int taskCount) {
+        printLineSeparator();
+        System.out.println(" Got it. I've deleted this task:");
+        System.out.println("   " + task);
+        System.out.println(" Now you have " + taskCount + " tasks in the list.");
+        printLineSeparator();
+    }
+
     public static void printAllTask() {
         printLineSeparator();
         if  (tasks.isEmpty()) {
             System.out.println(" No tasks in this list.");
         } else {
+            System.out.println(" Number of tasks in this list: " + tasks.size());
             System.out.println(" Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println(" " + (i + 1) + ". " + tasks.get(i).toString());
@@ -125,6 +140,20 @@ public class Nova {
             printLineSeparator();
         } catch (NumberFormatException e) {
             throw new NovaException(" Invalid task number format!");
+        }
+    }
+
+    private static void deleteTask(String userInput) throws NovaException {
+        try {
+            int index = Integer.parseInt(userInput);
+            if (index < 1 || index > tasks.size()) {
+                throw new NovaException(" OOPS!!! Invalid task number! Please enter a number between 1 and " + tasks.size());
+            }
+            Task taskRemoved = tasks.remove(index - 1);
+            printTaskDeleted(taskRemoved, tasks.size());
+
+        } catch (NumberFormatException e) {
+            throw new NovaException(" OOPS!!! Invalid task number format!");
         }
     }
 
