@@ -12,4 +12,8 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + getTickUnTickIcon() + " " + super.description + " (by: " + by + ")";
     }
+
+    public String getBy() {
+        return this.by;
+    }
 }

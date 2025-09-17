@@ -2,6 +2,7 @@ package prime.manager;
 
 import prime.exceptions.InvalidTaskNumberException;
 import prime.exceptions.PrimeException;
+import prime.storage.Storage;
 import prime.task.Task;
 import prime.ui.UserInterface;
 
@@ -9,11 +10,18 @@ import java.util.ArrayList;
 
 public class TaskManager {
     private static final int MAX_TASKS = 100;
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private final ArrayList<Task> tasks;
+    private final Storage storage;
+
+    public TaskManager() {
+        this.storage = new Storage();
+        this.tasks = new ArrayList<>(storage.load());
+    }
 
     public void addTask(Task task, UserInterface ui) throws PrimeException {
         if (tasks.size() < MAX_TASKS) {
             tasks.add(task);
+            storage.save(tasks);
             ui.printIndented("Got it. I've added this task:");
             ui.printIndented(task.toString());
             ui.printIndented("Now you have " + tasks.size() + " tasks in your task list.");
@@ -45,10 +53,12 @@ public class TaskManager {
 
     public void toggleMark(int taskNo, UserInterface ui) throws InvalidTaskNumberException {
         if (taskNo < 1 || taskNo > tasks.size()) {
-            throw new InvalidTaskNumberException(taskNo, tasks.size());
+            throw new InvalidTaskNumberException(taskNo,tasks.size());
         }
         Task task = tasks.get(taskNo - 1);
         task.setIsDone(!task.getIsDone());
+        storage.save(tasks);
+
         if (task.getIsDone()) {
             ui.printIndented("Nice Human! I've marked this task as done:");
         } else {

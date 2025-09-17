@@ -29,4 +29,8 @@ public abstract class Task {
     public String toString() {
         return this.description;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
 }
