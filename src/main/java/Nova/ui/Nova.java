@@ -1,17 +1,20 @@
 package Nova.ui;
 
 import Nova.exception.NovaException;
+import Nova.storage.Storage;
 import Nova.task.Deadline;
 import Nova.task.Event;
 import Nova.task.Task;
 import Nova.task.Todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Nova {
-    private static final int maxTaskCount = 100;
-    private static final Task[] tasks = new Task[maxTaskCount];
-    private static int taskCount = 0;
+    private static final String FilePath = "data/Nova.txt";
+    private static final Storage storage = new Storage(FilePath);
+    private static final ArrayList<Task> tasks = storage.loadTasks();
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -49,7 +52,7 @@ public class Nova {
                     addTask(command, userInputArray.length > 1 ? userInputArray[1] : "");
                     break;
                 default:
-                    throw new NovaException("OOPS! I don't understand that command.");
+                    throw new NovaException("OOPS!!! I don't understand that command.");
                 }
             } catch (NovaException e) {
                 printLineSeparator();
@@ -96,12 +99,12 @@ public class Nova {
 
     public static void printAllTask() {
         printLineSeparator();
-        if  (taskCount == 0) {
+        if  (tasks.isEmpty()) {
             System.out.println(" No tasks in this list.");
         } else {
             System.out.println(" Here are the tasks in your list:");
-            for (int i = 0; i < taskCount; i++) {
-                System.out.println(" " + (i + 1) + ". " + tasks[i].toString());
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(" " + (i + 1) + ". " + tasks.get(i));
             }
         }
         printLineSeparator();
@@ -113,7 +116,7 @@ public class Nova {
 
             checkMarkNumber(taskNumber);
 
-            Task currentTask = tasks[taskNumber - 1];
+            Task currentTask = tasks.get(taskNumber - 1);
             printLineSeparator();
             if (done) {
                 currentTask.markAsDone();
@@ -124,6 +127,8 @@ public class Nova {
             }
             System.out.println("    " + currentTask);
             printLineSeparator();
+
+            storage.saveTasks(tasks);
         } catch (NumberFormatException e) {
             throw new NovaException(" Invalid task number format!");
         }
@@ -162,20 +167,18 @@ public class Nova {
             break;
         }
         if (newTask != null) {
-            if (taskCount >= maxTaskCount) {
-                throw new NovaException("You have reached the limit of " + maxTaskCount + " tasks! Unable to add more.");
-            }
-            tasks[taskCount++] = newTask;
-            printTaskAdded(newTask, taskCount);
+            tasks.add(newTask);
+            printTaskAdded(newTask, tasks.size());
+            storage.saveTasks(tasks);
         }
     }
 
     private static void checkMarkNumber(int taskNumber) throws NovaException {
-        if (taskCount == 0) {
+        if (tasks.isEmpty()) {
             throw new NovaException("List is empty, no tasks to mark!");
         }
-        if (taskNumber < 1 || taskNumber > taskCount) {
-            throw new NovaException("Invalid task number! Please enter a number from 1 to " + taskCount + ".");
+        if (taskNumber < 1 || taskNumber > tasks.size()) {
+            throw new NovaException("Invalid task number! Please enter a number from 1 to " + tasks.size() + ".");
         }
     }
 }
