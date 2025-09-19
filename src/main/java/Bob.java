@@ -98,8 +98,19 @@ public class Bob {
                     System.out.println("OK, I've marked this task as not done yet");
                     System.out.println("  [" + instructions.get(index).getStatusIcon() + "] " + instructions.get(index).description);
 
-                    // Show List of tasks
-                } else if (sentence.equals("list")) {
+                } else if (Objects.equals(sentenceArray[0], "delete")) {
+                    int indexToRemove = Integer.parseInt(sentenceArray[1]) - 1;
+                    if (indexToRemove < 0 || indexToRemove >= instructions.size()) {
+                        throw new BobException("Sorry, please list a number within the list");
+                    }
+                    printLineSeparator();
+                    System.out.println("Bob has removed this task for you!");
+                    System.out.println(instructions.get(indexToRemove).description);
+                    instructions.remove(indexToRemove);
+                    System.out.println("You have "+instructions.size()+" tasks in the list");
+                }
+                // Show List of tasks
+                else if (sentence.equals("list")) {
                     printLineSeparator();
                     for (int i = 0; i < instructions.size(); i++) {
                         System.out.println((i + 1) + ". " + instructions.get(i));
