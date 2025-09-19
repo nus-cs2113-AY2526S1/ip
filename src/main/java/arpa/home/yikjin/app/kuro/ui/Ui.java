@@ -31,8 +31,16 @@ public final class Ui {
         System.out.printf("  %s", task);
         System.out.println();
 
+        tasksCount(numTasks);
+    }
+
+    public static void tasksCount(final int numTasks) {
         System.out.printf("Now you have %d tasks in the list.", numTasks);
         System.out.println();
+    }
+
+    public static void removeTaskBegin() {
+        System.out.println("Noted. I've removed this task:");
     }
 
     public static void bye() {
