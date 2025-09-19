@@ -1,16 +1,20 @@
 package Nova.ui;
 
 import Nova.exception.NovaException;
+import Nova.storage.Storage;
 import Nova.task.Deadline;
 import Nova.task.Event;
 import Nova.task.Task;
 import Nova.task.Todo;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Nova {
-    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static final String FilePath = "data/Nova.txt";
+    private static final Storage storage = new Storage(FilePath);
+    private static final ArrayList<Task> tasks = storage.loadTasks();
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -54,7 +58,7 @@ public class Nova {
                     deleteTask(userInputArray[1]);
                     break;
                 default:
-                    throw new NovaException("OOPS! I don't understand that command.");
+                    throw new NovaException("OOPS!!! I don't understand that command.");
                 }
             } catch (NovaException e) {
                 printLineSeparator();
@@ -138,6 +142,8 @@ public class Nova {
             }
             System.out.println("    " + currentTask);
             printLineSeparator();
+
+            storage.saveTasks(tasks);
         } catch (NumberFormatException e) {
             throw new NovaException(" Invalid task number format!");
         }
@@ -192,6 +198,7 @@ public class Nova {
         if (newTask != null) {
             tasks.add(newTask);
             printTaskAdded(newTask, tasks.size());
+            storage.saveTasks(tasks);
         }
     }
 
