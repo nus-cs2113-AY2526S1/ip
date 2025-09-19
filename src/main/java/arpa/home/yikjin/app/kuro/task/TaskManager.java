@@ -21,4 +21,8 @@ public final class TaskManager {
     public static boolean hasTasks() {
         return !TASKS.isEmpty();
     }
+
+    public static void removeTask(final int taskId) {
+        TASKS.remove(taskId);
+    }
 }
