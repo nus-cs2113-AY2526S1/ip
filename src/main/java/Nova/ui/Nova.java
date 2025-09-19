@@ -7,11 +7,12 @@ import Nova.task.Event;
 import Nova.task.Task;
 import Nova.task.Todo;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Nova {
-    private static final String FilePath = "data/Nova.txt";
+    private static final String FilePath = System.getProperty("user.home") + File.separator + "NovaData" + File.separator + "Nova.txt";
     private static final Storage storage = new Storage(FilePath);
     private static final ArrayList<Task> tasks = storage.loadTasks();
 
@@ -65,6 +66,7 @@ public class Nova {
                 System.out.println(" " + e.getMessage());
                 printLineSeparator();
             }
+            storage.saveTasks(tasks);
         }
     }
 
@@ -143,7 +145,6 @@ public class Nova {
             System.out.println("    " + currentTask);
             printLineSeparator();
 
-            storage.saveTasks(tasks);
         } catch (NumberFormatException e) {
             throw new NovaException(" Invalid task number format!");
         }
@@ -198,7 +199,6 @@ public class Nova {
         if (newTask != null) {
             tasks.add(newTask);
             printTaskAdded(newTask, tasks.size());
-            storage.saveTasks(tasks);
         }
     }
 

@@ -49,8 +49,8 @@ public class Storage {
                     continue;
                 }
 
-                for (String part : parts) {
-                    part = part.trim();
+                for (int i = 0; i < parts.length; i++) {
+                    parts[i] = parts[i].trim();
                 }
 
                 String type = parts[0];
