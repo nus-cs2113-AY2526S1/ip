@@ -25,6 +25,12 @@ public class Message {
 
     static final String invalidPrintResponse = "Wrong input! Try \"print <time YYYY-MM-DD>\"";
 
+    // find
+
+    static final String invalidFindResponse = "Wrong input! Try \"find <keyword>\"";
+    static final String emptyResultResponse = "Nothing found";
+    static final String validFindResponse = "Here are the matching tasks in your list:";
+
     // mark
 
     static final String markedResponse = "Nice! I've marked this task as done:";

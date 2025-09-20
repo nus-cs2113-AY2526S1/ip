@@ -110,8 +110,22 @@ public class Ui {
     }
 
     public static void respondEmptyPrint() {
-        System.out.println(Message.invalidPrintResponse);
+        System.out.println(Message.emptyResultResponse);
     }
+
+    // find
+    public static void respondInvalidFind() {
+        respond(Message.invalidFindResponse);
+    }
+
+    public static void respondEmptyFind() {
+        System.out.println(Message.emptyResultResponse);
+    }
+
+    public static void respondValidFind() {
+        System.out.println(Message.validFindResponse);
+    }
+
 
     // separator
     public static void separate() {
