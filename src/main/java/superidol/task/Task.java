@@ -5,9 +5,7 @@ public abstract class Task {
     protected String task;
     protected boolean isDone = false;
 
-    public Task(String task) {
-        this.task = task;
-    }
+    public Task() {}
 
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;

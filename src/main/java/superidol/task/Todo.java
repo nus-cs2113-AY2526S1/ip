@@ -2,11 +2,13 @@ package superidol.task;
 
 public class Todo extends Task{
     public Todo(String task) {
-        super(task);
+        super();
+        this.task = task;
     }
 
     public Todo(String task, boolean isDone) {
-        super(task);
+        super();
+        this.task = task;
         this.isDone = isDone;
     }
 

@@ -5,13 +5,15 @@ public class Event extends Task{
     private String endTime;
 
     public Event(String task, String startTime, String endTime) {
-        super(task);
+        super();
+        this.task = task;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
     public Event(String task, String startTime, String endTime, boolean isDone) {
-        super(task);
+        super();
+        this.task = task;
         this.startTime = startTime;
         this.endTime = endTime;
         this.isDone = isDone;
