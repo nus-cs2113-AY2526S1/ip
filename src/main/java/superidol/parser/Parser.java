@@ -66,7 +66,15 @@ public class Parser {
                         return null;
                     }
                 }
-
+            }
+            case "find": {
+                String keyword = command.substring(4).trim();
+                if (keyword.isBlank()) {
+                    Ui.respondInvalidFind();
+                    return null;
+                } else {
+                    return new FindCommand(keyword);
+                }
             }
             case "deadline": {
                 Pattern pattern = Pattern.compile(deadlineRegex);

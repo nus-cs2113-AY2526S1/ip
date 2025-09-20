@@ -19,5 +19,9 @@ public abstract class Task {
         }
     }
 
+    public boolean contains(String keyword) {
+        return task.toLowerCase().contains(keyword.toLowerCase());
+    }
+
     public abstract String saveData();
 }

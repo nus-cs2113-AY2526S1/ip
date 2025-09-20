@@ -67,4 +67,21 @@ public class TaskList {
         }
         Ui.separate();
     }
+
+    public void findByKeyword(String keyword) {
+        int count = 1;
+        Ui.separate();
+        Ui.respondValidFind();
+        for (Task task : taskList) {
+            if (task.contains(keyword)) {
+                String result = count + ". " + task.getTask();
+                System.out.println(result);
+                count++;
+            }
+        }
+        if (count == 1) {
+            Ui.respondEmptyFind();
+        }
+        Ui.separate();
+    }
 }
