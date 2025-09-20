@@ -98,9 +98,9 @@ public class Storage {
         }
     }
 
-    public void saveToFile(File f){
+    public void saveToFile(){
         try {
-            FileWriter fw = new FileWriter(f);
+            FileWriter fw = new FileWriter(file);
             for (Task task : taskList.getTaskList()) {
                 fw.write(task.saveData() + System.lineSeparator());
             }

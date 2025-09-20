@@ -1,25 +1,14 @@
 package superidol.command;
 
-public enum Command {
-    EXIT,
-    LIST,
-    MARK,
-    UNMARK,
-    TODO,
-    DEADLINE,
-    EVENT,
-    DELETE,
-    INVALID;
+import superidol.storage.Storage;
+import superidol.tasklist.TaskList;
 
-    public static Command getCommand(String command) {
-        String keyword = command.split(" ")[0];
+public abstract class Command {
+    protected boolean isExit = false;
 
-        try {
-            return Command.valueOf(keyword.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            return Command.INVALID;
-        }
+    public boolean getIsExit() {
+        return isExit;
     }
+
+    public abstract void execute(TaskList taskList, Storage storage);
 }
-
-
