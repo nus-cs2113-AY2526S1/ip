@@ -14,6 +14,11 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Object to working with files
+ * Loading data
+ * Saving data
+ */
 public class Storage {
     private File file;
     private TaskList taskList;
@@ -37,10 +42,9 @@ public class Storage {
         this.file = f;
     }
 
-    public File getFile() {
-        return file;
-    }
-
+    /**
+     * Load data from the whole txt file
+     */
     public void loadSavedFile() {
         if (!file.exists()) {
             return;
@@ -57,6 +61,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Transfer data from txt file to objects
+     *
+     * @param data
+     */
     public void loadTask(String data) {
         String[] parts = data.split(dataSeparator);
         // mark or unmark
@@ -107,6 +116,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Rewrite the file with list of tasks
+     */
     public void saveToFile(){
         try {
             FileWriter fw = new FileWriter(file);

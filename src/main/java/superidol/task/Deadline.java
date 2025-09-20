@@ -7,6 +7,13 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task{
     private LocalDate time;
 
+    /**
+     * constructor need to check if the time is valid
+     *
+     * @param task
+     * @param time
+     * @throws DateTimeParseException
+     */
     public Deadline(String task, String time) {
         super();
         this.task = task;
@@ -17,6 +24,14 @@ public class Deadline extends Task{
         }
     }
 
+    /**
+     * constructor need to check if the time is valid
+     *
+     * @param task
+     * @param time
+     * @param isDone
+     * @throws DateTimeParseException
+     */
     public Deadline(String task, String time, boolean isDone) {
         super();
         this.task = task;
@@ -44,6 +59,11 @@ public class Deadline extends Task{
         return data;
     }
 
+    /**
+     *
+     * @param time
+     * @return boolean if deadline is still valid
+     */
     public boolean isValid(LocalDate time) {
         if (time.isAfter(this.time)) {
             return false;

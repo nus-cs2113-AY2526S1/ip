@@ -9,6 +9,14 @@ public class Event extends Task{
     private LocalDate startTime;
     private LocalDate endTime;
 
+    /**
+     * constructor need to check for valid time string and timestamp
+     *
+     * @param task
+     * @param startTime
+     * @param endTime
+     * @throws DateTimeException
+     */
     public Event(String task, String startTime, String endTime) {
         super();
         this.task = task;
@@ -23,6 +31,16 @@ public class Event extends Task{
         }
     }
 
+    /**
+     * constructor need to check for valid time string and timestamp
+     * set isDone to load data from file
+     *
+     * @param task
+     * @param startTime
+     * @param endTime
+     * @param isDone
+     * @throws DateTimeException
+     */
     public Event(String task, String startTime, String endTime, boolean isDone) {
         super();
         this.task = task;
@@ -57,6 +75,11 @@ public class Event extends Task{
         return data;
     }
 
+    /**
+     *
+     * @param time
+     * @return boolean if the event is still valid
+     */
     public boolean isValid(LocalDate time) {
         if (time.isAfter(this.endTime)) {
             return false;

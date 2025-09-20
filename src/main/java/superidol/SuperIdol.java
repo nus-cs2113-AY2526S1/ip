@@ -3,8 +3,6 @@ package superidol;
 import superidol.command.Command;
 import superidol.storage.Storage;
 
-import superidol.command.CommandKeyword;
-
 import superidol.parser.Parser;
 
 import superidol.tasklist.TaskList;
@@ -12,7 +10,9 @@ import superidol.ui.Ui;
 
 import java.util.Scanner;
 
-
+/**
+ * SuperIdol class
+ */
 public class SuperIdol {
 
     private TaskList taskList;
@@ -23,6 +23,12 @@ public class SuperIdol {
         this.storage = new Storage(filePath, this.taskList);
     }
 
+    /**
+     * run loop
+     * get raw command
+     * pass to parser
+     * execute command
+     */
     public void run(){
         Ui.greeting();
         storage.loadSavedFile();

@@ -7,10 +7,20 @@ public abstract class Task {
 
     public Task() {}
 
+    /**
+     * mark/unmark the task
+     *
+     * @param isDone
+     */
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
 
+    /**
+     * get string of task's info to print
+     *
+     * @return String of task
+     */
     public String getTask() {
         if (this.isDone) {
             return "[X] " + this.task;
@@ -19,9 +29,20 @@ public abstract class Task {
         }
     }
 
+    /**
+     * to find task by keyword
+     *
+     * @param keyword
+     * @return boolean result: contains or not
+     */
     public boolean contains(String keyword) {
         return task.toLowerCase().contains(keyword.toLowerCase());
     }
 
+    /**
+     * return data to save in txt file
+     *
+     * @return String data
+     */
     public abstract String saveData();
 }

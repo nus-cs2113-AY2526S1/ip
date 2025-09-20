@@ -3,21 +3,18 @@ package superidol.ui;
 import superidol.task.Task;
 
 public class Ui {
-
+    
     public static void greeting() {
         respond(Message.hello + Message.logo + Message.greeting);
     }
-
     public static void respondToInvalidCommand() {
         respond(Message.invalidCommandResponse);
     }
-
     public static void respond(String response) {
         System.out.println(Message.separator);
         System.out.println(response);
         System.out.println(Message.separator);
     }
-
     public static void goodbye() {
         respond(Message.goodbyeMessage);
     }
@@ -34,11 +31,9 @@ public class Ui {
         System.out.println(task.getTask());
         System.out.println(Message.separator);
     }
-
     public static void respondInvalidMarking() {
         respond(Message.invalidMarkingResponse);
     }
-
     public static void respondOutOfListRange() {
         respond(Message.outOfRangeListResponse());
     }
@@ -48,15 +43,12 @@ public class Ui {
     public static void respondInvalidDeadline() {
         respond(Message.invalidDeadlineResponse);
     }
-
     public static void respondInvalidEvent() {
         respond(Message.invalidEventResponse);
     }
-
     public static void respondInvalidTodo() {
         respond(Message.invalidTodoResponse);
     }
-
     public static void respondAddingTask(Task newTask) {
         System.out.println(Message.separator);
         System.out.println(Message.addingConfirmation);
@@ -80,7 +72,6 @@ public class Ui {
         System.out.println(Message.deleteResult());
         System.out.println(Message.separator);
     }
-
     public static void respondInvalidDeleting() {
         respond(Message.invalidDeleteResponse);
     }
@@ -94,12 +85,10 @@ public class Ui {
     public static void respondCannotCreateNewFile() {
         respond(Message.cannotCreateFileResponse);
     }
-
     public static void respondInvalidData(String data) {
         System.out.print(Message.invalidDataResponse);
         System.out.println(data);
     }
-
     public static void respondCannotOpenFile() {
         System.out.println(Message.cannotOpenFileResponse);
     }
@@ -108,7 +97,6 @@ public class Ui {
     public static void respondInvalidPrint() {
         respond(Message.invalidPrintResponse);
     }
-
     public static void respondEmptyPrint() {
         System.out.println(Message.emptyResultResponse);
     }
@@ -117,15 +105,12 @@ public class Ui {
     public static void respondInvalidFind() {
         respond(Message.invalidFindResponse);
     }
-
     public static void respondEmptyFind() {
         System.out.println(Message.emptyResultResponse);
     }
-
     public static void respondValidFind() {
         System.out.println(Message.validFindResponse);
     }
-
 
     // separator
     public static void separate() {

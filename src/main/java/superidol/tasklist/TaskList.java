@@ -3,12 +3,15 @@ package superidol.tasklist;
 import superidol.task.Deadline;
 import superidol.task.Event;
 import superidol.task.Task;
-import superidol.ui.Message;
 import superidol.ui.Ui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Represents list of user tasks
+ * Using an ArrayList<Task>
+ */
 public class TaskList {
     private static ArrayList<Task> taskList = new ArrayList<>();
 
@@ -16,6 +19,13 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * Add new task into list
+     * Choose to announce the result or not
+     *
+     * @param task
+     * @param announce
+     */
     public void addTask(Task task, boolean announce) {
         taskList.add(task);
         Task.taskCount++;
@@ -24,6 +34,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Print the whole list
+     */
     public void showList() {
         if (Task.taskCount == 0) {
             Ui.respondEmptyList();
@@ -36,6 +49,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete a specific task in the list
+     *
+     * @param taskId
+     */
     public void deleteTask(int taskId) {
         if (taskId >= 1 && taskId <= Task.taskCount) {
             Ui.respondDeletingTask(taskList.get(taskId - 1));
@@ -46,10 +64,21 @@ public class TaskList {
         }
     }
 
+    /**
+     * Get task from list by ID
+     *
+     * @param taskId
+     * @return
+     */
     public Task getTask(int taskId) {
         return taskList.get(taskId);
     }
 
+    /**
+     * Print list of tasks that are still valid
+     *
+     * @param time
+     */
     public void printByTime(LocalDate time) {
         boolean isEmpty = true;
         Ui.separate();
@@ -68,6 +97,11 @@ public class TaskList {
         Ui.separate();
     }
 
+    /**
+     * Find list of tasks by keyword
+     *
+     * @param keyword
+     */
     public void findByKeyword(String keyword) {
         int count = 1;
         Ui.separate();

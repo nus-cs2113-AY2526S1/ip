@@ -17,6 +17,7 @@ public class Message {
             + "try: event <task> /from <start> /to <end>\n"
             + "try: (un)mark <index>\n"
             + "try: list\n"
+            + "try: find <keyword>\n"
             + "try: delete <index>";
     public static final String separator = "____________________________________________________________";
     static final String goodbyeMessage = "Bye. Hope to see you again soon!";

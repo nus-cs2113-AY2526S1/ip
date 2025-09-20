@@ -14,11 +14,21 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Object to parse the raw command from user
+ * Create Command objects to execute commands
+ */
 public class Parser {
 
     private static String deadlineRegex = "(deadline)\\s(.+?)\\s/by\\s(.+)";
     private static String eventRegex = "(event)\\s(.+?)\\s/from(.+?)\\s/to(.+)";
 
+    /**
+     * Parse the command string to Command object for execution
+     *
+     * @param command
+     * @return Command object for the user's command
+     */
     public static Command parse(String command) {
         String commandKeyWord = command.split(" ")[0].toLowerCase();
         try {
@@ -121,15 +131,4 @@ public class Parser {
             return null;
         }
     }
-
-    public void addDeadline(String command) {
-
-    }
-
-    public void deleteTask(String command) {
-
-    }
-
-
-
 }

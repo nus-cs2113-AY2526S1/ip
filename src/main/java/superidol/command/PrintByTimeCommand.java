@@ -9,6 +9,11 @@ import java.time.format.DateTimeParseException;
 public class PrintByTimeCommand extends Command{
     private LocalDate time;
 
+    /**
+     * Constructor need to check if the time string is valid
+     *
+     * @param time
+     */
     public PrintByTimeCommand(String time){
         try {
             this.time = LocalDate.parse(time);
