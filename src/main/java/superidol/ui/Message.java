@@ -13,10 +13,11 @@ public class Message {
     static final String greeting = "What can I do for you?";
     static final String invalidCommandResponse = "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
             + "try: todo <task>\n"
-            + "try: deadline <task> /by <time>\n"
-            + "try: event <task> /from <start> /to <end>\n"
+            + "try: deadline <task> /by <time YYYY-MM-DD>\n"
+            + "try: event <task> /from <start YYYY-MM-DD> /to <end YYYY-MM-DD>\n"
             + "try: (un)mark <index>\n"
             + "try: list\n"
+            + "try: print <time YYYY-MM-DD>\n"
             + "try: find <keyword>\n"
             + "try: delete <index>";
     public static final String separator = "____________________________________________________________";
