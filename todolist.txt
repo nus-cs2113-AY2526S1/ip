@@ -2,5 +2,7 @@ T|0|Buy groceries
 T|1|Call Mom
 D|1|Submit final paper|2025-10-05
 D|0|Team meeting slides|2025-09-25
-E|0|Project presentation|2025-10-15|2025-10-15
 E|0|Company retreat|2025-11-20|2025-11-22
+T|0|run
+D|0|submit assignment|2025-10-10
+E|0|fan meeting|2025-10-10|2025-10-13

@@ -29,12 +29,98 @@ Prerequisites: JDK 17, update Intellij to the most recent version.
 SuperIdol accepts commands via the command line. Use the following commands to manage your tasks:
 
 * **`list`**: Shows all tasks in your list.
+```angular2html
+list
+____________________________________________________________
+1. [T][ ] Buy groceries
+2. [T][X] Call Mom
+3. [D][X] Submit final paper (by: Oct 05 2025)
+4. [D][ ] Team meeting slides (by: Sep 25 2025)
+5. [E][ ] Project presentation (from: Oct 15 2025 to: Oct 15 2025)
+6. [E][ ] Company retreat (from: Nov 20 2025 to: Nov 22 2025)
+____________________________________________________________
+```
 * **`todo <description>`**: Adds a new todo task.
+```angular2html
+todo run
+____________________________________________________________
+Got it. I've added this task:
+[T][ ] run
+Now you have 7 tasks in the list.
+____________________________________________________________
+```
 * **`deadline <description> /by <YYYY-MM-DD>`**: Adds a new task with a deadline.
+```angular2html
+deadline submit assignment /by 2025-10-10
+____________________________________________________________
+Got it. I've added this task:
+[D][ ] submit assignment (by: Oct 10 2025)
+Now you have 8 tasks in the list.
+____________________________________________________________
+```
 * **`event <description> /from <YYYY-MM-DD> /to <YYYY-MM-DD>`**: Adds a new event.
+```angular2html
+event fan meeting /from 2025-10-10 /to 2025-10-13
+____________________________________________________________
+Got it. I've added this task:
+[E][ ] fan meeting (from: Oct 10 2025 to: Oct 13 2025)
+Now you have 9 tasks in the list.
+____________________________________________________________
+```
 * **`mark <index>`**: Marks a task as completed.
+```angular2html
+mark 5
+____________________________________________________________
+Nice! I've marked this task as done:
+[E][X] Project presentation (from: Oct 15 2025 to: Oct 15 2025)
+____________________________________________________________
+```
 * **`unmark <index>`**: Unmarks a task.
+```angular2html
+unmark 5
+____________________________________________________________
+OK, I've marked this task as not done yet:
+[E][ ] Project presentation (from: Oct 15 2025 to: Oct 15 2025)
+____________________________________________________________
+```
 * **`delete <index>`**: Deletes a task from the list.
+```angular2html
+delete 5
+____________________________________________________________
+Noted. I've removed this task:
+[E][ ] Project presentation (from: Oct 15 2025 to: Oct 15 2025)
+Now you have 8 tasks in the list.
+____________________________________________________________
+```
 * **`find <keyword>`**: Finds tasks matching a keyword.
+```angular2html
+find presentation
+____________________________________________________________
+Here are the matching tasks in your list:
+Nothing found
+____________________________________________________________
+find meeting
+____________________________________________________________
+Here are the matching tasks in your list:
+1. [D][ ] Team meeting slides (by: Sep 25 2025)
+2. [E][ ] fan meeting (from: Oct 10 2025 to: Oct 13 2025)
+____________________________________________________________
+```
 * **`print <YYYY-MM-DD>`**: Prints tasks that valid for a specific date.
+```angular2html
+print 2025-01-01
+____________________________________________________________
+[D][X] Submit final paper (by: Oct 05 2025)
+[D][ ] Team meeting slides (by: Sep 25 2025)
+[E][ ] Company retreat (from: Nov 20 2025 to: Nov 22 2025)
+[D][ ] submit assignment (by: Oct 10 2025)
+[E][ ] fan meeting (from: Oct 10 2025 to: Oct 13 2025)
+____________________________________________________________
+```
 * **`exit`**: Exits the application. **MUST** run this command to saving tasks.
+```angular2html
+exit
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
+```
