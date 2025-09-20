@@ -24,6 +24,14 @@ Prerequisites: JDK 17, update Intellij to the most recent version.
 
 **Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
 
+## Notes about command format
+
+* Words in **`UPPER_CASE`** are parameters supplied by the user.
+  e.g., in `todo <DESCRIPTION>`, `DESCRIPTION` is a parameter.
+* Parameters **MUST** be in any order.
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit`) will be ignored.
+  e.g., `list 123` will be interpreted as `list`.
+
 ## Usage Guide
 
 SuperIdol accepts commands via the command line. Use the following commands to manage your tasks:
@@ -40,7 +48,7 @@ ____________________________________________________________
 6. [E][ ] Company retreat (from: Nov 20 2025 to: Nov 22 2025)
 ____________________________________________________________
 ```
-* **`todo <description>`**: Adds a new todo task.
+* **`todo <DESCRIPTION>`**: Adds a new todo task.
 ```angular2html
 todo run
 ____________________________________________________________
@@ -49,7 +57,7 @@ Got it. I've added this task:
 Now you have 7 tasks in the list.
 ____________________________________________________________
 ```
-* **`deadline <description> /by <YYYY-MM-DD>`**: Adds a new task with a deadline.
+* **`deadline <DESCRIPTION> /by <TIME: YYYY-MM-DD>`**: Adds a new task with a deadline.
 ```angular2html
 deadline submit assignment /by 2025-10-10
 ____________________________________________________________
@@ -58,7 +66,7 @@ Got it. I've added this task:
 Now you have 8 tasks in the list.
 ____________________________________________________________
 ```
-* **`event <description> /from <YYYY-MM-DD> /to <YYYY-MM-DD>`**: Adds a new event.
+* **`event <DESCRIPTION> /from <BEGIN: YYYY-MM-DD> /to <END: YYYY-MM-DD>`**: Adds a new event.
 ```angular2html
 event fan meeting /from 2025-10-10 /to 2025-10-13
 ____________________________________________________________
@@ -67,7 +75,7 @@ Got it. I've added this task:
 Now you have 9 tasks in the list.
 ____________________________________________________________
 ```
-* **`mark <index>`**: Marks a task as completed.
+* **`mark <INDEX>`**: Marks a task as completed.
 ```angular2html
 mark 5
 ____________________________________________________________
@@ -75,7 +83,7 @@ Nice! I've marked this task as done:
 [E][X] Project presentation (from: Oct 15 2025 to: Oct 15 2025)
 ____________________________________________________________
 ```
-* **`unmark <index>`**: Unmarks a task.
+* **`unmark <INDEX>`**: Unmarks a task.
 ```angular2html
 unmark 5
 ____________________________________________________________
@@ -83,7 +91,7 @@ OK, I've marked this task as not done yet:
 [E][ ] Project presentation (from: Oct 15 2025 to: Oct 15 2025)
 ____________________________________________________________
 ```
-* **`delete <index>`**: Deletes a task from the list.
+* **`delete <INDEX>`**: Deletes a task from the list.
 ```angular2html
 delete 5
 ____________________________________________________________
@@ -92,7 +100,7 @@ Noted. I've removed this task:
 Now you have 8 tasks in the list.
 ____________________________________________________________
 ```
-* **`find <keyword>`**: Finds tasks matching a keyword.
+* **`find <KEYWORD>`**: Finds tasks matching a keyword.
 ```angular2html
 find presentation
 ____________________________________________________________
@@ -106,7 +114,7 @@ Here are the matching tasks in your list:
 2. [E][ ] fan meeting (from: Oct 10 2025 to: Oct 13 2025)
 ____________________________________________________________
 ```
-* **`print <YYYY-MM-DD>`**: Prints tasks that valid for a specific date.
+* **`print <TIME: YYYY-MM-DD>`**: Prints tasks that valid for a specific date.
 ```angular2html
 print 2025-01-01
 ____________________________________________________________
