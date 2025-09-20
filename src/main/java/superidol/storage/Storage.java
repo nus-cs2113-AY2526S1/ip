@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Storage {
@@ -79,16 +80,24 @@ public class Storage {
             break;
         case "D":
             if (parts.length == 4) {
-                Deadline deadline = new Deadline(parts[2], parts[3], isDone);
-                taskList.addTask(deadline, false);
+                try {
+                    Deadline deadline = new Deadline(parts[2], parts[3], isDone);
+                    taskList.addTask(deadline, false);
+                } catch (DateTimeParseException e) {
+                    Ui.respondInvalidDeadline();
+                }
             } else {
                 Ui.respondInvalidData(data);
             }
             break;
         case "E":
             if (parts.length == 5) {
-                Event event = new Event(parts[2], parts[3], parts[4], isDone);
-                taskList.addTask(event, false);
+                try {
+                    Event event = new Event(parts[2], parts[3], parts[4], isDone);
+                    taskList.addTask(event, false);
+                } catch (DateTimeParseException e) {
+                    Ui.respondInvalidEvent();
+                }
             } else {
                 Ui.respondInvalidData(data);
             }

@@ -3,6 +3,9 @@ package superidol.command;
 import superidol.storage.Storage;
 import superidol.task.Event;
 import superidol.tasklist.TaskList;
+import superidol.ui.Ui;
+
+import java.time.DateTimeException;
 
 public class AddEventCommand extends Command{
     private String task;
@@ -16,8 +19,12 @@ public class AddEventCommand extends Command{
     }
 
     public void execute(TaskList taskList, Storage storage) {
-        Event event = new Event(task, startTime, endTime);
-        taskList.addTask(event, true);
+        try {
+            Event event = new Event(task, startTime, endTime);
+            taskList.addTask(event, true);
+        } catch (DateTimeException e) {
+            Ui.respondInvalidEvent();
+        }
     }
 
 }

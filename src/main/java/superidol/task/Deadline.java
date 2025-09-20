@@ -1,23 +1,35 @@
 package superidol.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task{
-    private String time;
+    private LocalDate time;
 
     public Deadline(String task, String time) {
         super();
         this.task = task;
-        this.time = time;
+        try {
+            this.time = LocalDate.parse(time);
+        } catch  (DateTimeParseException e) {
+            throw e;
+        }
     }
 
     public Deadline(String task, String time, boolean isDone) {
         super();
         this.task = task;
-        this.time = time;
         this.isDone = isDone;
+        try {
+            this.time = LocalDate.parse(time);
+        } catch (DateTimeParseException e) {
+            throw e;
+        }
     }
 
     public String getTask() {
-        return "[D]" + super.getTask() + " (by: " + time +")";
+        return "[D]" + super.getTask() + " (by: " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) +")";
     }
 
     public String saveData() {
@@ -28,7 +40,14 @@ public class Deadline extends Task{
             data += "0|";
         }
         data += this.task + "|";
-        data += this.time;
+        data += this.time.toString();
         return data;
+    }
+
+    public boolean isValid(LocalDate time) {
+        if (time.isAfter(this.time)) {
+            return false;
+        }
+        return true;
     }
 }

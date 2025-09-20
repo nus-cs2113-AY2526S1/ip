@@ -9,6 +9,7 @@ import superidol.tasklist.TaskList;
 import superidol.ui.Ui;
 
 import java.io.File;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,6 +52,21 @@ public class Parser {
                 } else {
                     return new AddTodoCommand(task);
                 }
+            }
+            case "print": {
+                String time = command.substring(5).trim();
+                if (time.isBlank()) {
+                    Ui.respondInvalidPrint();
+                    return null;
+                } else {
+                    try {
+                        return new PrintByTimeCommand(time);
+                    } catch (DateTimeParseException e) {
+                        Ui.respondInvalidPrint();
+                        return null;
+                    }
+                }
+
             }
             case "deadline": {
                 Pattern pattern = Pattern.compile(deadlineRegex);

@@ -104,4 +104,17 @@ public class Ui {
         System.out.println(Message.cannotOpenFileResponse);
     }
 
+    // print
+    public static void respondInvalidPrint() {
+        respond(Message.invalidPrintResponse);
+    }
+
+    public static void respondEmptyPrint() {
+        System.out.println(Message.invalidPrintResponse);
+    }
+
+    // separator
+    public static void separate() {
+        System.out.println(Message.separator);
+    }
 }

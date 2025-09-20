@@ -21,7 +21,11 @@ public class Message {
     public static final String separator = "____________________________________________________________";
     static final String goodbyeMessage = "Bye. Hope to see you again soon!";
 
-    // marking UI
+    // print
+
+    static final String invalidPrintResponse = "Wrong input! Try \"print <time YYYY-MM-DD>\"";
+
+    // mark
 
     static final String markedResponse = "Nice! I've marked this task as done:";
     static final String unmarkedResponse = "OK, I've marked this task as not done yet:";
@@ -30,10 +34,10 @@ public class Message {
         return String.format("You only have %d task(s) in the list.", Task.taskCount);
     }
 
-    // create UI
+    // add
 
-    static final String invalidDeadlineResponse = "Wrong input! Try \"deadline <task> /by <time>\"";
-    static final String invalidEventResponse = "Wrong input! Try \"event <task> /from <start> /to <end>\"";
+    static final String invalidDeadlineResponse = "Wrong input! Try \"deadline <task> /by <time YYYY-MM-DD>\"";
+    static final String invalidEventResponse = "Wrong input! Try \"event <task> /from <start YYYY-MM-DD> /to <end YYYY-MM-DD>\"";
     static final String invalidTodoResponse = "Wrong input! Try \"todo <task>\"";
     static final String addingConfirmation = "Got it. I've added this task:";
     static String addingResult() {
@@ -42,7 +46,7 @@ public class Message {
 
     // list
 
-    static final String emptyListResponse = "There are no tasks in the list.\n" + "Try add some.";
+    static final String emptyListResponse = "There are no tasks suitable";
 
     // delete
 
