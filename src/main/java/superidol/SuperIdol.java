@@ -15,8 +15,8 @@ import java.util.Scanner;
  */
 public class SuperIdol {
 
-    private TaskList taskList;
-    private Storage storage;
+    private final TaskList taskList;
+    private final Storage storage;
 
     public SuperIdol(String filePath) {
         this.taskList = new TaskList();
