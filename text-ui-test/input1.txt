@@ -1,0 +1,27 @@
+list
+todo borrow book
+list
+deadline return book /by Sunday
+event project meeting /from Mon 2pm /to 4pm
+list
+mark 1
+list
+mark 3
+list
+unmark 1
+list
+mark 4
+todo
+deadline missing deadline task
+event missing both times
+event missing start time /to 4pm
+event missing end time /from Mon 2pm
+unknowncommandhere
+delete 1
+delete 100
+todo find all books and read them
+todo think about reading books
+find book
+find nonsence
+find proj
+bye
