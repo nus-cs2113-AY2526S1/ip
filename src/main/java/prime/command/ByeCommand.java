@@ -9,12 +9,12 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, UserInterface ui){
+    public void execute(TaskManager taskManager, UserInterface ui) {
         ui.printByeMessage();
     }
 
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 }

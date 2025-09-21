@@ -10,9 +10,9 @@ public class UserInterface {
     }
 
     public void printLineBreak() {
-        this.printIndented(LINE_BREAK); 
+        this.printIndented(LINE_BREAK);
     }
-    
+
     public void printWelcomeMessage() {
         printIndented("Greetings, human. I am " + AGENT_NAME + ".");
         printIndented("Freedom is the right of all sentient beings.");
