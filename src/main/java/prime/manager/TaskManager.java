@@ -72,4 +72,14 @@ public class TaskManager {
         ui.printIndented("OK, I've marked this task as not done yet:");
         ui.printIndented("  " + task);
     }
+
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                results.add(task);
+            }
+        }
+        return results;
+    }
 }
