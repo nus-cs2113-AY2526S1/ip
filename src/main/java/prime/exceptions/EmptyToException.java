@@ -1,7 +1,9 @@
 package prime.exceptions;
 
+import prime.parser.CommandType;
+
 public class EmptyToException extends PrimeException {
-    public EmptyToException(int index) {
-        super("OOPS!!! The Task Number " + index + " is invalid.");
+    public EmptyToException(CommandType commandType) {
+        super("OOPS!!! The /to of " + commandType.toString() + " cannot be empty");
     }
 }

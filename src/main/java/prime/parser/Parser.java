@@ -1,12 +1,23 @@
 package prime.parser;
 
+import prime.command.ByeCommand;
+import prime.command.Command;
+import prime.command.DeadlineCommand;
+import prime.command.DeleteCommand;
+import prime.command.EventCommand;
+import prime.command.InvalidCommand;
+import prime.command.ListCommand;
+import prime.command.MarkCommand;
+import prime.command.TodoCommand;
+import prime.command.UnmarkCommand;
+import prime.exceptions.PrimeException;
+
 public class Parser {
-    // Hardcoding the Constants
     private static final String BY = "/by";
     private static final String FROM = "/from";
     private static final String TO = "/to";
 
-    public static Command parse(String userInput) {
+    public static Command parse(String userInput) throws PrimeException {
         // Split out the command word and the arguments using the Regex for space
         String[] parts = userInput.split(" ", 2);
         String commandWord = parts[0];
@@ -21,23 +32,23 @@ public class Parser {
         // Inspired from CG2111A mod
         switch (commandWord) {
         case "bye":
-            return new Command(CommandType.BYE, arguments);
+            return new ByeCommand(arguments);
         case "list":
-            return new Command(CommandType.LIST, arguments);
+            return new ListCommand(arguments);
         case "mark":
-            return new Command(CommandType.MARK, arguments);
+            return new MarkCommand(arguments);
         case "unmark":
-            return new Command(CommandType.UNMARK, arguments);
+            return new UnmarkCommand(arguments);
         case "todo":
-            return new Command(CommandType.TODO, arguments);
+            return new TodoCommand(arguments);
         case "deadline":
-            return new Command(CommandType.DEADLINE, arguments);
+            return new DeadlineCommand(arguments);
         case "event":
-            return new Command(CommandType.EVENT, arguments);
+            return new EventCommand(arguments);
         case "delete":
-            return new Command(CommandType.DELETE, arguments);
+            return new DeleteCommand(arguments);
         default:
-            return new Command(CommandType.INVALID, userInput);
+            return new InvalidCommand(arguments);
         }
     }
 
@@ -57,7 +68,7 @@ public class Parser {
         int fromIndex = arguments.indexOf(FROM);
         int toIndex = arguments.indexOf(TO);
         if (fromIndex == -1 || toIndex == -1) {
-            return null; // no from or to
+            return null;
         }
         String description = arguments.substring(0, fromIndex).trim();
         String from = arguments.substring(fromIndex + FROM.length(), toIndex).trim();

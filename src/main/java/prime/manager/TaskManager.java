@@ -51,20 +51,25 @@ public class TaskManager {
             ui.printIndented((i + 1) + "." + tasks.get(i));
         }
     }
-
-    public void toggleMark(int taskNo, UserInterface ui) throws InvalidTaskNumberException {
-        if (taskNo < 1 || taskNo > tasks.size()) {
-            throw new InvalidTaskNumberException(taskNo,tasks.size());
+    public void markTask(int taskIndex, UserInterface ui) {
+        if (taskIndex <= 0 || taskIndex > tasks.size()) {
+            ui.printIndented("Invalid task number!");
+            return;
         }
-        Task task = tasks.get(taskNo - 1);
-        task.setIsDone(!task.getIsDone());
-        storage.save(tasks);
+        Task task = tasks.get(taskIndex - 1);
+        task.setIsDone(true);
+        ui.printIndented("Nice! I've marked this task as done:");
+        ui.printIndented("  " + task);
+    }
 
-        if (task.getIsDone()) {
-            ui.printIndented("Nice Human! I've marked this task as done:");
-        } else {
-            ui.printIndented("Ok Human! I've marked this task as not done yet:");
+    public void unmarkTask(int taskIndex, UserInterface ui) {
+        if (taskIndex <= 0 || taskIndex > tasks.size()) {
+            ui.printIndented("Invalid task number!");
+            return;
         }
-        ui.printIndented(task.toString());
+        Task task = tasks.get(taskIndex - 1);
+        task.setIsDone(false);
+        ui.printIndented("OK, I've marked this task as not done yet:");
+        ui.printIndented("  " + task);
     }
 }
