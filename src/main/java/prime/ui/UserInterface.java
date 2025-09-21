@@ -8,6 +8,7 @@ public class UserInterface {
     public void printIndented(String message) {
         System.out.println("    " + message);
     }
+
     public void printLineBreak() {
         this.printIndented(LINE_BREAK); 
     }
