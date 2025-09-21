@@ -17,8 +17,8 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    public String getTickUnTickIcon(){
-        if (this.getIsDone()){
+    public String getTickUnTickIcon() {
+        if (this.getIsDone()) {
             return "[X]";
         } else {
             return "[ ]";

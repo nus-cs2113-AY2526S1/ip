@@ -1,9 +1,9 @@
 package prime;
 
-import prime.exceptions.PrimeException;
 import prime.command.Command;
-import prime.parser.Parser;
+import prime.exceptions.PrimeException;
 import prime.manager.TaskManager;
+import prime.parser.Parser;
 import prime.ui.UserInterface;
 
 import java.util.Scanner;

@@ -5,6 +5,7 @@ import prime.command.Command;
 import prime.command.DeadlineCommand;
 import prime.command.DeleteCommand;
 import prime.command.EventCommand;
+import prime.command.FindCommand;
 import prime.command.InvalidCommand;
 import prime.command.ListCommand;
 import prime.command.MarkCommand;
@@ -47,6 +48,8 @@ public class Parser {
             return new EventCommand(arguments);
         case "delete":
             return new DeleteCommand(arguments);
+        case "find":
+            return new FindCommand(arguments);
         default:
             return new InvalidCommand(arguments);
         }
