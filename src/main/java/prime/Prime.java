@@ -8,8 +8,25 @@ import prime.ui.UserInterface;
 
 import java.util.Scanner;
 
+/**
+ * The entry point of the Prime Task Management application.
+ * <p>
+ * This class initializes the necessary components (UI, task manager, parser),
+ * handles user input, executes commands, and manages the application loop
+ * until the user issues an exit command.
+ * </p>
+ */
 public class Prime {
 
+    /**
+     * The main method that starts the Prime application.
+     * <p>
+     * It initializes the user interface, task manager, and input scanner.
+     * The application runs in a loop until the user chooses to exit.
+     * </p>
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         UserInterface ui = new UserInterface();
         TaskManager taskManager = new TaskManager();
