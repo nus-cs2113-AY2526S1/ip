@@ -1,5 +1,12 @@
 package prime.ui;
 
+/**
+ * Handles all user interactions in the Prime Task Management system.
+ * <p>
+ * This class is responsible for displaying messages, prompts, and responses
+ * to the user in a consistent, formatted style.
+ * </p>
+ */
 public class UserInterface {
     private static final String LINE_BREAK = "____________________________________________________________";
     private static final String AGENT_NAME = "Prime";

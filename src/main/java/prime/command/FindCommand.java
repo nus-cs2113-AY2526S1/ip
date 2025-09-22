@@ -7,11 +7,32 @@ import prime.ui.UserInterface;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a command to find tasks that match a given keyword.
+ * <p>
+ * Searches through all tasks in the {@link TaskManager} and displays
+ * the matching tasks via the {@link UserInterface}.
+ * </p>
+ */
 public class FindCommand extends Command {
+
+    /**
+     * Constructs a new {@code FindCommand} with the specified search keyword.
+     *
+     * @param arguments the search keyword to find in task descriptions
+     */
     public FindCommand(String arguments) {
         super(arguments);
     }
 
+    /**
+     * Executes the find command by searching for tasks containing the keyword
+     * and printing the results.
+     *
+     * @param taskManager the task manager containing all tasks
+     * @param ui          the user interface to display matching tasks
+     * @throws PrimeException if no search term is provided
+     */
     @Override
     public void execute(TaskManager taskManager, UserInterface ui) throws PrimeException {
         if (arguments.isEmpty()) {
