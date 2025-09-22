@@ -23,10 +23,14 @@ import java.util.ArrayList;
  * </p>
  */
 public class Storage {
-    /** The path to the file where tasks are stored. */
+    /**
+     * The path to the file where tasks are stored.
+     */
     private static final String FILE_PATH = "./data/duke.txt";
 
-    /** The UI instance used for displaying messages to the user. */
+    /**
+     * The UI instance used for displaying messages to the user.
+     */
     UserInterface ui = new UserInterface();
 
     /**
@@ -130,7 +134,7 @@ public class Storage {
      */
     private String formatTask(Task task) {
         String status;
-        if (task.getIsDone()){
+        if (task.getIsDone()) {
             status = "1";
         } else {
             status = "0";

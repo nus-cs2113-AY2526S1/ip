@@ -8,14 +8,16 @@ package prime.task;
  * </p>
  */
 public class Deadline extends Task {
-    /** The deadline (due date/time) for the task. */
+    /**
+     * The deadline (due date/time) for the task.
+     */
     protected String by;
 
     /**
      * Constructs a {@code Deadline} task with the given description and deadline.
      *
      * @param description The description of the deadline task.
-     * @param by The due date/time for the task.
+     * @param by          The due date/time for the task.
      */
     public Deadline(String description, String by) {
         super(description);

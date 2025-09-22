@@ -76,7 +76,7 @@ public class Parser {
      *
      * @param arguments The raw string containing the task description and {@code /by} token.
      * @return A string array where index 0 is the description and index 1 is the deadline,
-     *         or {@code null} if the {@code /by} token is missing.
+     * or {@code null} if the {@code /by} token is missing.
      */
     public static String[] parseDeadline(String arguments) {
         int byIndex = arguments.indexOf(BY);
@@ -93,7 +93,7 @@ public class Parser {
      *
      * @param arguments The raw string containing the task description and {@code /from} and {@code /to} tokens.
      * @return A string array where index 0 is the description, index 1 is the start time,
-     *         and index 2 is the end time, or {@code null} if either token is missing.
+     * and index 2 is the end time, or {@code null} if either token is missing.
      */
     public static String[] parseEvent(String arguments) {
         int fromIndex = arguments.indexOf(FROM);
