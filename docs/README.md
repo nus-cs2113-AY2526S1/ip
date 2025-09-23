@@ -1,6 +1,7 @@
 # Kobe User Guide
 
 
+
 Kobe is a friendly, minimal, command‑line task manager chatbot. It lets you track Todos, Deadlines, and Events, mark/unmark them, delete them, list all tasks, and search by keyword. Your tasks are saved automatically to disk between runs.
 
 
