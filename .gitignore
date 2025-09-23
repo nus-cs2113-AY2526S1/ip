@@ -250,3 +250,4 @@ replay_pid*
 # <https://github.com/nus-cs2113-AY2526S1/ip/blob/master/.gitignore>
 /text-ui-test/ACTUAL.TXT
 /text-ui-test/EXPECTED-UNIX.TXT
+/data

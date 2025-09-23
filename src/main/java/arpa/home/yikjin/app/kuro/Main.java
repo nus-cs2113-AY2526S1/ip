@@ -4,14 +4,24 @@ import java.util.NoSuchElementException;
 
 import arpa.home.yikjin.app.kuro.command.Runner;
 import arpa.home.yikjin.app.kuro.exception.base.AppException;
+import arpa.home.yikjin.app.kuro.task.FileManager;
 import arpa.home.yikjin.app.kuro.ui.Ui;
 
 final class Main {
     public static void main(final String[] args) {
-        Ui.greet();
+        init();
         commandRepl();
-
         Ui.close();
+    }
+
+    private static void init() {
+        try {
+            FileManager.loadFromDisk();
+        } catch (final AppException e) {
+            Ui.errException(e);
+        }
+
+        Ui.greet();
     }
 
     private static void commandRepl() {
@@ -19,8 +29,8 @@ final class Main {
             try {
                 final String inputLine = Ui.getUserPrompt();
                 Runner.runCommand(inputLine);
-            } catch (final AppException message) {
-                Ui.errException(message);
+            } catch (final AppException e) {
+                Ui.errException(e);
             } catch (final NoSuchElementException ignored) {
                 // Ensure the code does not error out when passing in input via command line, and the input does not end
                 // with "bye"

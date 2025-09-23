@@ -4,12 +4,16 @@ public final class Deadline extends Task {
     private final String due;
 
     public Deadline(final String name, final String due) {
-        super(name);
+        super(TaskType.DEADLINE, name);
         this.due = due;
+    }
+
+    String getDue() {
+        return due;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + due + ")";
+        return String.format("%s (by: %s)", super.toString(), due);
     }
 }
