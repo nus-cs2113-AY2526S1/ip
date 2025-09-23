@@ -5,14 +5,22 @@ public final class Event extends Task {
     private final String to;
 
     public Event(final String name, final String from, final String to) {
-        super(name);
+        super(TaskType.EVENT, name);
 
         this.from = from;
         this.to = to;
     }
 
+    String getTo() {
+        return to;
+    }
+
+    String getFrom() {
+        return from;
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + ", to: " + to + ")";
+        return String.format("%s (from: %s, to: %s)", super.toString(), from, to);
     }
 }

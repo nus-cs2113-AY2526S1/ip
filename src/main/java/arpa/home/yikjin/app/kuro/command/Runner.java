@@ -100,6 +100,7 @@ public final class Runner {
         }
 
         if (taskIds.length > 1) {
+            // Only accept 1 task to delete, since deleting a task will change the ID of others
             throw new ExcessTaskIdsException();
         }
 
@@ -123,7 +124,6 @@ public final class Runner {
         Ui.listTaskDetails(taskId, task);
 
         TaskManager.removeTask(taskIndex);
-
         Ui.tasksCount(TaskManager.getNumTasks());
     }
 
@@ -206,8 +206,8 @@ public final class Runner {
         }
 
         final Task task = TaskManager.getTask(taskId - 1);
-        task.setDone(isDone);
 
+        TaskManager.setTaskDone(taskId - 1, isDone);
         Ui.listTaskDetails(taskId, task);
     }
 
