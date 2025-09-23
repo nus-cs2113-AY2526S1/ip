@@ -2,6 +2,7 @@ package arpa.home.yikjin.app.kuro.command;
 
 import java.util.Map;
 
+import arpa.home.yikjin.app.kuro.exception.input.argument.ExcessTaskIdsException;
 import arpa.home.yikjin.app.kuro.exception.input.argument.InvalidTaskIdException;
 import arpa.home.yikjin.app.kuro.exception.input.argument.MissingTaskIdsException;
 import arpa.home.yikjin.app.kuro.exception.input.argument.MissingTaskNameException;
@@ -46,6 +47,9 @@ public final class Runner {
         case DEADLINE:
             addDeadline(posArgsAsString, namedArgs);
             break;
+        case DELETE:
+            removeTask(posArgs);
+            break;
         case EVENT:
             addEvent(posArgsAsString, namedArgs);
             break;
@@ -66,7 +70,7 @@ public final class Runner {
         }
     }
 
-    static void bye() {
+    private static void bye() {
         Ui.bye();
         isTerminateGiven = true;
     }
@@ -88,6 +92,39 @@ public final class Runner {
 
         final Deadline deadline = new Deadline(deadlineName, by);
         addTask(deadline);
+    }
+
+    private static void removeTask(final String[] taskIds) {
+        if (taskIds.length < 1) {
+            throw new MissingTaskIdsException();
+        }
+
+        if (taskIds.length > 1) {
+            throw new ExcessTaskIdsException();
+        }
+
+        final String taskIdStr = taskIds[0];
+        final int taskId;
+
+        try {
+            taskId = Integer.parseInt(taskIdStr);
+        } catch (final NumberFormatException ignored) {
+            throw new InvalidTaskIdException(taskIdStr);
+        }
+
+        if (taskId < 1 || taskId > TaskManager.getNumTasks()) {
+            throw new InvalidTaskIdException(taskId);
+        }
+
+        final int taskIndex = taskId - 1;
+        final Task task = TaskManager.getTask(taskIndex);
+
+        Ui.removeTaskBegin();
+        Ui.listTaskDetails(taskId, task);
+
+        TaskManager.removeTask(taskIndex);
+
+        Ui.tasksCount(TaskManager.getNumTasks());
     }
 
     private static void addEvent(final String eventName, final Map<String, String[]> eventArgs) {

@@ -1,8 +1,8 @@
 package arpa.home.yikjin.app.kuro.command;
 
 enum InputCommand {
-    BYE("bye"), DEADLINE("deadline"), EVENT("event"), LIST("list"), MARK("mark"), TODO("todo"), UNMARK(
-            "unmark"), INVALID("");
+    BYE("bye"), DEADLINE("deadline"), DELETE("delete"), EVENT("event"), LIST("list"), MARK("mark"), TODO(
+            "todo"), UNMARK("unmark"), INVALID("");
 
     private final String enumValue;
 
