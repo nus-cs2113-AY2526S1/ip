@@ -2,6 +2,8 @@
 /.idea/
 /out/
 /*.iml
+META-INF/
+/data/
 
 # Gradle build files
 /.gradle/
@@ -13,5 +15,12 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Java compiled files
+*.class
+*.jar
+
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Crash logs
+hs_err_pid*
