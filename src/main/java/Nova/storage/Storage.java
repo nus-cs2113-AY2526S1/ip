@@ -2,6 +2,7 @@ package Nova.storage;
 
 import Nova.task.Task;
 import Nova.task.Deadline;
+import Nova.task.TaskList;
 import Nova.task.Todo;
 import Nova.task.Event;
 
@@ -82,11 +83,11 @@ public class Storage {
         return tasks;
     }
 
-    public void saveTasks(ArrayList<Task> tasks) {
+    public void saveTasks(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
 
-            for (Task task : tasks) {
+            for (Task task : tasks.getAllTasks()) {
                 String line = "";
 
                 if (task instanceof Todo) {
