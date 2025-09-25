@@ -1,0 +1,4 @@
+T | 1 | borrow book
+T | 0 | hello
+T | 0 | return book
+E | 0 | concert | saturday 2pm  |  4pm
