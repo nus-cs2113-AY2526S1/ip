@@ -1,15 +1,20 @@
+help
+todo read book
+deadline return book /by June 6th
+event project meeting /from Aug 6th 2pm /to 4pm
+todo join sports club
 list
-hello
-todo sleep now
-todo wake up
-deadline make bed
+mark 2
+unmark 2
+delete 3
+list
+todo borrow book
+deadline assignment /by Sep 30th
+event hackathon /from Oct 5th 10am /to Oct 6th 6pm
+list
 mark 5
-deadline do assignment /by Sunday
-delete 8
-delete 1
-list
-event project meeting /from Mon 2pm /to 4pm
-mark 1
-mark 3
+mark 6
+unmark 6
+delete 2
 list
 bye

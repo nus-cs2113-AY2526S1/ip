@@ -9,65 +9,115 @@
  What can I do for you?
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
- No tasks in this list.
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
- OOPS! I don't understand that command.
+ Here are the available commands:
+   list                - Show all tasks
+   todo <desc>         - Add a todo
+   deadline <desc> /by <time> - Add a deadline
+   event <desc> /from <start> /to <end> - Add an event
+   mark <num>          - Mark a task as done
+   unmark <num>        - Mark a task as not done
+   delete <num>        - Delete a task
+   help                - Show this help message
+   bye                 - Exit the program
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
  Got it. I've added this task:
-   [T][ ] sleep now
+   [T][ ] read book
  Now you have 1 tasks in the list.
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
  Got it. I've added this task:
-   [T][ ] wake up
+   [D][ ] return book (by: June 6th)
  Now you have 2 tasks in the list.
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-  OOPS!!! Please use the format: deadline <desc> /by <time>
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
- Invalid task number! Please enter a number from 1 to 2.
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
  Got it. I've added this task:
-   [D][ ] do assignment (by: Sunday)
+   [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
  Now you have 3 tasks in the list.
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-  OOPS!!! Invalid task number! Please enter a number between 1 and 3
+ Got it. I've added this task:
+   [T][ ] join sports club
+ Now you have 4 tasks in the list.
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ Number of tasks in this list: 4
+ Here are the tasks in your list:
+ 1. [T][ ] read book
+ 2. [D][ ] return book (by: June 6th)
+ 3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+ 4. [T][ ] join sports club
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ Nice! I've marked this task as done:
+    [D][X] return book (by: June 6th)
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ OK, I've marked this task as not done yet:
+    [D][ ] return book (by: June 6th)
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
  Got it. I've deleted this task:
-   [T][ ] sleep now
- Now you have 2 tasks in the list.
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
- Number of tasks in this list: 2
- Here are the tasks in your list:
- 1. [T][ ] wake up
- 2. [D][ ] do assignment (by: Sunday)
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
- Got it. I've added this task:
-   [E][ ] project meeting (from: Mon 2pm to: 4pm)
+   [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
  Now you have 3 tasks in the list.
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
- Nice! I've marked this task as done:
-    [T][X] wake up
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
- Nice! I've marked this task as done:
-    [E][X] project meeting (from: Mon 2pm to: 4pm)
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
  Number of tasks in this list: 3
  Here are the tasks in your list:
- 1. [T][X] wake up
- 2. [D][ ] do assignment (by: Sunday)
- 3. [E][X] project meeting (from: Mon 2pm to: 4pm)
+ 1. [T][ ] read book
+ 2. [D][ ] return book (by: June 6th)
+ 3. [T][ ] join sports club
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ Got it. I've added this task:
+   [T][ ] borrow book
+ Now you have 4 tasks in the list.
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ Got it. I've added this task:
+   [D][ ] assignment (by: Sep 30th)
+ Now you have 5 tasks in the list.
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ Got it. I've added this task:
+   [E][ ] hackathon (from: Oct 5th 10am to: Oct 6th 6pm)
+ Now you have 6 tasks in the list.
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ Number of tasks in this list: 6
+ Here are the tasks in your list:
+ 1. [T][ ] read book
+ 2. [D][ ] return book (by: June 6th)
+ 3. [T][ ] join sports club
+ 4. [T][ ] borrow book
+ 5. [D][ ] assignment (by: Sep 30th)
+ 6. [E][ ] hackathon (from: Oct 5th 10am to: Oct 6th 6pm)
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ Nice! I've marked this task as done:
+    [D][X] assignment (by: Sep 30th)
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ Nice! I've marked this task as done:
+    [E][X] hackathon (from: Oct 5th 10am to: Oct 6th 6pm)
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ OK, I've marked this task as not done yet:
+    [E][ ] hackathon (from: Oct 5th 10am to: Oct 6th 6pm)
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ Got it. I've deleted this task:
+   [D][ ] return book (by: June 6th)
+ Now you have 5 tasks in the list.
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ Number of tasks in this list: 5
+ Here are the tasks in your list:
+ 1. [T][ ] read book
+ 2. [T][ ] join sports club
+ 3. [T][ ] borrow book
+ 4. [D][X] assignment (by: Sep 30th)
+ 5. [E][ ] hackathon (from: Oct 5th 10am to: Oct 6th 6pm)
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
  Bye. Hope to see you again soon!
