@@ -2,6 +2,7 @@ package Nova.parser;
 
 import Nova.command.Command;
 import Nova.command.ExitCommand;
+import Nova.command.FindCommand;
 import Nova.command.ListCommand;
 import Nova.command.MarkCommand;
 import Nova.command.AddTodoCommand;
@@ -28,6 +29,7 @@ public class Parser {
             case "deadline" -> new AddDeadlineCommand(arguments);
             case "event" -> new AddEventCommand(arguments);
             case "delete" -> new DeleteCommand(arguments);
+            case "find" -> new FindCommand(arguments);
             case "help" -> new HelpCommand();
             default -> throw new NovaException("I don't understand that command.");
         };

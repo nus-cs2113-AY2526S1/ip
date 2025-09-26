@@ -16,6 +16,7 @@ public class HelpCommand extends Command {
         System.out.println("   mark <num>          - Mark a task as done");
         System.out.println("   unmark <num>        - Mark a task as not done");
         System.out.println("   delete <num>        - Delete a task");
+        System.out.println("   find <desc>         - Find a task by partial or full description");
         System.out.println("   help                - Show this help message");
         System.out.println("   bye                 - Exit the program");
         ui.showLineSeparator();

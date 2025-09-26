@@ -4,6 +4,8 @@ import Nova.exception.NovaException;
 
 import java.util.ArrayList;
 
+import static java.util.stream.Collectors.toList;
+
 public class TaskList {
     private final ArrayList<Task> tasks;
 
@@ -38,7 +40,6 @@ public class TaskList {
         return tasks.get(taskNumber - 1);
     }
 
-
     public ArrayList<Task> getAllTasks() {
         return tasks;
     }
@@ -51,4 +52,10 @@ public class TaskList {
         return tasks.isEmpty();
     }
 
+    public TaskList findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = (ArrayList<Task>) tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                .collect(toList());
+        return new TaskList(matchingTasks);
+    }
 }

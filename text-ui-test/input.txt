@@ -12,6 +12,8 @@ todo borrow book
 deadline assignment /by 30/09/2025 2359
 event hackathon /from 05/10/2025 1000 /to 06/10/2025 1800
 list
+find book
+find home
 mark 5
 mark 6
 unmark 6
