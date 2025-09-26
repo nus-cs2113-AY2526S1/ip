@@ -17,6 +17,7 @@
    mark <num>          - Mark a task as done
    unmark <num>        - Mark a task as not done
    delete <num>        - Delete a task
+   find <desc>         - Find a task by partial or full description
    help                - Show this help message
    bye                 - Exit the program
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
@@ -92,6 +93,16 @@
  4. [T][ ] borrow book
  5. [D][ ] assignment (by: Sep 30 2025 2359)
  6. [E][ ] hackathon (from: Oct 5 2025 1000 to: Oct 6 2025 1800)
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ Search: book
+ Here are matching tasks in your list:
+ 1. [T][ ] read book
+ 2. [D][ ] return book (by: Jan 1 2000 1900)
+ 3. [T][ ] borrow book
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+ No matching tasks found that matches: home
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
 =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
  Nice! I've marked this task as done:

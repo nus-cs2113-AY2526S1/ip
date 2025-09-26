@@ -1,6 +1,8 @@
 package Nova.ui;
 
+import Nova.exception.NovaException;
 import Nova.task.Task;
+import Nova.task.TaskList;
 
 import java.util.Scanner;
 
@@ -77,11 +79,22 @@ public class TextUi {
         showLineSeparator();
     }
 
-    public void showLoadingError(String message) {
-        showError("Unable to load saved tasks. Starting with an empty list." + message);
-    }
-
     public String readCommand() {
         return scanner.nextLine().trim();
+    }
+
+    public void showAllTasks(TaskList matchingTasks, String keyword) throws NovaException {
+        if (matchingTasks.isEmpty()) {
+            showMessage(" No matching tasks found that matches: " + keyword );
+        } else {
+            showLineSeparator();
+            System.out.println(" Search: " + keyword);
+            System.out.println(" Here are matching tasks in your list:");
+            for (int taskIndex = 1; taskIndex <= matchingTasks.getTasksSize(); taskIndex++) {
+                Task task = matchingTasks.getTask(taskIndex);
+                System.out.println(" " + (taskIndex) + ". " + task);
+            }
+            showLineSeparator();
+        }
     }
 }

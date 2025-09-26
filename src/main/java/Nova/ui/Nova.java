@@ -5,9 +5,7 @@ import Nova.parser.Parser;
 import Nova.command.Command;
 import Nova.storage.Storage;
 import Nova.task.TaskList;
-import Nova.ui.TextUi;
 
-import java.io.IOException;
 
 
 public class Nova {

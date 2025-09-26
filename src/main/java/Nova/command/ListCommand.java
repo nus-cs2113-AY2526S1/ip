@@ -15,9 +15,9 @@ public class ListCommand extends Command {
             ui.showLineSeparator();
             System.out.println(" Number of tasks in this list: " + tasks.getTasksSize());
             System.out.println(" Here are the tasks in your list:");
-            for (int i = 1; i <= tasks.getTasksSize(); i++) {
-                Task task = tasks.getTask(i);
-                System.out.println(" " + (i) + ". " + task);
+            for (int taskIndex = 1; taskIndex <= tasks.getTasksSize(); taskIndex++) {
+                Task task = tasks.getTask(taskIndex);
+                System.out.println(" " + (taskIndex) + ". " + task);
             }
             ui.showLineSeparator();
         }
