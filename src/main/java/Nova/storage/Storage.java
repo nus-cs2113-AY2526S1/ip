@@ -16,13 +16,32 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
+/**
+ * The {@code Storage} class handles reading and writing tasks to a file.
+ * It manages loading tasks from the file into memory and saving task changes
+ * back to the file.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a new {@code Storage} object with the given file path.
+     *
+     * @param filePath the file path where tasks are saved
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the file into an ArrayList.
+     * <p>
+     * If the file or its parent directory does not exist, they will be created.
+     * Supports Todo, Deadline, and Event task types.
+     *
+     * @return an ArrayList of tasks loaded from the file
+     * @throws NovaException If there is an error reading the file or unknown task type
+     */
     public ArrayList<Task> loadTasks() throws NovaException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
@@ -80,6 +99,16 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves all tasks in the given {@link TaskList} to the file.
+     * <p>
+     * Each task is written in a consistent format:
+     * Todo: T | status | description
+     * Deadline: D | status | description | by
+     * Event: E | status | description | from to to
+     *
+     * @param tasks the TaskList containing tasks to save
+     */
     public void saveTasks(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);

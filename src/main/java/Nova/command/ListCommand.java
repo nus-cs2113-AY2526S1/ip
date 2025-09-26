@@ -6,7 +6,20 @@ import Nova.task.Task;
 import Nova.task.TaskList;
 import Nova.ui.TextUi;
 
+/**
+ * Represents a command that lists all tasks in the current task list.
+ */
 public class ListCommand extends Command {
+    /**
+     * Executes the list command.
+     * If the task list is empty, shows a message.
+     * Otherwise, prints the number of tasks and their details.
+     *
+     * @param tasks   The TaskList containing all current tasks.
+     * @param ui      The TextUi instance for interacting with the user.
+     * @param storage The Storage instance for saving/loading tasks (not used here).
+     * @throws NovaException If an error occurs during execution eg. getTask(taskIndex).
+     */
     @Override
     public void execute(TaskList tasks, TextUi ui, Storage storage) throws NovaException {
         if (tasks.isEmpty()) {

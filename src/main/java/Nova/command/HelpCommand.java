@@ -4,7 +4,20 @@ import Nova.storage.Storage;
 import Nova.task.TaskList;
 import Nova.ui.TextUi;
 
+/**
+ * Represents a command that displays a list of available commands
+ * and their usage to the user.
+ */
 public class HelpCommand extends Command {
+
+    /**
+     * Executes the help command by printing all available commands
+     * and their descriptions to the console.
+     *
+     * @param tasks   The TaskList containing all current tasks (not used here).
+     * @param ui      The TextUi instance for interacting with the user.
+     * @param storage The Storage instance for saving/loading tasks (not used here).
+     */
     @Override
     public void execute(TaskList tasks, TextUi ui, Storage storage) {
         ui.showLineSeparator();
