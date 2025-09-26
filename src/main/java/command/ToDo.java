@@ -25,16 +25,16 @@ public class ToDo extends Task{
     @Override
     public String getFrom(){
         return "";
-    };
+    }
 
     @Override
     public String getTo(){
         return "";
-    };
+    }
 
     @Override
     public String getBy(){
         return "";
-    };
+    }
 
 }
