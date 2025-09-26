@@ -117,7 +117,7 @@ public class TaskList {
     /**
      * Finds tasks that contain a specific text string and prints them
      *
-     * @param text The text to search for within task names
+     * @param text The text to search for within task name
      */
     public void find(String text) {
         ArrayList<Task> findList = new ArrayList<>();
