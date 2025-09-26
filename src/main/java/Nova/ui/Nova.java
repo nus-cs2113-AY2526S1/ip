@@ -7,9 +7,10 @@ import Nova.storage.Storage;
 import Nova.task.TaskList;
 import Nova.ui.TextUi;
 
+import java.io.IOException;
+
 
 public class Nova {
-//    private static final String FilePath = "./NovaData/Nova.txt";
     private final Storage storage;
     private TaskList tasks;
     private final TextUi ui;
@@ -20,7 +21,7 @@ public class Nova {
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (Exception e) {
-            ui.showLoadingError();
+            ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }

@@ -24,7 +24,7 @@ public class AddDeadlineCommand extends Command {
             ui.showAddedTask(newTask, tasks.getTasksSize());
             storage.saveTasks(tasks);
         } catch (Exception e) {
-            throw new NovaException("Please use the format: deadline <desc> /by <time>");
+            throw new NovaException("Please use the format: deadline <desc> /by <DD/MM/YYYY HHmm>");
         }
     }
 }

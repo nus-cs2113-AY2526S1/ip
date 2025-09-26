@@ -77,8 +77,8 @@ public class TextUi {
         showLineSeparator();
     }
 
-    public void showLoadingError() {
-        showError("Unable to load saved tasks. Starting with an empty list.");
+    public void showLoadingError(String message) {
+        showError("Unable to load saved tasks. Starting with an empty list." + message);
     }
 
     public String readCommand() {

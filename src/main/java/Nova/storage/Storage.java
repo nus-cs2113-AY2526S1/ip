@@ -1,5 +1,6 @@
 package Nova.storage;
 
+import Nova.exception.NovaException;
 import Nova.task.Task;
 import Nova.task.Deadline;
 import Nova.task.TaskList;
@@ -22,7 +23,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> loadTasks() {
+    public ArrayList<Task> loadTasks() throws NovaException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
 
@@ -46,7 +47,6 @@ public class Storage {
                 String[] parts = line.split("\\|");
 
                 if (parts.length < 3) {
-                    System.out.println(" OOPS!!! Failed to parse line " + line);
                     continue;
                 }
 
@@ -54,31 +54,28 @@ public class Storage {
                     parts[i] = parts[i].trim();
                 }
 
-                String type = parts[0];
+                String type = parts[0].trim();
                 boolean isDone = parts[1].equals("1");
-                String description = parts[2];
+                String description = parts[2].trim();
 
-                Task task = null;
+                Task task;
                 switch (type.trim()) {
                 case "T" -> task = new Todo(description);
                 case "D" -> task = new Deadline(description, parts[3]);
                 case "E" -> {
-                    String[] timeParts = parts[3].split("-",2);
+                    String[] timeParts = parts[3].split(" to ",2);
                     task = new Event(description, timeParts[0], timeParts[1]);
                 }
+                default -> throw new IOException("Unknown task type: " + type);
                 }
-                if (task != null) {
-                    if (isDone) {
-                        task.markAsDone();
-                    }
-                    tasks.add(task);
-                } else {
-                    System.out.println(" OOPS!!! Failed to parse line " + line);
+                if (isDone) {
+                    task.markAsDone();
                 }
+                tasks.add(task);
             }
             sc.close();
         } catch (IOException e) {
-            System.out.println(" OOPS!!! Error loading file: " + e.getMessage());
+            throw new NovaException("Error loading file: " + e.getMessage());
         }
         return tasks;
     }
@@ -93,9 +90,14 @@ public class Storage {
                 if (task instanceof Todo) {
                     line = "T | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription();
                 } else if (task instanceof Deadline) {
-                    line = "D | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + " | " + ((Deadline) task).getBy();
+                    line = "D | " + (task.getIsDone() ? "1" : "0")
+                            + " | " + task.getDescription()
+                            + " | " + ((Deadline) task).getBy();
                 } else if (task instanceof Event) {
-                    line = "E | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + " | " + ((Event) task).getFrom() + "-" + ((Event) task).getTo();
+                    line = "E | " + (task.getIsDone() ? "1" : "0")
+                            + " | " + task.getDescription() + " | "
+                            + ((Event) task).getFrom() + " to "
+                            + ((Event) task).getTo();
                 }
                 fw.write(line + System.lineSeparator());
             }

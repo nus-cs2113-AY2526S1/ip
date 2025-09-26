@@ -25,7 +25,7 @@ public class AddEventCommand extends Command {
             ui.showAddedTask(newTask, tasks.getTasksSize());
             storage.saveTasks(tasks);
         } catch (Exception e) {
-            throw new NovaException("Please use the format: event <desc> /from <start> /to <end>");
+            throw new NovaException("Please use the format: event <desc> /from <DD/MM/YYYY HHmm> /to <DD/MM/YYYY HHmm>");
         }
     }
 }
