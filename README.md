@@ -1,26 +1,55 @@
-# Zoro project template
+# Zoro Task Manager
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+```
+╔═════════════════════════════════════╗
+║  ███████╗ ██████╗ ██████╗  ██████╗  ║
+║  ╚══███╔╝██╔═══██╗██╔══██╗██╔═══██╗ ║
+║    ███╔╝ ██║   ██║██████╔╝██║   ██║ ║
+║   ███╔╝  ██║   ██║██╔══██╗██║   ██║ ║
+║  ███████╗╚██████╔╝██║  ██║╚██████╔  ║
+║  ╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ║
+╚═════════════════════════════════════╝
+```
 
-## Setting up in Intellij
+## Quick Start
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+### Main Menu
+- **1 (echo)**: Test input/output
+- **2 (task)**: Task management mode
+- **bye/exit**: Exit application
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Zoro.java` file, right-click it, and choose `Run Zoro.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### Task Commands
+```bash
+# Basic tasks
+todo practice sword techniques
+list
+mark 1
+delete 1
+find practice
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+# Advanced tasks
+deadline complete training /by Friday 5pm
+event sword practice /from 2pm /to 4pm
+```
+
+## Features
+- Create todos, deadlines, and events
+- Mark tasks complete/incomplete
+- Search and delete tasks
+- Automatic file saving
+- Zoro-themed interface with swordsman personality
+
+## Project Structure
+```
+zoro/
+├── Zoro.java              # Main application
+├── core/                  # Business logic
+├── model/                 # Task entities
+├── ui/                    # User interface
+└── validation/            # Input validation
+```
+
+*"I'm going to be the world's greatest swordsman! And now I'll help you become the most organized person!"* - Roronoa Zoro (probably)
+
+
+
