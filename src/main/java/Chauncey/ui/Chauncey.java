@@ -5,6 +5,7 @@ import Chauncey.exception.ChaunceyException;
 
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
 
 public class Chauncey {
 //    private static ArrayList<Task> tasks = new ArrayList<>();
@@ -23,6 +24,9 @@ public class Chauncey {
             tasks = new TaskList();
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
+            tasks = new TaskList();
+        } catch (DateTimeParseException e) {
+            ui.showDateFormatError();
             tasks = new TaskList();
         }
     }
@@ -87,6 +91,8 @@ public class Chauncey {
             }
         } catch (ChaunceyException | IOException e) {
             ui.showErrorMessage(e);
+        } catch (DateTimeParseException e) {
+            ui.showDateFormatError();
         }
     }
 
