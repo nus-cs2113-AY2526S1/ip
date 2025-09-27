@@ -1,0 +1,4 @@
+[T] [X] a
+[T] [ ] c
+[D] [X] proj (by: tomorrow)
+[E] [ ] this thing next week (from: wed, to: thurs)
