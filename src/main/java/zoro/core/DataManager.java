@@ -11,16 +11,27 @@ import zoro.model.Task;
 import zoro.model.Deadline;
 import zoro.model.Event;
 
+/**
+ * Manages data persistence for tasks.
+ * Handles saving and loading tasks to/from file storage.
+ */
 public class DataManager {
     private static final String DATA_DIRECTORY = "data";
     private static final String SAVE_FILENAME = "zoro.txt";
     private final Path dataPath;
 
+    /**
+     * Constructs a new DataManager and ensures data directory exists.
+     */
     public DataManager() {
         this.dataPath = Paths.get(DATA_DIRECTORY, SAVE_FILENAME);
         createFileIfNotExists();
     }
 
+    /**
+     * Creates the data directory if it doesn't exist.
+     * Handles IOException by printing error message.
+     */
    private void createFileIfNotExists() {
         try {
             Path pathDirectory = Paths.get(DATA_DIRECTORY);
@@ -32,6 +43,12 @@ public class DataManager {
         }
    }
 
+    /**
+     * Saves the current list of tasks to file.
+     * Each task is written as a separate line using its toString() method.
+     *
+     * @param tasks - the list of tasks to save
+     */
    public void saveTasks(List<Task> tasks) {
         try (BufferedWriter writer = Files.newBufferedWriter(dataPath)) {
             for (Task task : tasks) {

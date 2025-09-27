@@ -4,11 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 import zoro.model.Task;
 
-
+/**
+ * Utility class for validating user input commands.
+ * Contains static methods to validate different types of task commands.
+ */
 public class Validator {
 
-
-    //TTODO
+    /**
+     * Validates todo command format and content.
+     *
+     * @param userInput - the user input string to validate
+     * @return - ValidationResult indicating success or failure with error message
+     */
     public static ValidationResult validateTodoCommand(String userInput) {
         String[] userInputSplit = userInput.split(" ");
 
@@ -27,7 +34,13 @@ public class Validator {
     }
 
 
-    //MARK
+    /**
+     * Validates mark command format and checks if task index exists.
+     *
+     * @param userInput - the user input string to validate
+     * @param tasks - the current list of tasks to check index against
+     * @return - ValidationResult indicating success or failure with error message
+     */
     public static ValidationResult validateMarkCommand(String userInput, List<Task> tasks) {
         String[] userInputSplit = userInput.split(" ");
 
@@ -49,8 +62,12 @@ public class Validator {
 
     }
 
-
-    //DEADLINE
+    /**
+     * Validates deadline command format including /by keyword placement.
+     *
+     * @param userInput - the user input string to validate
+     * @return - ValidationResult indicating success or failure with error message
+     */
     public static ValidationResult validateDeadlineCommand(String userInput) {
         String[] userInputSplit = userInput.split(" ");
         List<String> argsList = Arrays.asList(userInputSplit);
@@ -95,7 +112,12 @@ public class Validator {
     }
 
 
-    //EVENT
+    /**
+     * Validates event command format including /from and /to keyword placement.
+     *
+     * @param userInput - the user input string to validate
+     * @return - ValidationResult indicating success or failure with error message
+     */
     public static ValidationResult validateEventCommand(String userInput) {
         String[] userInputSplit = userInput.split(" ");
         if (userInputSplit.length < 6) {
@@ -145,9 +167,15 @@ public class Validator {
         }
 
         return ValidationResult.success();
-
     }
 
+    /**
+     * Validates delete command format and checks if task index exists.
+     *
+     * @param userInput - the user input string to validate
+     * @param tasks - the current list of tasks to check index against
+     * @return - ValidationResult indicating success or failure with error message
+     */
     public static ValidationResult validateDeleteCommand(String userInput, List<Task> tasks) {
         String[] userInputSplit = userInput.split(" ");
 
@@ -176,6 +204,13 @@ public class Validator {
         }
     }
 
+    /**
+     * Validates find command format and keyword presence.
+     *
+     * @param userInput - the user input string to validate
+     * @param tasks - the current list of tasks (parameter kept for consistency)
+     * @return - ValidationResult indicating success or failure with error message
+     */
     public static ValidationResult validateFindCommand(String userInput, List<Task> tasks) {
         String[] userInputSplit = userInput.split(" ");
 
@@ -195,7 +230,10 @@ public class Validator {
 
 
 
-    //nested public class that holds the results of a validations
+    /**
+     * Nested class that holds the results of input validation.
+     * Contains success/failure status and optional error message.
+     */
     public static class ValidationResult {
         //private class to hold validation results
         private final boolean isValid;
@@ -206,18 +244,39 @@ public class Validator {
             this.errorMessage = errorMessage;
         }
 
+        /**
+         * Creates a successful validation result.
+         *
+         * @return - ValidationResult indicating success
+         */
         public static ValidationResult success() {
             return new ValidationResult(true, null);
         }
 
+        /**
+         * Creates a failed validation result with error message.
+         *
+         * @param errorMessage - the error message to include
+         * @return - ValidationResult indicating failure with message
+         */
         public static ValidationResult fail(String errorMessage) {
             return new ValidationResult(false, errorMessage);
         }
 
+        /**
+         * Checks if the validation was successful.
+         *
+         * @return - true if validation passed, false otherwise
+         */
         public boolean isValid() {
             return isValid;
         }
 
+        /**
+         * Gets the error message if validation failed.
+         *
+         * @return - the error message, or null if validation succeeded
+         */
         public String getErrorMessage() {
             return errorMessage;
         }

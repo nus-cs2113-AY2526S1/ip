@@ -4,19 +4,33 @@ import zoro.ui.UserInterface;
 import zoro.ui.InputHandler;
 
 
-
+/**
+ * Handles state and user interactions for the different application modes.
+ */
 public class StateHandler {
     private final UserInterface ui;
     private final TaskManager taskManager;
     private final InputHandler inputHandler;
 
+    /**
+     * Constructs new StateHandler.
+     *
+     * @param ui - the user interface for the output
+     * @param taskManager - the task manager for the task operations
+     * @param inputHandler - the input handler for the user input
+     */
     public StateHandler(UserInterface ui, TaskManager taskManager, InputHandler inputHandler) {
         this.ui = ui;
         this.taskManager = taskManager;
         this.inputHandler = inputHandler;
     }
 
-
+    /**
+     * Handles the main menu state.
+     * Displays menu options and processes user selection.
+     *
+     * @return - the next state to transition to based on user input
+     */
     public State handleMenu() {
         ui.printMenuIntro();
         String userInput = inputHandler.getUserInput();
@@ -43,6 +57,12 @@ public class StateHandler {
         }
     }
 
+    /**
+     * Handles the echo mode state.
+     * Continuously echoes user input until exit command is given.
+     *
+     * @return - the next state to transition to
+     */
     public State handleEcho() {
         ui.printEchoInstruction();
         while (true) {
@@ -65,6 +85,12 @@ public class StateHandler {
         }
     }
 
+    /**
+     * Handles the task management state.
+     * Processes various task-related commands until exit or menu return.
+     *
+     * @return - the next state to transition to
+     */
     public State handleTask() {
         ui.printTaskInstruction();
         while (true) {

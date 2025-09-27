@@ -9,21 +9,38 @@ import zoro.model.Deadline;
 import zoro.model.Event;
 import zoro.validation.Validator;
 
+/**
+ * Manages all task-related operations including creation, modification, and deletion.
+ * Handles different types of tasks: basic tasks, deadlines, and events.
+ */
 public class TaskManager {
     private final List<Task> tasks;
     private final DataManager dataManager;
 
+    /**
+     * Constructs a new TaskManager with empty task list and data manager.
+     */
     public TaskManager() {
         this.dataManager = new DataManager();
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to the task list and saves to storage.
+     *
+     * @param task - the task to add
+     */
     public void addTask(Task task) {
         tasks.add(task);
         dataManager.saveTasks(tasks);
     }
 
-    //TTODO
+    /**
+     * Processes todo command by validating input and creating a basic task.
+     *
+     * @param userInput - the user's todo command input
+     * @param ui - the user interface for displaying messages
+     */
     public void processTodoCommand(String userInput, UserInterface ui) {
         Validator.ValidationResult validation = Validator.validateTodoCommand(userInput);
 
@@ -39,7 +56,12 @@ public class TaskManager {
         ui.printTaskAdded(task);
     }
 
-    //MARK
+    /**
+     * Processes mark command by validating input and toggling task completion status.
+     *
+     * @param userInput - the user's mark command input
+     * @param ui - the user interface for displaying messages
+     */
    public void processMarkCommand(String userInput, UserInterface ui) {
        Validator.ValidationResult validation = Validator.validateMarkCommand(userInput, tasks);
 
@@ -60,7 +82,12 @@ public class TaskManager {
             }
    }
 
-   //DEADLINE
+    /**
+     * Processes deadline command by validating input and creating a deadline task.
+     *
+     * @param userInput - the user's deadline command input
+     * @param ui - the user interface for displaying messages
+     */
    public void processDeadlineCommand(String userInput, UserInterface ui) {
         Validator.ValidationResult validation = Validator.validateDeadlineCommand(userInput);
 
@@ -91,7 +118,12 @@ public class TaskManager {
        ui.printTaskAdded(deadline);
    }
 
-   //EVENT
+    /**
+     * Processes event command by validating input and creating an event task.
+     *
+     * @param userInput - the user's event command input
+     * @param ui - the user interface for displaying messages
+     */
    public void processEventCommand(String userInput, UserInterface ui) {
         Validator.ValidationResult validation = Validator.validateEventCommand(userInput);
 
@@ -125,6 +157,12 @@ public class TaskManager {
        ui.printTaskAdded(event);
    }
 
+    /**
+     * Processes delete command by validating input and removing specified task.
+     *
+     * @param userInput - the user's delete command input
+     * @param ui - the user interface for displaying messages
+     */
     public void processDeleteCommand(String userInput, UserInterface ui) {
             Validator.ValidationResult validation = Validator.validateDeleteCommand(userInput, tasks);
             if (!validation.isValid()) {
@@ -140,6 +178,12 @@ public class TaskManager {
             ui.printTaskDeleted(deletedTask);
         }
 
+    /**
+     * Processes find command by searching for tasks containing the specified keyword.
+     *
+     * @param userInput - the user's find command input
+     * @param ui - the user interface for displaying messages
+     */
     public void processFindCommand(String userInput, UserInterface ui) {
         Validator.ValidationResult validation = Validator.validateFindCommand(userInput, tasks);
         if (!validation.isValid()) {
@@ -162,10 +206,21 @@ public class TaskManager {
 
     }
 
+    /**
+     * Gets a copy of the current task list.
+     *
+     * @return - a new ArrayList containing all current tasks
+     */
     public List<Task> getTasks() {
         return new ArrayList<>(tasks);
     }
 
+    /**
+     * Extracts the task description from user input by removing the command keyword.
+     *
+     * @param userInput - the complete user input string
+     * @return - the task description without the command keyword
+     */
     public String getTaskSubstring(String userInput) {
         return userInput.substring(userInput.split(" ")[0].length()+1); //skips the keyword
     }
