@@ -2,7 +2,7 @@
 
 ## Product screenshot：
 
-![img.png](img.png)
+![img_1.png](img_1.png)
 
 ## Product intro：
 
@@ -12,6 +12,7 @@ Chauncey is a chatbot to help you keep track of your task list. Chauncey support
 3. Delete a task from your task list.
 4. Mark a task as done.
 5. Unmark a task as not done.
+6. Find all the tasks containing one keyword.
 
 Task type in Chauncey:
 1. Todo (T): tasks that have no time limit
@@ -113,11 +114,40 @@ OK, I've marked this task as not done yet:
 ____________________________________________________________
 ```
 
-## Feature ABC
+### Find tasks by searching a keyword
 
-// Feature details
+Action: type `find <keyword>` when Chauncey ask for next command.
 
+Outcome: all the tasks with description containing the keyword
+will be listed with task details.
 
-## Feature XYZ
+Example of finding tasks by keyword:
+```
+find midterm // Your input command
+____________________________________________________________
+Here are the matching tasks in your list:
+1.[T][ ] review midterm
+2.[E][ ] attend midterm (from Oct 01 2025 10:00 to Oct 01 2025 11:30)
+____________________________________________________________
+```
 
-// Feature details
+## Features
+
+### Dual-Format Date Handling
+
+1. Input Format: Users can enter dates in a simple standardized
+    format (yyyy-MM-dd HHmm)
+
+2. Output Format: Dates are automatically converted to a more 
+    readable format (MMM dd yyyy HH:mm) when displayed
+
+### Persistent Storage
+
+1. All tasks are automatically saved to a text file upon modification
+2. Date formats are validated during both input and file loading
+3. Corrupted data is detected
+
+### Seamless File Operations
+
+1. Automatic directory creation if the storage path doesn't exist
+2. Graceful handling of missing data files (creates new file instead of crashing)
