@@ -19,10 +19,13 @@ public class TaskManager {
 
     /**
      * Constructs a new TaskManager with empty task list and data manager.
+     * Loads tasks from file if exist
      */
     public TaskManager() {
         this.dataManager = new DataManager();
         this.tasks = new ArrayList<>();
+        List<Task> loadedTasks = dataManager.loadTasks();
+        this.tasks.addAll(loadedTasks);
     }
 
     /**
@@ -80,6 +83,7 @@ public class TaskManager {
         } else {
             ui.printTaskUnmarked(tasks.get(index).getDescription());
             }
+        dataManager.saveTasks(tasks);
    }
 
     /**
@@ -175,6 +179,7 @@ public class TaskManager {
             Task deletedTask = tasks.get(deleteIndex);
             tasks.remove(deletedTask);
 
+            dataManager.saveTasks(tasks);
             ui.printTaskDeleted(deletedTask);
         }
 
