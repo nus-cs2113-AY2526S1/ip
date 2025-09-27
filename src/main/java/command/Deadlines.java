@@ -1,5 +1,12 @@
 package command;
 
+/**
+ * Represents a task that is to be done by a deadline
+ *
+ * @author  Lai Kai Jie Jeremy
+ * @since   2025-08-17
+ */
+
 public class Deadlines extends ToDo{
     private String by;
     private boolean deadlineStatus;
@@ -10,6 +17,11 @@ public class Deadlines extends ToDo{
         this.deadlineStatus = true;
     }
 
+    /**
+     * Returns the by field for deadline
+     *
+     * @return by
+     */
     public String getBy() {
         return by;
     }
@@ -18,15 +30,17 @@ public class Deadlines extends ToDo{
         this.by = by;
     }
 
+    /**
+     * Returns the deadline status
+     */
     @Override
     public String getType() {
         return (deadlineStatus ? "D" : " ");
     }
 
-    public void setDeadlineStatus(boolean deadlineStatus) {
-        this.deadlineStatus = deadlineStatus;
-    }
-
+    /**
+     * Returns deadline message
+     */
     @Override
     public String getTask(){
         return super.getTask() + " (by: " + getBy() + ")";

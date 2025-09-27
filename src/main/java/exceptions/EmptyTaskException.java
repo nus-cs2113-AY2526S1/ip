@@ -1,6 +1,6 @@
 package exceptions;
 
-public class Empty extends RuntimeException {
+public class EmptyTaskException extends RuntimeException {
     public String getMessage(){
         return "Please fill in a task";
     }

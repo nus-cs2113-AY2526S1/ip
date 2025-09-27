@@ -1,6 +1,6 @@
 package exceptions;
 
-public class IncompleteFormat extends RuntimeException {
+public class IncompleteFormatException extends RuntimeException {
     public String getMessage(){
         return "Your command is uncomplete, check again";
     }
