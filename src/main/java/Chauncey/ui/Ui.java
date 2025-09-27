@@ -12,6 +12,9 @@ public class Ui {
         this.in = new Scanner(System.in);
     }
 
+    /**
+     * Display welcome message, list the available commands and ask for an input as command.
+     */
     public void printWelcomeMessage() {
         System.out.println("Hello! I'm Chauncey.");
         System.out.println("List of things I can do: list / add / delete / mark / unmark / find. If you want to exit, please input \"bye\".");
@@ -22,6 +25,9 @@ public class Ui {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Display exit message when the user input "bye".
+     */
     public void printExitMessage() {
         System.out.println("Bye. Hope to see you again soon!");
     }
@@ -30,14 +36,25 @@ public class Ui {
         System.out.println("Loading from previous data...");
     }
 
+    /**
+     * Output the message that the file is not found in the given file path.
+     */
     public void showLoadingError() {
         System.out.println("No previous data found.");
     }
 
+    /**
+     * Output the message that the format of date is incorrect and tell the user the correct date format.
+     */
     public void showDateFormatError() {
         System.out.println("Please input date in this format: yyyy-MM-dd HHmm");
     }
 
+    /**
+     * Outputs the error message according to the input exception to tell the user what is wrong.
+     *
+     * @param e An exception, which can be ChaunceyException, IOException, FileNotFoundException, DateTimeParseException.
+     */
     public void showErrorMessage(Exception e) {
         System.out.println("Error: " + e.getMessage());
     }
@@ -52,18 +69,35 @@ public class Ui {
                 "<description> / from <yyyy-MM-dd HHmm> / to <yyyy-MM-dd HHmm>.)");
     }
 
+    /**
+     * Outputs the message that the task is added to the tasks list successfully.
+     *
+     * @param task The Task object added to the ArrayList.
+     * @param numOfTasks Size of the ArrayList in TaskList object.
+     */
     public void showTaskAddedMessage(Task task, int numOfTasks) {
         System.out.println("Got it. I've added this task: ");
         task.outputTaskDetails();
         System.out.println("Now you have " + numOfTasks + " tasks in the list.");
     }
 
+    /**
+     * Output the message that the task is deleted from the tasks list successfully.
+     *
+     * @param taskDetails Details of the deleted task.
+     * @param numOfTasks Size of the ArrayList in TaskList object.
+     */
     public void showTaskDeletedMessage(String taskDetails, int numOfTasks) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(taskDetails);
         System.out.println("Now you have " + numOfTasks + " tasks in the list.");
     }
 
+    /**
+     * Display the tasks list to the user, including the information of task type, task status and task details.
+     *
+     * @param tasks The TaskList object in the Chauncey chatbot.
+     */
     public void listTasks(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i<= tasks.getSize(); i++) {
@@ -72,6 +106,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Display the filtered tasks list to the user, including the information of task type, task status and task details.
+     *
+     * @param tasks The TaskList object filtered by a keyword.
+     */
     public void listFilteredTasks(TaskList tasks) {
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 1; i<= tasks.getSize(); i++) {
@@ -80,11 +119,21 @@ public class Ui {
         }
     }
 
+    /**
+     * Output the message that the task is marked as done successfully.
+     *
+     * @param task The task marked as done.
+     */
     public void showMarkTaskMessage(Task task) {
         System.out.println("Nice! I've marked this task as done:");
         task.outputTaskDetails();
     }
 
+    /**
+     * Output the message that the task is unmarked successfully.
+     *
+     * @param task The unmarked task .
+     */
     public void showUnmarkTaskMessage(Task task) {
         System.out.println("OK, I've marked this task as not done yet:");
         task.outputTaskDetails();
