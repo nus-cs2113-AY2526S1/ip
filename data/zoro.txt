@@ -1,3 +1,5 @@
 [T] [ ] a
-[T] [ ] v
-[T] [ ] adkjhdsalkfh
+[T] [ ] b
+[T] [ ] c
+[D] [ ] do this thing (by: tomorrow)
+[E] [ ] meet up with someone (from: tomorrow 2pm, to: 4pm)

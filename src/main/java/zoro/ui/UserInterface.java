@@ -8,6 +8,9 @@ public class UserInterface {
 
     /*    MENU    */
 
+    public void printSeparator() {
+        System.out.print("-----------------------\n\n");
+    }
 
     public void printMenuIntro() {
         String ZORO_LOGO =
@@ -21,7 +24,7 @@ public class UserInterface {
             "╚═════════════════════════════════════╝";
         System.out.println(ZORO_LOGO);
         String name = "Roronoa Zoro";
-        System.out.println("________________________");
+        printSeparator();
         System.out.println("I'm " + name + " - somehow I ended up here, I was looking for soju..");
         System.out.println("What can I do for you?");
         System.out.println(
@@ -30,7 +33,7 @@ public class UserInterface {
             "More training exercises coming soon!\n" +
             "Type \"bye\" or \"exit\" to exit"
         );
-        System.out.println("________________________");
+        printSeparator();
     }
 
 
@@ -43,6 +46,7 @@ public class UserInterface {
             "Type something and I will echo it!\n" +
             "Type \"bye\" when you're ready to end your training."
         );
+        printSeparator();
     }
 
     public void printEchoMessage(String userInput) {
@@ -63,6 +67,7 @@ public class UserInterface {
                 "mark [task_index] - Mark victories (or defeats)\n" +
                 "Now get to work!"
         );
+        printSeparator();
     }
 
     public void printValidInputTodo() {

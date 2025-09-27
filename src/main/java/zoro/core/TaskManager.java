@@ -10,14 +10,17 @@ import zoro.model.Event;
 import zoro.validation.Validator;
 
 public class TaskManager {
-    private final List<Task> tasks; //initialize to a List so that it works flexibly with any 'list'
+    private final List<Task> tasks;
+    private final DataManager dataManager;
 
     public TaskManager() {
+        this.dataManager = new DataManager();
         this.tasks = new ArrayList<>();
     }
 
     public void addTask(Task task) {
         tasks.add(task);
+        dataManager.saveTasks(tasks);
     }
 
     //TTODO
