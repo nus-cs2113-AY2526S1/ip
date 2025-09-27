@@ -127,18 +127,40 @@ public class TaskManager {
 
     public void processDeleteCommand(String userInput, UserInterface ui) {
             Validator.ValidationResult validation = Validator.validateDeleteCommand(userInput, tasks);
-                if (!validation.isValid()) {
-                    ui.printValidationError(validation.getErrorMessage());
-                    ui.printValidInputDelete();
-                    return;
-                }
+            if (!validation.isValid()) {
+                ui.printValidationError(validation.getErrorMessage());
+                ui.printValidInputDelete();
+                return;
+            }
 
-                    int deleteIndex = Integer.parseInt(userInput.split(" ")[1])-1;
+            int deleteIndex = Integer.parseInt(userInput.split(" ")[1])-1;
             Task deletedTask = tasks.get(deleteIndex);
             tasks.remove(deletedTask);
 
-                    ui.printTaskDeleted(deletedTask);
+            ui.printTaskDeleted(deletedTask);
         }
+
+    public void processFindCommand(String userInput, UserInterface ui) {
+        Validator.ValidationResult validation = Validator.validateFindCommand(userInput, tasks);
+        if (!validation.isValid()) {
+                ui.printValidationError(validation.getErrorMessage());
+                ui.printValidInputFind();
+                return;
+        }
+
+        List<Task> foundTasks = new ArrayList<>();
+        String[] args = userInput.split(" ");
+        String keyword = args[1];
+        for (Task task: tasks) {
+            if (task.getDescription().contains(keyword)) {
+                foundTasks.add(task);
+            }
+        }
+
+        ui.printTasksFound(foundTasks);
+
+
+    }
 
     public List<Task> getTasks() {
         return new ArrayList<>(tasks);

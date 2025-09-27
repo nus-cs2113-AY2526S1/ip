@@ -92,6 +92,9 @@ public class StateHandler {
             case "delete":
                 taskManager.processDeleteCommand(userInput, ui);
                 break;
+            case "find":
+                taskManager.processFindCommand(userInput, ui);
+                break;
             case "menu":
             case "back":
             case "return":

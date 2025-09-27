@@ -176,6 +176,23 @@ public class Validator {
         }
     }
 
+    public static ValidationResult validateFindCommand(String userInput, List<Task> tasks) {
+        String[] userInputSplit = userInput.split(" ");
+
+        if (userInputSplit.length < 2) {
+            return ValidationResult.fail("I can't find what you're looking for if you don't give me any directions!" +
+                    "Enter a keyword next time.");
+        }
+
+        String keyword = userInputSplit[1];
+        if (keyword.isEmpty()) {
+            return ValidationResult.fail("That's as empty as my sense of direction. " +
+                    "Give me the name of the item you're looking for, I'm a bounty hunter after all.");
+        }
+
+        return ValidationResult.success();
+    }
+
 
 
     //nested public class that holds the results of a validations

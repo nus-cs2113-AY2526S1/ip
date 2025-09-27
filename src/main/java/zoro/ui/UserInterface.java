@@ -65,6 +65,8 @@ public class UserInterface {
                 "c) event [event] /from [startTime] /to [endTime] - Scheduled duels and training\n" +
                 "list - See all your current missions\n" +
                 "mark [task_index] - Mark victories (or defeats)\n" +
+                "delete [task_index] - Eradicate your enemies\n" +
+                "find [keyword] - Locate targets\n" +
                 "Now get to work!"
         );
         printSeparator();
@@ -90,6 +92,10 @@ public class UserInterface {
         System.out.println("Proper form: delete [task_number]");
     }
 
+    public void printValidInputFind() {
+        System.out.println("Proper form: find [keyword]");
+    }
+
     public void printTaskMarked(String userInput) {
         System.out.println("Task " + userInput + " has been conquered. Time for the next challenge!");
     }
@@ -105,6 +111,17 @@ public class UserInterface {
 
     public void printTaskDeleted(Task task) {
         System.out.println("Target: " + task.toString() + " has been eliminated");
+    }
+
+    public void printTasksFound(List<Task> tasks) {
+        if (!tasks.isEmpty()) {
+            System.out.println("I got pretty lost looking for these:");
+            for (Task task : tasks) {
+                System.out.println(task.toString());
+            }
+        } else {
+            System.out.println("I think I got lost, I couldn't find anything!");
+        }
     }
 
     public void printTaskList(List<Task> tasks) {
