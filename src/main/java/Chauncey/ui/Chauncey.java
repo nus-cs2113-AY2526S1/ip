@@ -3,282 +3,115 @@ package Chauncey.ui;
 import Chauncey.task.*;
 import Chauncey.exception.ChaunceyException;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Chauncey {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+//    private static ArrayList<Task> tasks = new ArrayList<>();
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
 
-    public static void printLine() {
-        System.out.println("____________________________________________________________");
-    }
-
-    private static void addTask() {
+    public Chauncey(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         try {
-            System.out.print("What type of task do you want to add? todo/deadline/event?");
-            Scanner in = new Scanner(System.in);
-            String type = in.nextLine();
-            if (type.isEmpty()) {
-                throw new ChaunceyException("Task type input can't be empty! Please select: todo/deadline/event");
-            }
-            System.out.println("Please enter the task details (split details by '/'): ");
-            String task = in.nextLine();
-            if (task.isEmpty()) {
-                throw new ChaunceyException("Task details can't be empty! Please input task details.");
-            }
-            switch (type) {
-            case "todo":
-                tasks.add(new Todo(task));
-                break;
-            case "deadline":
-                String[] deadlineDetails = task.split("/");
-                if (deadlineDetails.length < 2) {
-                    throw new ChaunceyException("Task details not enough! Please input task input in this format: task description/task deadline");
-                }
-                if (deadlineDetails.length > 2) {
-                    throw new ChaunceyException("Task details more than expected! Please only input task description and task deadline.");
-                }
-                String deadline = deadlineDetails[deadlineDetails.length - 1].trim();
-                tasks.add(new Deadline(deadlineDetails[0].trim(), deadline));
-                break;
-            case "event":
-                String[] eventDetails = task.split("/");
-                if (eventDetails.length < 3) {
-                    throw new ChaunceyException("Task details not enough! Please input task input in this format: task description/(from) start time/(to) end time");
-                }
-                if (eventDetails.length > 3) {
-                    throw new ChaunceyException("Task details more than expected! Please only input task description, task start time and task end time.");
-                }
-                String startTime = eventDetails[eventDetails.length - 2].trim();
-                String endTime = eventDetails[eventDetails.length - 1].trim();
-                tasks.add(new Event(eventDetails[0].trim(), startTime, endTime));
-                break;
-            default:
-                throw new ChaunceyException("Invalid task type. Please choose among: todo / deadline / event");
-            }
-            System.out.println("Got it. I've added this task: ");
-            tasks.get(tasks.size()-1).outputTaskDetails();
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            saveToFile();
+            ui.showLoadingMessage();
+            tasks = new TaskList(storage.loadFile());
         } catch (ChaunceyException e) {
-            System.out.println("Error: " + e.getMessage());
+            ui.showErrorMessage(e);
+            tasks = new TaskList();
+        } catch (FileNotFoundException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
 
-    private static void deleteTask(String command) {
-        try {
-            if (tasks.isEmpty()) {
-                throw new ChaunceyException("There is no task in the list. Can't do delete command.");
-            }
-            int taskNumber = getTaskNumber(command);
-            String taskDetails = tasks.get(taskNumber - 1).getTaskDetails();
-            tasks.remove(taskNumber-1);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(taskDetails);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            saveToFile();
-        } catch (ChaunceyException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+    private void addTask() throws ChaunceyException, IOException {
+        ui.showSelectTaskTypeMessage();
+        String type = ui.readCommand();
+        ui.showInputTaskDetailsMessage();
+        Parser taskDetailsParser = new Parser(ui.readCommand());
+        String[] taskDetails = taskDetailsParser.parseTaskDetails();
+        tasks.addTask(type, taskDetails);
+        ui.showTaskAddedMessage(tasks.getTask(tasks.getSize() - 1), tasks.getSize());
+        storage.saveToFile(tasks.getTasksList());
     }
 
-    private static void listTasks() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i<= tasks.size(); i++) {
-            System.out.print(i + ".");
-            tasks.get(i-1).outputTaskDetails();
-        }
+    private void deleteTask(Parser commandParser) throws ChaunceyException, IOException {
+        int taskNumber = commandParser.parseTaskNumber(tasks.getSize());
+        String taskDetails = tasks.deleteTask(taskNumber);
+        ui.showTaskDeletedMessage(taskDetails, tasks.getSize());
+        storage.saveToFile(tasks.getTasksList());
     }
 
-    private static void markTask(String command) {
-        try {
-            if (tasks.isEmpty()) {
-                throw new ChaunceyException("There is no task in the list. Can't do mark command.");
-            }
-            int taskNumber = getTaskNumber(command);
-            if (tasks.get(taskNumber-1).getStatus()) {
-                throw new ChaunceyException("Task " + taskNumber + " is already marked done.");
-            }
-            tasks.get(taskNumber - 1).markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-
-            tasks.get(taskNumber - 1).outputTaskDetails();
-            saveToFile();
-        } catch (ChaunceyException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+    private void markTask(Parser commandParser) throws ChaunceyException, IOException {
+        int taskNumber = commandParser.parseTaskNumber(tasks.getSize());
+        tasks.markTask(taskNumber);
+        ui.showMarkTaskMessage(tasks.getTask(taskNumber - 1));
+        storage.saveToFile(tasks.getTasksList());
     }
 
-    private static void unmarkTask(String command) {
-        try {
-            if (tasks.isEmpty()) {
-                throw new ChaunceyException("There is no task in the list. Can't do unmark command.");
-            }
-            int taskNumber = getTaskNumber(command);
-            if (!tasks.get(taskNumber-1).getStatus()) {
-                throw new ChaunceyException("Task " + taskNumber + " is not done! Can't unmark it.");
-            }
-            tasks.get(taskNumber - 1).markAsUndone();
-            System.out.println("OK, I've marked this task as not done yet:");
-
-            tasks.get(taskNumber - 1).outputTaskDetails();
-            saveToFile();
-        } catch (ChaunceyException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+    private void unmarkTask(Parser commandParser) throws ChaunceyException, IOException {
+        int taskNumber = commandParser.parseTaskNumber(tasks.getSize());
+        tasks.unmarkTask(taskNumber);
+        ui.showUnmarkTaskMessage(tasks.getTask(taskNumber - 1));
+        storage.saveToFile(tasks.getTasksList());
     }
 
-    private static int getTaskNumber(String command) throws ChaunceyException {
-        String[] commandDetails = command.split(" ");
-        if (commandDetails.length < 2) {
-            throw new ChaunceyException("I don't know what is the task number for the command. Please also input the task number (formate: <command: delete/mark/unmark> <task number>).");
-        }
-        String numberInString = commandDetails[commandDetails.length - 1];
-        int taskNumber = Integer.parseInt(numberInString);
-        if (taskNumber < 1 || taskNumber > tasks.size()) {
-            throw new ChaunceyException("Invalid task number. Task number should be between 1 and " + tasks.size());
-        }
-        return taskNumber;
-    }
-
-    public static void main(String[] args) {
-        // Add greetings.
-        printLine();
-        printWelcomeMessage();
-        printLine();
-        System.out.println();
-
-        // Enable echos of commands entered by the user
-        Scanner in = new Scanner(System.in);
-        String command = in.nextLine().toLowerCase();
-        while (!command.equals("bye")) {
-            printLine();
-            executeCommand(command);
-            printLine();
-            System.out.println();
-            System.out.println("Next command?");
-            command = in.nextLine();
-        }
-
-        // Exit when the user enters "bye"
-        printLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        printLine();
-    }
-
-    private static void executeCommand(String command) {
+    private void executeCommand(String command) {
         try {
             if (command.isEmpty()) {
                 throw new ChaunceyException("Command is empty! Please input a command.");
             }
-            String instruction = command.split(" ")[0];
+            Parser commandParser = new Parser(command);
+            String instruction = commandParser.parseCommand();
             switch (instruction) {
             case "list":
-                listTasks();
+                ui.listTasks(tasks);
                 break;
             case "add":
                 addTask();
                 break;
             case "delete":
-                deleteTask(command);
+                deleteTask(commandParser);
                 break;
             case "mark":
-                markTask(command);
+                markTask(commandParser);
                 break;
             case "unmark":
-                unmarkTask(command);
+                unmarkTask(commandParser);
                 break;
             default:
                 throw new ChaunceyException("Oh no! I don't know what the command means. Please input a valid command.");
             }
-        } catch (ChaunceyException e) {
-            System.out.println("Error: " + e.getMessage());
+        } catch (ChaunceyException | IOException e) {
+            ui.showErrorMessage(e);
         }
     }
 
-    private static void printWelcomeMessage() {
-        System.out.println("Hello! I'm Chauncey.");
-        System.out.println("Loading from previous data...");
-        loadFile();
-        System.out.println("List of things I can do: list / add / delete / mark / unmark. If you want to exit, please input \"bye\".");
-        System.out.println("What can I do for you?");
+    public void run() {
+        ui.printLine();
+        ui.printWelcomeMessage();
+        ui.printLine();
+        ui.printEmptyLine();
+
+        String command = ui.readCommand().toLowerCase();
+        while (!command.equals("bye")) {
+            ui.printLine();
+            executeCommand(command);
+            ui.printLine();
+            ui.printEmptyLine();
+            ui.askForNextCommand();
+            command = ui.readCommand();
+        }
+
+        ui.printLine();
+        ui.printExitMessage();
+        ui.printLine();
     }
 
-    private static void saveToFile() {
-        try {
-            File directory = new File("./data");
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-            FileWriter fw = new FileWriter("./data/Chauncey.txt");
-            for (Task task: tasks) {
-                fw.write(task.writeToFile() + "\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-
-    private static void loadFile() {
-        try {
-            File directory = new File("./data");
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-            File f = new File("./data/Chauncey.txt");
-            Scanner fileReader = new Scanner(f);
-            String line;
-            while (fileReader.hasNext()) {
-                line = fileReader.nextLine();
-                addTaskFromFile(line);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("No previous data found.");
-        } catch (ChaunceyException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-
-    private static void addTaskFromFile(String line) throws ChaunceyException {
-        String[] taskDetails = line.split("\\|");
-        if (taskDetails.length < 3) {
-            throw new ChaunceyException("Corrupted data: insufficient fields in line (at least 3 fields is needed: " + line);
-        }
-        switch (taskDetails[0].trim()) {
-        case "T":
-            if (taskDetails.length != 3) {
-                throw new ChaunceyException("Corrupted data: Exactly 3 fields is needed for todo.");
-            }
-            tasks.add(new Todo(taskDetails[2].trim()));
-            updateTaskStatus(taskDetails[1].trim());
-            break;
-        case "D":
-            if (taskDetails.length != 4) {
-                throw new ChaunceyException("Corrupted data: Exactly 4 fields is needed for deadline.");
-            }
-            tasks.add(new Deadline(taskDetails[2].trim(), taskDetails[3].trim()));
-            updateTaskStatus(taskDetails[1].trim());
-            break;
-        case "E":
-            if (taskDetails.length != 5) {
-                throw new ChaunceyException("Corrupted data: Exactly 5 fields is needed for event.");
-            }
-            tasks.add(new Event(taskDetails[2].trim(), taskDetails[3].trim(), taskDetails[4].trim()));
-            updateTaskStatus(taskDetails[1].trim());
-            break;
-        default:
-            throw new ChaunceyException("Task type is invalid.");
-        }
-    }
-
-    private static void updateTaskStatus(String taskStatus) {
-        if (taskStatus.equals("1")) {
-            tasks.get(tasks.size() - 1).markAsDone();
-        }
+    public static void main(String[] args) {
+        new Chauncey("./data/Chauncey.txt").run();
     }
 }
