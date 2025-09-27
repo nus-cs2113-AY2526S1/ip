@@ -18,7 +18,7 @@ public class Toothless {
         Ui ui = new Ui(tasks);
         TaskList tl = new TaskList(tasks,ui);
         Parser parser = new Parser(tl,ui);
-        Storage s = new Storage(tasks,tl);
+        Storage storage = new Storage(tasks,tl);
 
         Scanner input = new Scanner(System.in);
 
@@ -26,7 +26,7 @@ public class Toothless {
         ui.printCommandList();
 
         try{
-            s.createDirFile();
+            storage.createDirFile();
         }catch(IOException e){
             System.out.println("Error while creating directory");
         }
@@ -36,7 +36,7 @@ public class Toothless {
 
         if(f.length() != 0){
             try{
-                s.getFileContents(f);
+                storage.getFileContents(f);
             }catch(FileNotFoundException e){
                 System.out.println("Unable to retrieve file contents");
             }
@@ -49,7 +49,7 @@ public class Toothless {
             reply = input.nextLine();
         }
 
-        s.exportToFile(f);
+        storage.exportToFile(f);
 
         ui.printBye();
     }
