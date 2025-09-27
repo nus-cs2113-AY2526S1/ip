@@ -34,6 +34,10 @@ public class Ui {
         System.out.println("No previous data found.");
     }
 
+    public void showDateFormatError() {
+        System.out.println("Please input date in this format: yyyy-MM-dd HHmm");
+    }
+
     public void showErrorMessage(Exception e) {
         System.out.println("Error: " + e.getMessage());
     }
@@ -44,6 +48,8 @@ public class Ui {
 
     public void showInputTaskDetailsMessage() {
         System.out.println("Please enter the task details (split details by '/'): ");
+        System.out.println("(For deadline details: input <description> / by <yyyy-MM-dd HHmm>.\nFor event details: input " +
+                "<description> / from <yyyy-MM-dd HHmm> / to <yyyy-MM-dd HHmm>.)");
     }
 
     public void showTaskAddedMessage(Task task, int numOfTasks) {
