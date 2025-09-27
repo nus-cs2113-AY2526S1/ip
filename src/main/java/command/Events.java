@@ -1,5 +1,12 @@
 package command;
 
+/**
+ * Represents a task that is to be done within a period of time
+ *
+ * @author  Lai Kai Jie Jeremy
+ * @since   2025-08-17
+ */
+
 public class Events extends ToDo {
     private String from;
     private String to;
@@ -13,31 +20,35 @@ public class Events extends ToDo {
         this.eventStatus = true;
     }
 
+    /**
+     * Returns the to field for events
+     *
+     * @return to
+     */
     public String getTo() {
         return to;
     }
 
-    public void setTo(String to) {
-        this.to = to;
-    }
-
+    /**
+     * Returns the from field for deadline
+     *
+     * @return from
+     */
     public String getFrom() {
         return from;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
+    /**
+     * Returns event status
+     */
     @Override
     public String getType() {
         return (eventStatus ? "E" : " ");
     }
 
-    public void setEventStatus(boolean eventStatus) {
-        this.eventStatus = eventStatus;
-    }
-
+    /**
+     * Returns event message
+     */
     @Override
     public String getTask(){
         return super.getTask() + " (from: " + getFrom() + " to: " + getTo()  + ")";
