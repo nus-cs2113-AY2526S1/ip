@@ -1,30 +1,108 @@
-# Zoro User Guide
+# Zoro Task Manager - User Guide
 
-// Update the title above to match the actual product name
+*"Listen up! Here's how you manage tasks like a proper swordsman."*
 
-// Product screenshot goes here
+## Getting Started
 
-// Product intro goes here
-
-## Adding deadlines
-
-// Describe the action and its outcome.
-
-// Give examples of usage
-
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
+Run the application and you'll see the main menu. Type **2** to start managing tasks, or **1** to test the echo feature.
 
 ```
-expected output
+What can I do for you?
+1: echo - I'll repeat what you say 
+2: task - Let's get your schedule sharper than my blades
 ```
 
-## Feature ABC
+## Core Task Operations
 
-// Feature details
+### Creating Tasks
 
+**Basic Task (Todo)**
+```
+todo practice meditation
+```
+Perfect for simple tasks without time constraints.
 
-## Feature XYZ
+**Task with Deadline**
+```
+deadline finish project report /by Friday 5pm
+```
+Use when you have a specific due date or time limit.
 
-// Feature details
+**Scheduled Event**
+```
+event team meeting /from Monday 2pm /to Monday 3pm
+```
+For appointments, meetings, or time-blocked activities.
+
+### Managing Your Tasks
+
+**See All Tasks**
+```
+list
+```
+Shows your complete task list with checkboxes and details.
+
+**Mark Complete/Incomplete**
+```
+mark 2
+```
+Toggle task #2 between done ✓ and not done. Use the number from your task list.
+
+**Remove Tasks**
+```
+delete 1
+```
+Permanently removes task #1 from your list.
+
+**Find Tasks**
+```
+find meeting
+```
+Shows all tasks containing the word "meeting".
+
+## Quick Tips
+
+- **Task numbers change** when you delete tasks - always check `list` first
+- **Keywords matter**: Use `/by` for deadlines, `/from` and `/to` for events
+- **Case sensitive**: Commands are lowercase, but task descriptions can be anything
+- **Get lost?** Type `menu` to return to the main screen anytime
+
+## Common Mistakes
+
+**Wrong:** `deadline study for exam Friday`  
+**Right:** `deadline study for exam /by Friday`
+
+**Wrong:** `event gym workout 6pm 7pm`  
+**Right:** `event gym workout /from 6pm /to 7pm`
+
+**Wrong:** `mark finish homework`  
+**Right:** `mark 3` (use the task number, not description)
+
+## Example Workflow
+
+```
+# Start your day
+todo review emails
+deadline submit report /by today 5pm
+event lunch meeting /from 12pm /to 1pm
+
+# Check what you have
+list
+
+# Complete the first task
+mark 1
+
+# Later, clean up
+delete 1
+find report
+```
+
+## Navigation
+
+- **menu** or **back** - Return to main menu
+- **bye** - Exit application
+- **list** - Always available in task mode
+
+---
+
+*Your tasks are automatically saved. Now get to work and become the greatest task-master!*
