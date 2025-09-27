@@ -63,6 +63,12 @@ public class Chauncey {
         storage.saveToFile(tasks.getTasksList());
     }
 
+    private TaskList findTasks(Parser commandParser) throws ChaunceyException {
+        String keyword = commandParser.parseKeyword();
+        TaskList filteredTasks = new TaskList(tasks.filterTasks(keyword));
+        return filteredTasks;
+    }
+
     private void executeCommand(String command) {
         try {
             if (command.isEmpty()) {
@@ -85,6 +91,9 @@ public class Chauncey {
                 break;
             case "unmark":
                 unmarkTask(commandParser);
+                break;
+            case "find":
+                ui.listFilteredTasks(findTasks(commandParser));
                 break;
             default:
                 throw new ChaunceyException("Oh no! I don't know what the command means. Please input a valid command.");

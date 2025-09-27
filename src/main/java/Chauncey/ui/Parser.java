@@ -35,4 +35,15 @@ public class Parser {
         }
         return command.split("/");
     }
+
+    public String parseKeyword() throws ChaunceyException {
+        String[] keywords = command.split(" ");
+        if (keywords.length < 2) {
+            throw new ChaunceyException("Keyword can't be empty");
+        }
+        if (keywords.length > 2) {
+            throw new ChaunceyException("Please input only one keyword.");
+        }
+        return keywords[1];
+    }
 }

@@ -96,4 +96,14 @@ public class TaskList {
     public ArrayList<Task> getTasksList() {
         return tasks;
     }
+
+    public ArrayList<Task> filterTasks(String keyword) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getDescription().contains(keyword)) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
+    }
 }

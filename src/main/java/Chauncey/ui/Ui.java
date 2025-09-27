@@ -14,7 +14,7 @@ public class Ui {
 
     public void printWelcomeMessage() {
         System.out.println("Hello! I'm Chauncey.");
-        System.out.println("List of things I can do: list / add / delete / mark / unmark. If you want to exit, please input \"bye\".");
+        System.out.println("List of things I can do: list / add / delete / mark / unmark / find. If you want to exit, please input \"bye\".");
         System.out.println("What can I do for you?");
     }
 
@@ -66,6 +66,14 @@ public class Ui {
 
     public void listTasks(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
+        for (int i = 1; i<= tasks.getSize(); i++) {
+            System.out.print(i + ".");
+            tasks.getTask(i-1).outputTaskDetails();
+        }
+    }
+
+    public void listFilteredTasks(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
         for (int i = 1; i<= tasks.getSize(); i++) {
             System.out.print(i + ".");
             tasks.getTask(i-1).outputTaskDetails();
