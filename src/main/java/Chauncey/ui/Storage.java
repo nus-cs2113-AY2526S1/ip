@@ -58,6 +58,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Overwrite the text file with the task list.
+     *
+     * @param tasks The task list to be written to the file.
+     * @throws IOException If the file is not accessible or file path is invalid.
+     */
     public void saveToFile(ArrayList<Task> tasks) throws IOException {
         File file = new File(filePath);
         File directory = file.getParentFile();
@@ -71,6 +77,15 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Load all the tasks recorded in the file to an ArrayList and return the ArrayList.
+     * Data is loaded line by line, and each line contains the information of one task.
+     *
+     * @return An ArrayList containing all the tasks recorded in the file.
+     * @throws FileNotFoundException If the file doesn't exist.
+     * @throws ChaunceyException If a line lacks information or contains extra information for a specific task, or if
+     *                           the task type is invalid.
+     */
     public ArrayList<Task> loadFile() throws FileNotFoundException, ChaunceyException {
         File file = new File(filePath);
         File directory = file.getParentFile();

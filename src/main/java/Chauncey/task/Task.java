@@ -23,6 +23,11 @@ public class Task {
         return isDone;
     }
 
+    /**
+     * Returns the status icon of a task.
+     *
+     * @return A String indicating the status of a task, where "X" means done, " " means undone.
+     */
     public String getStatusIcon() {
         return (isDone ? "X":" ");
     }
@@ -36,6 +41,9 @@ public class Task {
         this.description = description;
     }
 
+    /**
+     * Output a dummy line, to be overwritten by subclass.
+     */
     public void outputTaskDetails() {
         System.out.println();
     }
@@ -44,6 +52,10 @@ public class Task {
         return description;
     }
 
+    /**
+     * Returns a dummy String, to be overwritten by subclass.
+     * @return Null
+     */
     public String writeToFile() {
         return null;
     }

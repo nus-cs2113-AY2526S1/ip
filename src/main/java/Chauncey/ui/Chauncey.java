@@ -13,6 +13,13 @@ public class Chauncey {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructor of Chauncey class.
+     * When the file indicated by the filePath exists, the tasks in the text file will be loaded to TaskList object.
+     * Otherwise, the ArrayList of TaskList object will be empty.
+     *
+     * @param filePath A relative path of the text file to store the tasks
+     */
     public Chauncey(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
