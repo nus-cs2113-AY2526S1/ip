@@ -15,7 +15,7 @@ public class UserInterface {
      * Prints a separator line for visual formatting.
      */
     public void printSeparator() {
-        System.out.print("-----------------------\n\n");
+        System.out.print("----------------------------------------------\n");
     }
 
     /**
@@ -52,6 +52,7 @@ public class UserInterface {
      * Prints instructions for the echo mode.
      */
     public void printEchoInstruction() {
+        printSeparator();
         System.out.println(
             "Echo training activated!\n" +
             "Type something and I will echo it!\n" +
@@ -76,6 +77,7 @@ public class UserInterface {
      * Prints instructions for task management mode.
      */
     public void printTaskInstruction() {
+        printSeparator();
         System.out.println(
                 "Listen up! Here's how you manage tasks like a proper swordsman:\n" +
                 "a) todo [task] - Basic training, one task at a time\n" +
@@ -93,42 +95,54 @@ public class UserInterface {
      * Prints the correct format for todo command.
      */
     public void printValidInputTodo() {
+        printSeparator();
         System.out.println("Proper form: todo [task] - Like 'todo practice sword techniques'");
+        printSeparator();
     }
 
     /**
      * Prints the correct format for mark command.
      */
     public void printValidInputMark() {
+        printSeparator();
         System.out.println("Proper form: mark [task_number] - Pick the right target!");
+        printSeparator();
     }
 
     /**
      * Prints the correct format for deadline command.
      */
     public void printValidInputDeadline() {
+        printSeparator();
         System.out.println("Proper form: deadline [task] /by [deadline_day] - Set your training goals!");
+        printSeparator();
     }
 
     /**
      * Prints the correct format for event command.
      */
     public void printValidInputEvent() {
+        printSeparator();
         System.out.println("Proper form: event [event] /from [startTime] /to [endTime] - Schedule like a warrior!");
+        printSeparator();
     }
 
     /**
      * Prints the correct format for delete command.
      */
     public void printValidInputDelete() {
+        printSeparator();
         System.out.println("Proper form: delete [task_number]");
+        printSeparator();
     }
 
     /**
      * Prints the correct format for find command.
      */
     public void printValidInputFind() {
+        printSeparator();
         System.out.println("Proper form: find [keyword]");
+        printSeparator();
     }
 
     /**
@@ -137,7 +151,9 @@ public class UserInterface {
      * @param userInput - the task description that was marked
      */
     public void printTaskMarked(String userInput) {
+        printSeparator();
         System.out.println("Task " + userInput + " has been conquered. Time for the next challenge!");
+        printSeparator();
     }
 
     /**
@@ -146,8 +162,10 @@ public class UserInterface {
      * @param task - the task that was added
      */
    public void printTaskAdded(Task task) {
-        System.out.println("New mission accepted: " + task.toString());
-        System.out.println("Added to your training regimen.");
+       printSeparator();
+       System.out.println("New mission accepted: " + task.toString());
+       System.out.println("Added to your training regimen.");
+       printSeparator();
    }
 
     /**
@@ -156,7 +174,9 @@ public class UserInterface {
      * @param userInput - the task description that was unmarked
      */
     public void printTaskUnmarked(String userInput) {
+        printSeparator();
         System.out.println("Task " + userInput + " is back in action. Sometimes you gotta fight the same battle twice.");
+        printSeparator();
     }
 
     /**
@@ -165,7 +185,9 @@ public class UserInterface {
      * @param task - the task that was deleted
      */
     public void printTaskDeleted(Task task) {
+        printSeparator();
         System.out.println("Target: " + task.toString() + " has been eliminated");
+        printSeparator();
     }
 
     /**
@@ -174,6 +196,7 @@ public class UserInterface {
      * @param tasks - the list of tasks that matched the search criteria
      */
     public void printTasksFound(List<Task> tasks) {
+        printSeparator();
         if (!tasks.isEmpty()) {
             System.out.println("I got pretty lost looking for these:");
             for (Task task : tasks) {
@@ -182,6 +205,7 @@ public class UserInterface {
         } else {
             System.out.println("I think I got lost, I couldn't find anything!");
         }
+        printSeparator();
     }
 
     /**
@@ -190,6 +214,7 @@ public class UserInterface {
      * @param tasks - the list of all current tasks
      */
     public void printTaskList(List<Task> tasks) {
+        printSeparator();
         if (tasks.isEmpty()) {
             System.out.println("No tasks? Are you staying on top of your work or are you slacking off?");
             System.out.println("If you want to become the greatest swordsman theres no time for slacking - get to work.");
@@ -199,6 +224,7 @@ public class UserInterface {
         for (int i=0; i<tasks.size(); i++) {
             System.out.println((i+1) + ". " + tasks.get(i).toString());
         }
+        printSeparator();
     }
 
     /*    GENERAL    */
@@ -207,6 +233,7 @@ public class UserInterface {
      * Prints goodbye message when exiting the application.
      */
     public void printGoodbye() {
+        printSeparator();
         System.out.println("See ya, don't get lost!");
     }
 
@@ -214,7 +241,9 @@ public class UserInterface {
      * Prints error message for invalid user input.
      */
     public void printInvalidInput() {
+        printSeparator();
         System.out.println("That's not a valid input, you're really starting to act like that stupid chef.");
+        printSeparator();
     }
 
     /**
@@ -223,9 +252,11 @@ public class UserInterface {
      * @param errorMessage - the specific error message to display
      */
     public void printValidationError(String errorMessage) {
+        printSeparator();
         System.out.println("Hold on, whats this?");
         System.out.println(errorMessage);
         System.out.println("Fix your form and try again!");
+        printSeparator();
     }
 
 }

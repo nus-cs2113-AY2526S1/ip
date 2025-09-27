@@ -203,7 +203,6 @@ public class TaskManager {
 
         ui.printTasksFound(foundTasks);
 
-
     }
 
     /**
