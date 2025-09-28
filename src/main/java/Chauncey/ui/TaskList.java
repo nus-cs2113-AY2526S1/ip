@@ -43,20 +43,20 @@ public class TaskList {
             break;
         case "deadline":
             if (taskDetails.length < 2) {
-                throw new ChaunceyException("Task details not enough! Please input task input in this format: task description/task deadline");
+                throw new ChaunceyException("Task details not enough! Please input task input in this format: <description> / by <yyyy-MM-dd HHmm> ");
             }
             if (taskDetails.length > 2) {
-                throw new ChaunceyException("Task details more than expected! Please only input task description and task deadline.");
+                throw new ChaunceyException("Task details more than expected! Please only input task description and task deadline in this format: <description> / by <yyyy-MM-dd HHmm>.");
             }
             String deadline = taskDetails[1].trim();
             tasks.add(new Deadline(taskDetails[0].trim(), deadline));
             break;
         case "event":
             if (taskDetails.length < 3) {
-                throw new ChaunceyException("Task details not enough! Please input task input in this format: task description/(from) start time/(to) end time");
+                throw new ChaunceyException("Task details not enough! Please input task input in this format: <description> / from <yyyy-MM-dd HHmm> / to <yyyy-MM-dd HHmm>");
             }
             if (taskDetails.length > 3) {
-                throw new ChaunceyException("Task details more than expected! Please only input task description, task start time and task end time.");
+                throw new ChaunceyException("Task details more than expected! Please only input task description, task start time and task end time in this format: <description> / from <yyyy-MM-dd HHmm> / to <yyyy-MM-dd HHmm>.");
             }
             String startTime = taskDetails[1].trim();
             String endTime = taskDetails[2].trim();

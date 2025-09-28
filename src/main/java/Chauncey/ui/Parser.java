@@ -37,7 +37,7 @@ public class Parser {
         String numberInString = commandDetails[commandDetails.length - 1];
         int taskNumber = Integer.parseInt(numberInString);
         if (taskNumber < 1 || taskNumber > numOfTasks) {
-            throw new ChaunceyException("Invalid task number. Task number should be between 1 and " + numberInString);
+            throw new ChaunceyException("Invalid task number. Task number should be between 1 and " + numOfTasks);
         }
         return taskNumber;
     }

@@ -111,10 +111,15 @@ public class Ui {
      * @param tasks The TaskList object filtered by a keyword.
      */
     public void listFilteredTasks(TaskList tasks) {
-        System.out.println("Here are the matching tasks in your list:");
-        for (int i = 1; i<= tasks.getSize(); i++) {
-            System.out.print(i + ".");
-            tasks.getTask(i-1).outputTaskDetails();
+        if (tasks.getSize() == 0) {
+            System.out.println("No matching task in your list.");
+        }
+        else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 1; i <= tasks.getSize(); i++) {
+                System.out.print(i + ".");
+                tasks.getTask(i - 1).outputTaskDetails();
+            }
         }
     }
 
