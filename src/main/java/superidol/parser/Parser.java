@@ -1,0 +1,134 @@
+package superidol.parser;
+
+import superidol.command.*;
+import superidol.storage.Storage;
+import superidol.task.Deadline;
+import superidol.task.Event;
+import superidol.task.Todo;
+import superidol.tasklist.TaskList;
+import superidol.ui.Ui;
+
+import java.io.File;
+import java.time.format.DateTimeParseException;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Object to parse the raw command from user
+ * Create Command objects to execute commands
+ */
+public class Parser {
+
+    private static String deadlineRegex = "(deadline)\\s(.+?)\\s/by\\s(.+)";
+    private static String eventRegex = "(event)\\s(.+?)\\s/from(.+?)\\s/to(.+)";
+
+    /**
+     * Parse the command string to Command object for execution
+     *
+     * @param command
+     * @return Command object for the user's command
+     */
+    public static Command parse(String command) {
+        String commandKeyWord = command.split(" ")[0].toLowerCase();
+        try {
+            switch (commandKeyWord) {
+            case "exit":
+                return new ExitCommand();
+            case "list":
+                return new ListCommand();
+            case "mark":
+                try {
+                    int taskId = Integer.parseInt(command.split(" ")[1]);
+                    return new MarkCommand(taskId, true);
+                } catch (NumberFormatException e) {
+                    Ui.respondInvalidMarking();
+                    return null;
+                }
+            case "unmark":
+                try {
+                    int taskId = Integer.parseInt(command.split(" ")[1]);
+                    return new MarkCommand(taskId, false);
+                } catch (NumberFormatException e) {
+                    Ui.respondInvalidMarking();
+                    return null;
+                }
+            case "todo": {
+                // remove "todo"
+                String task = command.substring(4).trim();
+                if (task.isBlank()) {
+                    Ui.respondInvalidTodo();
+                    return null;
+                } else {
+                    return new AddTodoCommand(task);
+                }
+            }
+            case "print": {
+                String time = command.substring(5).trim();
+                if (time.isBlank()) {
+                    Ui.respondInvalidPrint();
+                    return null;
+                } else {
+                    try {
+                        return new PrintByTimeCommand(time);
+                    } catch (DateTimeParseException e) {
+                        Ui.respondInvalidPrint();
+                        return null;
+                    }
+                }
+            }
+            case "find": {
+                String keyword = command.substring(4).trim();
+                if (keyword.isBlank()) {
+                    Ui.respondInvalidFind();
+                    return null;
+                } else {
+                    return new FindCommand(keyword);
+                }
+            }
+            case "deadline": {
+                Pattern pattern = Pattern.compile(deadlineRegex);
+                Matcher matcher = pattern.matcher(command);
+
+                if (matcher.find()) {
+                    String task = matcher.group(2).trim();
+                    String time = matcher.group(3).trim();
+
+                    return new AddDeadlineCommand(task, time);
+                } else {
+                    Ui.respondInvalidDeadline();
+                    return null;
+                }
+            }
+            case "event": {
+                Pattern pattern = Pattern.compile(eventRegex);
+                Matcher matcher = pattern.matcher(command);
+
+                if (matcher.find()) {
+                    String task = matcher.group(2).trim();
+                    String startTime = matcher.group(3).trim();
+                    String endTime = matcher.group(4).trim();
+                    return new AddEventCommand(task, startTime, endTime);
+                } else {
+                    Ui.respondInvalidEvent();
+                    return null;
+                }
+            }
+            case "delete":
+                try {
+                    int taskId = Integer.parseInt(command.split(" ")[1]);
+                    return new DeleteCommand(taskId);
+                } catch (NumberFormatException e) {
+                    Ui.respondInvalidDeleting();
+                    return null;
+                }
+            default:
+                Ui.respondToInvalidCommand();
+                return null;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Ui.respondToInvalidCommand();
+            return null;
+        }
+    }
+}
