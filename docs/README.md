@@ -34,10 +34,9 @@ Outcome: all the tasks will be listed with the task details.
 Example output:
 ```
 Here are the tasks in your list:
-1.[T][ ] borrow book
-2.[T][ ] read book
-3.[D][ ] submit assignment (by Sunday)
-4.[E][ ] attend cs2113 lecture (from Friday 4pm to 6pm)
+1.[T][ ] review midterm
+2.[D][ ] submit ip (by Oct 03 2025 23:59)
+3.[E][ ] attend lecture (from Oct 03 2025 16:00 to Oct 03 2025 18:00)
 ```
 
 ### Add a task
@@ -47,9 +46,9 @@ Action:
 1. type `add` when Chauncey ask for next command
 2. Chauncey will ask for task type, input `todo` or `deadline` or `event`
 3. Chauncey will ask for task details:
-    1. if task type is "todo": input task description only
-   2. if task type is "deadline", input task description and deadline, separated by "/". Example: `submit assignment/by Sunday`
-   3. if task type is "event": input task description, task start time and end time, separated by "/". Example: `attend cs2113 lecture/from Friday 4pm/to 6pm`
+   1. if task type is "todo": input task description only
+   2. if task type is "deadline", input task description and deadline, separated by "/". Format: `<description> / by <yyyy-MM-dd HHmm>`. Example: `submit assignment/by 2025-10-03 2359`
+   3. if task type is "event": input task description, task start time and end time, separated by "/". Format: `<description> / from <yyyy-MM-dd HHmm> / to <yyyy-MM-dd HHmm>`. Example: `attend cs2113 lecture/from 2025-10-03 1600/to 2025-10-03 1800`
 
 Outcome: 
 
@@ -61,10 +60,12 @@ add // your input for step 1
 ____________________________________________________________
 What type of task do you want to add? todo/deadline/event?event // step 2
 Please enter the task details (split details by '/'):
-attend cs2113 lecture/from Friday 4pm/to 6pm // step 3
+(For deadline details: input <description> / by <yyyy-MM-dd HHmm>.
+For event details: input <description> / from <yyyy-MM-dd HHmm> / to <yyyy-MM-dd HHmm>.)
+attend lecture / from 2025-10-03 1600 / to 2025-10-03 1800 // step 3
 Got it. I've added this task:
-[E][ ] attend cs2113 lecture (from Friday 4pm to 6pm)
-Now you have 4 tasks in the list.
+[E][ ] attend lecture (from Oct 03 2025 16:00 to Oct 03 2025 18:00)
+Now you have 3 tasks in the list.
 ____________________________________________________________
 ```
 
