@@ -2,7 +2,6 @@ package Chauncey.ui;
 
 import Chauncey.task.Task;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
