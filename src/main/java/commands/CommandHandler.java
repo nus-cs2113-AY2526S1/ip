@@ -93,7 +93,7 @@ public class CommandHandler {
     }
 
     /**
-     * Handles the find command by searching for tasks with a matching keyword
+     * Handle the find command by searching for tasks with a matching keyword
      *
      * @param taskList The TaskList object to search within
      * @param text     The keyword to search for
