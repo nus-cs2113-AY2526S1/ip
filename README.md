@@ -1,26 +1,141 @@
-# Duke project template
+# WELCOME TO HERO, THE BEST CHAT BOT
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## FUNCTIONS
+1) Add a To Do task
+2) Add a Deadline task
+3) Add an Event task
+4) List your tasks
+5) Mark your tasks as done
+6) Mark your tasks as not done
+7) Delete your tasks
+8) Find your tasks
 
-## Setting up in Intellij
+## FUNCTIONS USAGE
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+### 1) Add a To Do task
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Usage: ```todo [description]```
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+> Example: ```todo borrow book```
+
+Output:
+```
+____________________________________________________________
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 1 task in the task list.
+____________________________________________________________
+```
+
+### 2) Add a Deadline task
+
+Usage: ```deadline [description] /by [deadline]```
+
+> Example: ```deadline return book /by Sunday```
+
+Output:
+```
+____________________________________________________________
+Got it. I've added this task:
+[D][ ] return book (by: Sunday)
+Now you have 2 tasks in the task list.
+____________________________________________________________
+```
+
+### 3) Add an Event task
+
+Usage: ```event [description] /from [start] /to [end]```
+
+> Example: ```event project meeting /from Mon 2pm /to 4pm```
+
+Output:
+```
+____________________________________________________________
+Got it. I've added this task:
+[E][ ] project meeting (from: Mon 2pm | to: 4pm)
+Now you have 3 tasks in the task list.
+____________________________________________________________
+```
+
+### 4) List your tasks
+
+Usage: ```list```
+
+Output:
+```
+____________________________________________________________
+Here are the tasks in your task list:
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (from: Mon 2pm | to: 4pm)
+____________________________________________________________
+```
+
+### 5) Mark your tasks as done
+
+Usage: ```mark [task number]```
+
+> Example: ```mark 3```
+
+Output:
+```
+____________________________________________________________
+Nice! I've marked this task as done:
+[E][X] project meeting (from: Mon 2pm | to: 4pm)
+____________________________________________________________
+```
+
+### 6) Unmark your tasks as not done
+
+Usage: ```unmark [task number]```
+
+> Example: ```unmark 3```
+
+Output:
+```
+____________________________________________________________
+Nice! I've marked this task as done:
+[E][ ] project meeting (from: Mon 2pm | to: 4pm)
+____________________________________________________________
+```
+
+### 7) Delete your tasks
+
+Usage: ```delete [task number]```
+
+> Example: ```delete 1```
+
+Output:
+```
+____________________________________________________________
+Got it. I've deleted this task:
+[T][ ] borrow book
+Now you have 2 tasks in the task list.
+____________________________________________________________
+```
+
+
+### 8) Find your tasks
+
+Usage: ```find [text]```
+
+> Example: ```find book```
+
+Output:
+```
+____________________________________________________________
+Here are the matching tasks in your list:
+1. [D][ ] return book (by: Sunday)
+____________________________________________________________
+```
+
+### 9) Exit the program
+
+Usage: ```bye```
+
+Output:
+```
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
+```
