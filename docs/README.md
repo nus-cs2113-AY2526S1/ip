@@ -1,4 +1,4 @@
-# Duke User Guide
+# Toothless
 
 // Update the title above to match the actual product name
 
