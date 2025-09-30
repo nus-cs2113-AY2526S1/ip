@@ -32,17 +32,17 @@ Example: `event meeting /from 1pm /to 2pm`
 
 Marking Task: `mark`\
 Marks a task\
-Format: `mark LISTINDEX`
+Format: `mark LISTINDEX`\
 Example: `mark 1`
 
 Unmarking Task: `unmark`\
 Unmarks a task\
-Format: `unmark LISTINDEX`
+Format: `unmark LISTINDEX`\
 Example: `unmark 1`
 
 Deleting Task: `delete`\
 Deletes a task\
-Format: `delete LISTINDEX`
+Format: `delete LISTINDEX`\
 Example: `delete 1`
 
 Finding Tasks: `find`\
