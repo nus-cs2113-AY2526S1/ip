@@ -1,7 +1,49 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm Bob
+What can I do for you?
+No save data found, creating new file to store it!
+You currently have no tasks!
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 1 task in the list.
+Invalid syntax!
+Correct Syntax: todo <task name>
+1.[T][ ] borrow book
+Got it. I've added this task:
+[D][ ] return book (by: Sept 29 2025)
+Now you have 2 tasks in the list.
+Please specify a deadline with /by <deadline in yyyy-mm-dd>!
+Got it. I've added this task:
+[E][ ] project meeting (from: Sept 29 2025 2:00pm to: Sept 29 2025 4:00pm)
+Now you have 3 tasks in the list.
+Please specify an end date with /to <to date in yyyy-mm-dd HH:mm>!
+Please specify an end date with /to <to date in yyyy-mm-dd HH:mm>!
+Found these matching tasks!
+[T][ ] borrow book
+[D][ ] return book (by: Sept 29 2025)
+No matching tasks found!
+1.[T][ ] borrow book
+2.[D][ ] return book (by: Sept 29 2025)
+3.[E][ ] project meeting (from: Sept 29 2025 2:00pm to: Sept 29 2025 4:00pm)
+I've marked the following task as done:
+[T][X] borrow book
+Invalid index: 4
+Invalid syntax!
+Correct Syntax: mark <index>
+I've unmarked the following task as done:
+[T][ ] borrow book
+Invalid index: 4
+Invalid syntax!
+Correct Syntax: unmark <index>
+Got it. I've deleted this task:
+[T][ ] borrow book
+Now you have 2 tasks in the list.
+Invalid index: 3
+Invalid syntax!
+Correct Syntax: delete <index>
+Sorry, please type a valid input!
+No deadlines for Sept 30 2025 found!
+No events within Sept 30 2025 found!
+The following tasks were found due Sep 29 2025
+[D][ ] return book (by: Sept 29 2025)
+No events within Sept 29 2025 found!
+Bye. Hope to see you again soon!
