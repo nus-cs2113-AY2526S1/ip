@@ -194,9 +194,38 @@ public class Bob {
                     System.out.println("Bob has removed this task for you!");
                     System.out.println(instructions.get(indexToRemove).description);
                     instructions.remove(indexToRemove);
-                    System.out.println("You have "+instructions.size()+" tasks in the list");
+                    System.out.println("You have " + instructions.size() + " tasks in the list");
+
+
+                } else if (Objects.equals(sentenceArray[0], "find")) {
+                    if (sentenceArray.length < 2) {
+                        throw new BobException("Please provide a keyword to find - Bob");
+                    }
+
+                    printLineSeparator();
+                    int firstSpaceIndex = sentence.indexOf(' ');
+                    String keyword = sentence.substring(firstSpaceIndex + 1).trim();
+                    if (keyword.isEmpty()) {
+                        throw new BobException("Your find keyword cannot be empty - Bob 😡");
+                    }
+
+                    System.out.println("Here are the matching tasks in your list:");
+                    int shown = 0;
+                    String query = keyword.toLowerCase();
+
+                    for (Task t : instructions) {
+                        if (t.description.toLowerCase().contains(query)) {
+                            shown++;
+                            System.out.println(shown + ". " + t);
+                        }
+                    }
+
+                    if (shown == 0) {
+                        System.out.println("(none)");
+                    }
                 }
-                // Show List of tasks
+
+        // Show List of tasks
                 else if (sentence.equals("list")) {
                     printLineSeparator();
                     for (int i = 0; i < instructions.size(); i++) {
