@@ -33,14 +33,14 @@ public class Toothless {
         Ui ui = new Ui(tasks);
         TaskList tl = new TaskList(tasks,ui);
         Parser parser = new Parser(tl,ui);
-        Storage s = new Storage(tasks,tl);
+        Storage storage = new Storage(tasks,tl);
         File f = new File("./data/Toothless.txt");
 
         Scanner input = new Scanner(System.in);
 
         ui.printLogo();
         ui.printCommandList();
-        s.bootFile(f);
+        storage.bootFile(f);
 
         String reply = input.nextLine();
 
