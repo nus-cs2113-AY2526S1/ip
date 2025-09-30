@@ -32,8 +32,8 @@ public class Parser {
      * @throws WrongFormatException invokes when the user inputs the wrong format of the command
      */
     public void checkOperation(String reply) throws EmptyTaskException, IncompleteFormatException, InvalidCommandException, OutOfBoundsException, WrongFormatException {
-        reply = reply.trim();
-        String[] splitArray = reply.split(" ");
+        String trimmedReply = reply.trim();
+        String[] splitArray = trimmedReply.split(" ");
         String operation = splitArray[0];
 
         if(operation.equals("mark")){
@@ -46,13 +46,13 @@ public class Parser {
         else if(operation.equals("list")){
             tl.getList();
         }else if(operation.equals("todo")){
-            tl.executeToDoOperation(reply,operation);
+            tl.executeToDoOperation(trimmedReply,operation);
         }else if(operation.equals("deadline")){
-            tl.executeDeadlineOperation(reply,operation);
+            tl.executeDeadlineOperation(trimmedReply,operation);
         }else if(operation.equals("event")){
-            tl.executeEventOperation(reply,operation);
+            tl.executeEventOperation(trimmedReply,operation);
         }else if(operation.equals("find")){
-            tl.executeFindOperation(reply,operation);
+            tl.executeFindOperation(trimmedReply,operation);
         }
         else{
             throw new InvalidCommandException();

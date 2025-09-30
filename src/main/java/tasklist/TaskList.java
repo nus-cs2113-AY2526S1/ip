@@ -240,11 +240,13 @@ public class TaskList {
      * @param index index of task in the list
      */
     public void deleteTask(int index){
-        index -= 1;
+        int decrementedIndex = index - 1;
+
         ui.printTopMessage("delete");
-        ui.printDelete(index);
+        ui.printDelete(decrementedIndex);
         ui.printBorder();
-        tasks.remove(index);
+
+        tasks.remove(decrementedIndex);
     }
 
     /**
@@ -254,13 +256,16 @@ public class TaskList {
      * @param listIndex index of task in the list
      */
     public void markStatus(String mark, int listIndex){
+        int decrementedIndex = listIndex - 1;
+
         if(mark.equals("mark")){
-            tasks.get(listIndex-1).setMarkStatus(true);
+            tasks.get(decrementedIndex).setMarkStatus(true);
             ui.printTopMessage("mark");
         }else{
-            tasks.get(listIndex-1).setMarkStatus(false);
+            tasks.get(decrementedIndex).setMarkStatus(false);
             ui.printTopMessage("unmark");
         }
+
         ui.printMark(listIndex);
         ui.printBorder();
     }
@@ -271,7 +276,9 @@ public class TaskList {
      * @param listIndex index of task in the list
      */
     public void readFileMark(int listIndex){
-        tasks.get(listIndex-1).setMarkStatus(true);
+        int decrementedIndex = listIndex - 1;
+
+        tasks.get(decrementedIndex).setMarkStatus(true);
     }
 
     /**
@@ -341,18 +348,19 @@ public class TaskList {
         final int DEADLINELENGTH = 8;
         final int EVENTLENGTH = 5;
         String taskName;
+        String slicedString;
 
         if(operation.equals("todo") || operation.equals("find")){
-            reply = reply.substring(TODO_FINDLENGTH);
-            taskName = reply.trim();
+            slicedString = reply.substring(TODO_FINDLENGTH);
+            taskName = slicedString.trim();
         }else if(operation.equals("deadline")){
             int byIndex = reply.indexOf("/by");
-            reply = reply.substring(DEADLINELENGTH,byIndex);
-            taskName = reply.trim();
+            slicedString = reply.substring(DEADLINELENGTH,byIndex);
+            taskName = slicedString.trim();
         }else if(operation.equals("event")){
             int byIndex = reply.indexOf("/from");
-            reply = reply.substring(EVENTLENGTH,byIndex);
-            taskName = reply.trim();
+            slicedString = reply.substring(EVENTLENGTH,byIndex);
+            taskName = slicedString.trim();
         }else{
             throw new InvalidCommandException();
         }
