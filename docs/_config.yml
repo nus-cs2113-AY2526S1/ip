@@ -1,3 +1,5 @@
-title: My Site
-description: My GitHub Pages site with Jekyll
-theme: hacker
+title: Toothless Chatbot
+description: a chatbot for managing tasks
+remote_theme: pages-themes/hacker@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
