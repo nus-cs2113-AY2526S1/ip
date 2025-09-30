@@ -54,5 +54,5 @@ Exiting program: `bye`\
 Exits the program\
 Format: `bye`
 
-Saving the data
+Saving the data\
 Toothless will save the data in a text file once you exit the program
