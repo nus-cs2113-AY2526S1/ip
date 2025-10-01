@@ -11,6 +11,7 @@ java -jar ip.jar
 5. Type a command and press **Enter** to execute it.
 
 ---
+
 ## Features
 ### 1. Adding tasks
 **1.1 Todo:** ```todo``` 
@@ -39,7 +40,9 @@ Adds a task with a start and end date/time.
 ```
 event <description> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm>
 ```
+
 ---
+
 ### 2. Listing all tasks: ```list```
 Shows all tasks in the task list.
 
@@ -48,6 +51,7 @@ Shows all tasks in the task list.
 list
 ```
 ---
+
 ### 3. Marking / Unmarking tasks
 Marks a task as done or not done.
 
@@ -59,6 +63,7 @@ unmark <index>
 where index is the number shown beside each task in ```list```
 
 ---
+
 ### 4. Deleting a task: ```delete```
 Deletes a task by its index in the list.
 
@@ -68,6 +73,7 @@ delete <index>
 ```
 
 ---
+
 ### 5. Finding tasks
 **5.1 Find by keyword:** ```find```
 
@@ -84,6 +90,7 @@ date <yyyy-MM-dd HHmm>
 ```
 
 ---
+
 ### 6. Exiting the program: ```bye```
 Closes the ShinChan chatbot.
 
@@ -96,6 +103,7 @@ bye
 ## Saving Data
 - Tasks are **saved automatically** to a text file after every change.
 - They will be loaded back when you restart ShinChan.
+
 ---
 
 ## Command Summary
