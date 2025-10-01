@@ -99,6 +99,7 @@ bye
 ---
 
 ## Command Summary
+
 | Action       | Format / Example                                          |
 |--------------|-----------------------------------------------------------|
 | Add Todo     | `todo read book`                                          |
