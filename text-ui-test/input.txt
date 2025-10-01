@@ -1,0 +1,67 @@
+abc
+todo read book
+list
+todo write book
+list
+deadline return book /by Sunday
+list
+event project meeting /from Mon 2pm /to 4pm
+list
+mark 1
+list
+mark 3
+list
+mark 4
+list
+unmark 1
+list
+unmark 4
+list
+mark 5
+todo
+deadline buy bread /by
+deadline buy bread /to Sunday
+event Holiday /from /to Sunday
+event /from Sunday /to
+event Holiday /from Sunday
+event Holiday /fro Sunday /to Monday
+event Holiday /from Sunday /by Monday
+list
+mark
+unmark
+mark 1
+list
+find book
+find
+delete 0
+delete -1
+delete 10
+list
+deadline homework /by 21-9-2025
+deadline homework /by 21-09-2025
+deadline homework2 /by tmr 22-9-2025
+deadline homework2 /by tmr 22-09-2025
+list
+delete 5
+delete 5
+list
+event event1 /from 21-9-2025 /to now 21-09-2025
+event event1 /from 21-09-2025 /to now 21-09-2025
+event event2 /from now /to now 21-9-2025
+event event2 /from now /to now 21-09-2025
+event event3 /from now 21-09-2025 /to tmr 22-09-2025
+list
+delete 5
+delete 5
+delete 5
+delete 1
+list
+delete 3
+list
+mark 1 1
+unmark 1 1
+delete 1 1
+list
+delete 1
+delete 1
+bye
