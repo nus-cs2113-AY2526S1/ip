@@ -1,6 +1,13 @@
 # Nova User Guide
 
-![Nova Logo](img_1.png)
+```
+  _   _   ____  __      __    _
+ | \ | | / __ \ \ \    / /   / \
+ |  \| || |  | | \ \  / /   / _ \
+ | |\  || |  | |  \ \/ /   / ___ \
+ |_| \_| \____/    \__/   /_/   \_\
+
+```
 
 Nova is a simple, interactive **task manager chatbot** that helps you keep track of tasks 
 such as Todos, Deadlines, and Events.  
@@ -14,7 +21,18 @@ You can add tasks, mark them as done, search, and save them — all through natu
 4. Open the command terminal, `cd` into the folder you put the jar file in.
 5. Run the program with: `java -jar Nova.jar`
 6. You should see the Nova welcome message:
-![Nova Welcome Message](img.png)
+```
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+  _   _   ____  __      __    _
+ | \ | | / __ \ \ \    / /   / \
+ |  \| || |  | | \ \  / /   / _ \
+ | |\  || |  | |  \ \/ /   / ___ \
+ |_| \_| \____/    \__/   /_/   \_\
+
+ Hello! I'm Nova
+ What can I do for you?
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+```
 7. Type the command in the terminal and press Enter to execute it. rg. typing `help` 
    and pressing Enter will show the list of command that can be used.
 
