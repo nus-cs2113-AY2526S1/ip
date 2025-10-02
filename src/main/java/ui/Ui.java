@@ -41,8 +41,10 @@ public class Ui {
                 "mark [num] eg. mark 1\n" +
                 "unmark [num] eg.unmark 2\n" +
                 "todo [task name] eg. todo go run\n" +
-                "deadline [task name] /by [deadline date/time] eg. deadline pay loan /by 01/01/25\n" +
-                "event [task name] /from [start date/time] /to [end date/time] eg. attend conference /from Monday 1pm /to Friday 9pm\n" +
+                "deadline [task name] /by [deadline] eg. deadline pay loan /by 2025-01-01\n" +
+                "[deadline] can be text or yyyy-mm-dd format\n" +
+                "event [task name] /from [start] /to [end] eg. attend conference /from Monday 1pm /to Friday 9pm\n" +
+                "[start] or [end] can be text or yyyy-mm-dd format\n" +
                 "--------------------------------\n");
     }
 

@@ -22,12 +22,14 @@ Example: `todo go running`
 
 Adding Deadline: `deadline`\
 Adds a deadline task\
-Format: `deadline TASKANEM /by DEADLINE`\
+Format: `deadline TASKNAME /by DEADLINE`\
+Remarks: DEADLINE can be text or `yyyy-mm-dd` format\
 Example: `deadline submit CS2113 project /by Friday`
 
 Adding Event: `event`\
 Adds a event task\
 Format: `event TASKNAME /from START /to END`\
+Remarks: START and END can be text or `yyyy-mm-dd` format\
 Example: `event meeting /from 1pm /to 2pm`
 
 Marking Task: `mark`\
@@ -46,7 +48,7 @@ Format: `delete LISTINDEX`\
 Example: `delete 1`
 
 Finding Tasks: `find`\
-List all task containg the keyword provided\
+List all task containing the keyword provided\
 Format: `find KEYWORD`\
 Example: `find test`
 
