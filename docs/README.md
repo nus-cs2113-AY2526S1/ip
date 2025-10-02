@@ -5,7 +5,7 @@
 ## Quick Start
 
 1. Ensure you have Java `17` or above installed in your device
-2. Download the lastest `.jar` file from here
+2. Download the lastest `.jar` file from [here](https://github.com/MinionWolf/ip/releases/download/A-Release/ip.jar)
 3. Copy the file to the folder you want to use as the *home folder* for your Toothless.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ip.jar` command to run the application.
 
@@ -58,3 +58,17 @@ Format: `bye`
 
 Saving the data\
 Toothless will save the data in a text file once you exit the program
+
+## Command Summary
+
+| Action | Format, Examples |
+| List | `list` |
+| ToDo | `todo TASKNAME`\ eg. `todo go running` |
+| Deadline | `deadline TASKNAME /by DEADLINE`\ DEADLINE can be text or `yyyy-mm-dd` format\ eg. `deadline submit CS2113 project /by Friday` |
+| Event | `event TASKNAME /from START /to END`\ START and END can be text or `yyyy-mm-dd` format\ eg. `event meeting /from 1pm /to 2pm` |
+| Mark | `mark LISTINDEX`\ eg. `mark 1` |
+| Unmark | `unmark LISTINDEX`\ eg. `unmark 1` |
+| Delete | `delete LISTINDEX`\ eg. `delete 1` |
+| Find | `find KEYWORD`\ eg. `find test` |
+| Exit | `bye` |
+
