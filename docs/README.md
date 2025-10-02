@@ -21,18 +21,18 @@ You can add tasks, mark them as done, search, and save them — all through natu
 4. Open the command terminal, `cd` into the folder you put the jar file in.
 5. Run the program with: `java -jar Nova.jar`
 6. You should see the Nova welcome message:
-```
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-  _   _   ____  __      __    _
- | \ | | / __ \ \ \    / /   / \
- |  \| || |  | | \ \  / /   / _ \
- | |\  || |  | |  \ \/ /   / ___ \
- |_| \_| \____/    \__/   /_/   \_\
-
- Hello! I'm Nova
- What can I do for you?
-=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-```
+    ```
+    =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+      _   _   ____  __      __    _
+     | \ | | / __ \ \ \    / /   / \
+     |  \| || |  | | \ \  / /   / _ \
+     | |\  || |  | |  \ \/ /   / ___ \
+     |_| \_| \____/    \__/   /_/   \_\
+    
+     Hello! I'm Nova
+     What can I do for you?
+    =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+    ```
 7. Type the command in the terminal and press Enter to execute it. rg. typing `help` 
    and pressing Enter will show the list of command that can be used.
 
@@ -41,7 +41,7 @@ You can add tasks, mark them as done, search, and save them — all through natu
 - [Features](#features)
   - [Adding a Todo task: `todo`](#adding-a-todo-task-todo)
   - [Adding a Deadline task: `deadline`](#adding-a-deadline-task-deadline)
-  - [Adding a Event task: `event`](#adding-a-event-task-event)
+  - [Adding an Event task: `event`](#adding-an-event-task-event)
   - [Listing all task: `list`](#listing-all-task-list)
   - [Marking tasks as Done / Not Done: `mark` `unmark`](#marking-tasks-as-done--not-done-mark-unmark)
   - [Deleting a task: `delete`](#deleting-a-task-delete)
@@ -100,7 +100,7 @@ Add a task that has to be done by a certain date/time.
 <br>
 
 ---
-### Adding a Event task: `event`
+### Adding an Event task: `event`
 Adds a task that starts and ends within a period of time.
 
 **Format**  
@@ -135,9 +135,9 @@ Shows the list of tasks in the task list.
 ### Marking tasks as Done / Not Done: `mark` `unmark`
 Marks/Unmarks a certain task in task list.
 
-| Action   | Format |
-|----------|--------|
-| ✅ Mark   | `mark INDEX` |
+| Action   | Format         |
+|----------|----------------|
+| ✅ Mark   | `mark INDEX`   |
 | ❌ Unmark | `unmark INDEX` |
 
 
