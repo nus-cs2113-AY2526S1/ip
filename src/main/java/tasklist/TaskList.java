@@ -7,6 +7,11 @@ import command.ToDo;
 import exceptions.*;
 import ui.Ui;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -164,6 +169,18 @@ public class TaskList {
      * @param to end of the event
      */
     public void addEvent(String taskName, String from, String to){
+        try{
+            if(from.contains("-")){
+                from = getDate(from);
+            }
+
+            if(to.contains("-")){
+                to = getDate(to);
+            }
+        }catch(DateTimeParseException e){
+            System.out.println("Please enter a valid date format");
+        }
+
         Events e = new Events(taskName, from, to);
         tasks.add(e);
         ui.printTopMessage("event");
@@ -188,9 +205,17 @@ public class TaskList {
      * prints a message
      *
      * @param taskName task name of the task
-     * @param by due date of task
+     * @param by deadline of task
      */
     public void addDeadline(String taskName, String by){
+        try{
+            if(by.contains("-")){
+                by = getDate(by);
+            }
+        }catch(DateTimeParseException e){
+            System.out.println("Please enter a valid date format");
+        }
+
         Deadlines d = new Deadlines(taskName, by);
         tasks.add(d);
         ui.printTopMessage("deadline");
@@ -329,7 +354,7 @@ public class TaskList {
      * @param reply the user input
      * @throws IncompleteFormatException invokes when it detects that the format of the command is incomplete
      */
-    public void checkEmptyByFromTo(String reply) throws IncompleteFormatException {
+    public void checkByFromTo(String reply) throws IncompleteFormatException {
         if(reply.isEmpty()){
             throw new IncompleteFormatException();
         }
@@ -383,7 +408,7 @@ public class TaskList {
         int byIndex = reply.indexOf("/by");
         String by = reply.substring(byIndex + BYLENGTH).trim();
 
-        checkEmptyByFromTo(by);
+        checkByFromTo(by);
 
         return by;
     }
@@ -409,9 +434,20 @@ public class TaskList {
             fromTo = reply.substring(toIndex + TOLENGTH).trim();
         }
 
-        checkEmptyByFromTo(fromTo);
+        checkByFromTo(fromTo);
 
         return fromTo;
+    }
+
+    /**
+     * Retrieves date formatted in dd MM yyyy
+     *
+     * @param date user input date
+     */
+    public String getDate(String date){
+        LocalDate dateString = LocalDate.parse(date);
+
+        return dateString.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
     /**
