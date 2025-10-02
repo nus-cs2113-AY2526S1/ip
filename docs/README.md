@@ -23,13 +23,13 @@ Example: `todo go running`
 Adding Deadline: `deadline`\
 Adds a deadline task\
 Format: `deadline TASKNAME /by DEADLINE`\
-Remarks: DEADLINE can be text or `yyyy-mm-dd` format\
+Remarks: `DEADLINE` can be text or `yyyy-mm-dd` format\
 Example: `deadline submit CS2113 project /by Friday`
 
 Adding Event: `event`\
 Adds a event task\
 Format: `event TASKNAME /from START /to END`\
-Remarks: START and END can be text or `yyyy-mm-dd` format\
+Remarks: `START` and `END` can be text or `yyyy-mm-dd` format\
 Example: `event meeting /from 1pm /to 2pm`
 
 Marking Task: `mark`\
@@ -64,11 +64,11 @@ Toothless will save the data in a text file once you exit the program
 | Action | Format, Examples |
 | List | `list` |
 | ToDo | `todo TASKNAME`\ eg. `todo go running` |
-| Deadline | `deadline TASKNAME /by DEADLINE`\ DEADLINE can be text or `yyyy-mm-dd` format\ eg. `deadline submit CS2113 project /by Friday` |
-| Event | `event TASKNAME /from START /to END`\ START and END can be text or `yyyy-mm-dd` format\ eg. `event meeting /from 1pm /to 2pm` |
-| Mark | `mark LISTINDEX`\ eg. `mark 1` |
-| Unmark | `unmark LISTINDEX`\ eg. `unmark 1` |
-| Delete | `delete LISTINDEX`\ eg. `delete 1` |
-| Find | `find KEYWORD`\ eg. `find test` |
+| Deadline | `deadline TASKNAME /by DEADLINE` `DEADLINE` can be text or `yyyy-mm-dd` format eg. `deadline submit CS2113 project /by Friday` |
+| Event | `event TASKNAME /from START /to END` `START` and `END` can be text or `yyyy-mm-dd` format eg. `event meeting /from 1pm /to 2pm` |
+| Mark | `mark LISTINDEX` eg. `mark 1` |
+| Unmark | `unmark LISTINDEX` eg. `unmark 1` |
+| Delete | `delete LISTINDEX` eg. `delete 1` |
+| Find | `find KEYWORD` eg. `find test` |
 | Exit | `bye` |
 
