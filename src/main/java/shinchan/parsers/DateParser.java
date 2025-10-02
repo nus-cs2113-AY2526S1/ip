@@ -37,7 +37,11 @@ public class DateParser {
      */
     public static LocalDateTime parse(String date) throws IllegalDateFormatException, TaskMissingDateException {
         if (date == null || date.isBlank()) {
-            throw new TaskMissingDateException("Please enter a date!");
+            throw new TaskMissingDateException("""
+                    Please enter a date!
+                    Expected format:
+                    Deadline: deadline <description> /by <yyyy-MM-dd HHmm>
+                    Event: event <description> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm>""");
         }
         String normalizedDate = date.strip().replaceAll("\\s+", " ").trim();
         try {
