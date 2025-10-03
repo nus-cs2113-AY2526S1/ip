@@ -1,8 +1,17 @@
+/**
+ * Task with a single deadline/time by which it should be done.
+ */
 public class Deadline extends Task{
 
     protected String by;
 
 
+    /**
+     * Creates a deadline task.
+     *
+     * @param description task description.
+     * @param by deadline of task
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
