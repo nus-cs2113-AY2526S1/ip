@@ -1,5 +1,5 @@
 /**
- * Application-specific checked exception for Bob.
+ * Application-specific checked exception for Bob
  * <p>
  * Used to signal invalid commands
  */

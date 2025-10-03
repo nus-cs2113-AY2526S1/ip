@@ -1,5 +1,5 @@
 /**
- * Base class for all task types.
+ * Base class for all task types
  */
 
 public class Task {
@@ -7,7 +7,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Creates a task with the given description. Newly created tasks are not done.
+     * Creates a task with the given description. Newly created tasks are not done
      *
      * @param description information on task
      */
@@ -20,14 +20,14 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    /** Marks this task as done. */
+    /** Marks this task as done */
     public void markAsDone() {
         if (!isDone) {
             isDone = true;
         }
     }
 
-    /** Marks this task as not done. */
+    /** Marks this task as not done */
     public void markAsUndone() {
         if (isDone) {
             isDone = false;

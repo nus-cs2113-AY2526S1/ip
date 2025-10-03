@@ -14,7 +14,7 @@ public class Bob {
         try {
             new Storage(filePath).loadTasks();
         } catch (Exception e) {
-            ui.showLoadingError();
+            ui.showError(e.getMessage());
         }
     }
 
@@ -39,7 +39,6 @@ public class Bob {
 
     /**
      * Performs main.
-     * @param args parameter.
      */
     public static void main(String[] args) {
         new Bob("data/bob.txt").run();
