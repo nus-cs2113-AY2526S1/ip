@@ -1,10 +1,21 @@
 import java.util.Objects;
 
+/**
+ * Parses input commands and dispatches actions to the model
+ */
 public class Parser {
+
+    /** Prints a horizontal line to the console as design feature */
     public void printLineSeparator() {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Parses a user command string and executes the corresponding action.
+     *
+     * @param sentence the input entered by the user.
+     * @param bob the current {@link Bob} instance, used to update conversation state.
+     */
     public void parsing(String sentence, Bob bob) {
         String[] sentenceArray = sentence.split("\\s+");
         Storage storage = new Storage("data/bob.txt");

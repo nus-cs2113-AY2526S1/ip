@@ -1,16 +1,26 @@
+/**
+ * Class Bob in the Bob task manager.
+ */
 public class Bob {
     private final Ui ui;
     public volatile boolean endConvo = false;
 
+    /**
+     * Constructs a new Bob.
+     * @param filePath parameter.
+     */
     public Bob(String filePath) {
         this.ui = new Ui();
         try {
             new Storage(filePath).loadTasks();
         } catch (Exception e) {
-            ui.showLoadingError();
+            ui.showError(e.getMessage());
         }
     }
 
+    /**
+     * Runs the program
+     */
     public void run() {
         ui.showWelcome();
         Parser parser = new Parser();
@@ -27,6 +37,9 @@ public class Bob {
         }
     }
 
+    /**
+     * Performs main.
+     */
     public static void main(String[] args) {
         new Bob("data/bob.txt").run();
     }

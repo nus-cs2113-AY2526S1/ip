@@ -4,8 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Manages tasks from a file on device.
+ * <p>
+ * Ensures formatting of tasks to {@link Task} and its subclasses.
+ */
 public record Storage(String FILE_PATH) {
 
+    /** Loads tasks from disk */
     public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(FILE_PATH);
@@ -56,6 +62,11 @@ public record Storage(String FILE_PATH) {
         return tasks;
     }
 
+    /**
+     * Saves all tasks to the device and overwrites the existing file.
+     *
+     * @param tasks tasks to be saved to
+     */
     public void saveTasks(ArrayList<Task> tasks) {
         try {
             File file = new File(FILE_PATH);
