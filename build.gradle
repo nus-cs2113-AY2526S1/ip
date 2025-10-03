@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'cs2113'
+version = '3.0'
+
+application {
+    mainClass = 'kyro.base.Kyro'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': application.mainClass
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

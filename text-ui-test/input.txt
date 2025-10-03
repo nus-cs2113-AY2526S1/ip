@@ -1,0 +1,13 @@
+todo read book
+deadline return book /by 2019-12-02 1800
+event project meeting /from 2019-12-01 1400 /to 2019-12-01 1600
+list
+mark 2
+list
+unmark 2
+list
+filter 2019-12-01
+find book
+delete 2
+list
+bye
