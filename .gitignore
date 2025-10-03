@@ -2,16 +2,34 @@
 /.idea/
 /out/
 /*.iml
+*.class
 
 # Gradle build files
-/.gradle/
+/gradle/
 /build/
 src/main/resources/docs/
+/testing_jar
+build.Gradle
+gradle.properties
+gradlew
+gradlew.bat
+settings.gradle
+.gitattributes
+/app
 
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
 
+# storage
+src/main/java/data/*
+
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+data
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
