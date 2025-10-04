@@ -1,0 +1,13 @@
+list
+todo buy bread
+deadline eat bread /by 2025-10-02 2359
+event poop bread /from 2025-10-03 0000 /to 2025-10-03 2359
+list
+mark 3
+mark 2
+list
+unmark 2
+list
+find eat
+date 2025-10-03 1800
+bye
