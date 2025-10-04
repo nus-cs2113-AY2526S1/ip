@@ -1,6 +1,6 @@
 package arpa.home.yikjin.app.kuro.command;
 
-enum InputCommand {
+public enum InputCommand {
     BYE("bye"), DEADLINE("deadline"), DELETE("delete"), EVENT("event"), LIST("list"), MARK("mark"), TODO(
             "todo"), UNMARK("unmark"), INVALID("");
 
@@ -10,7 +10,7 @@ enum InputCommand {
         this.enumValue = enumValue;
     }
 
-    static InputCommand parse(final String command) {
+    public static InputCommand parse(final String command) {
         for (final InputCommand enumCommand : values()) {
             if (enumCommand.enumValue.equalsIgnoreCase(command)) {
                 return enumCommand;

@@ -2,6 +2,8 @@ package arpa.home.yikjin.app.kuro.task;
 
 import java.util.ArrayList;
 
+import arpa.home.yikjin.app.kuro.storage.FileManager;
+
 public final class TaskManager {
     private static final int TASKS_INIT_SIZE = 10;
     private static final ArrayList<Task> TASKS = new ArrayList<>(TASKS_INIT_SIZE);
@@ -10,7 +12,7 @@ public final class TaskManager {
         addTask(task, true);
     }
 
-    static void addTask(final Task task, final boolean isSaveToDisk) {
+    public static void addTask(final Task task, final boolean isSaveToDisk) {
         TASKS.add(task);
 
         if (isSaveToDisk) {

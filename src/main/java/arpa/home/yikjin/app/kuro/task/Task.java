@@ -15,19 +15,19 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    TaskType getTaskType() {
+    public TaskType getTaskType() {
         return taskType;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    boolean isDone() {
+    public boolean isDone() {
         return isDone;
     }
 
-    void setDone(final boolean done) {
+    public void setDone(final boolean done) {
         isDone = done;
     }
 

@@ -1,4 +1,4 @@
-package arpa.home.yikjin.app.kuro.command;
+package arpa.home.yikjin.app.kuro.parser;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-final class InputParser {
+import arpa.home.yikjin.app.kuro.command.InputCommand;
+
+public final class InputParser {
     private static final int INIT_POS_ARGS_CAPACITY = 5;
     private static final int INIT_NAMED_ARGS_CAPACITY = 2;
     private static final Pattern SPACES = Pattern.compile("\\s+");
@@ -17,14 +19,14 @@ final class InputParser {
     private InputCommand command;
     private String rawCommand;
 
-    InputParser() {
+    public InputParser() {
         rawCommand = "";
         command = InputCommand.INVALID;
         positionalArgs = new ArrayList<>(INIT_POS_ARGS_CAPACITY);
         namedArgs = new HashMap<>(INIT_NAMED_ARGS_CAPACITY);
     }
 
-    static String mapArgsToString(final String[] args) {
+    public static String mapArgsToString(final String[] args) {
         if (args == null) {
             return "";
         }
@@ -32,7 +34,7 @@ final class InputParser {
         return String.join(" ", args);
     }
 
-    void parse(final String input) {
+    public void parse(final String input) {
         final String[] tokens = SPACES.split(input);
 
         rawCommand = "";
@@ -83,19 +85,19 @@ final class InputParser {
         return rawCommand + "(" + command + "): " + positionalArgs + " | " + namedArgs;
     }
 
-    String getRawCommand() {
+    public String getRawCommand() {
         return rawCommand;
     }
 
-    InputCommand getCommand() {
+    public InputCommand getCommand() {
         return command;
     }
 
-    String[] getPositionalArgs() {
+    public String[] getPositionalArgs() {
         return positionalArgs.toArray(EMPTY_STRING_ARRAY);
     }
 
-    Map<String, String[]> getNamedArgs() {
+    public Map<String, String[]> getNamedArgs() {
         return Collections.unmodifiableMap(namedArgs);
     }
 }
