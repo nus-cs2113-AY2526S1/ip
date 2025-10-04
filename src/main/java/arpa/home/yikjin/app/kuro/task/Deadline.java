@@ -8,7 +8,7 @@ public final class Deadline extends Task {
         this.due = due;
     }
 
-    String getDue() {
+    public String getDue() {
         return due;
     }
 

@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 
 import arpa.home.yikjin.app.kuro.command.Runner;
 import arpa.home.yikjin.app.kuro.exception.base.AppException;
-import arpa.home.yikjin.app.kuro.task.FileManager;
+import arpa.home.yikjin.app.kuro.storage.FileManager;
 import arpa.home.yikjin.app.kuro.ui.Ui;
 
 final class Main {

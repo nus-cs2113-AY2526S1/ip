@@ -1,4 +1,4 @@
-package arpa.home.yikjin.app.kuro.task;
+package arpa.home.yikjin.app.kuro.storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,6 +13,11 @@ import arpa.home.yikjin.app.kuro.exception.io.CreateFileIoException;
 import arpa.home.yikjin.app.kuro.exception.io.InvalidFileLineException;
 import arpa.home.yikjin.app.kuro.exception.io.ReadFileIoException;
 import arpa.home.yikjin.app.kuro.exception.io.WriteFileIoException;
+import arpa.home.yikjin.app.kuro.parser.FileParser;
+import arpa.home.yikjin.app.kuro.task.InvalidTask;
+import arpa.home.yikjin.app.kuro.task.Task;
+import arpa.home.yikjin.app.kuro.task.TaskManager;
+import arpa.home.yikjin.app.kuro.task.TaskType;
 import arpa.home.yikjin.app.kuro.ui.Ui;
 
 public class FileManager {
@@ -65,7 +70,7 @@ public class FileManager {
         }
     }
 
-    static void saveTask(final Task task) {
+    public static void saveTask(final Task task) {
         final String taskLine = FileParser.parseTaskAsLine(task);
 
         FILE_CACHE.add(taskLine);
@@ -80,7 +85,7 @@ public class FileManager {
         }
     }
 
-    static void deleteTask(final int taskIndex) {
+    public static void deleteTask(final int taskIndex) {
         FILE_CACHE.remove(taskIndex);
         saveAllTasks();
     }
@@ -99,7 +104,7 @@ public class FileManager {
         }
     }
 
-    static void updateTask(final int taskIndex, final Task task) {
+    public static void updateTask(final int taskIndex, final Task task) {
         if (task.getTaskType() == TaskType.INVALID) {
             return;
         }

@@ -11,11 +11,11 @@ public final class Event extends Task {
         this.to = to;
     }
 
-    String getTo() {
+    public String getTo() {
         return to;
     }
 
-    String getFrom() {
+    public String getFrom() {
         return from;
     }
 

@@ -1,6 +1,6 @@
 package arpa.home.yikjin.app.kuro.task;
 
-enum TaskType {
+public enum TaskType {
     TODO('T'), DEADLINE('D'), EVENT('E'), INVALID(' ');
 
     private final char taskType;
@@ -9,7 +9,7 @@ enum TaskType {
         this.taskType = taskType;
     }
 
-    static TaskType parse(final char taskType) {
+    public static TaskType parse(final char taskType) {
         for (final TaskType enumTaskType : values()) {
             if (taskType == enumTaskType.taskType) {
                 return enumTaskType;

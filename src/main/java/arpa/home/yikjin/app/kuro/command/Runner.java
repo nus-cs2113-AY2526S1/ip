@@ -11,6 +11,7 @@ import arpa.home.yikjin.app.kuro.exception.input.command.MissingCommandException
 import arpa.home.yikjin.app.kuro.exception.input.option.MissingOptionNameException;
 import arpa.home.yikjin.app.kuro.exception.input.option.MissingOptionValueException;
 import arpa.home.yikjin.app.kuro.exception.state.EmptyTaskListException;
+import arpa.home.yikjin.app.kuro.parser.InputParser;
 import arpa.home.yikjin.app.kuro.task.Deadline;
 import arpa.home.yikjin.app.kuro.task.Event;
 import arpa.home.yikjin.app.kuro.task.Task;
@@ -95,6 +96,23 @@ public final class Runner {
     }
 
     private static void removeTask(final String[] taskIds) {
+        final int taskId = getFirstTaskId(taskIds);
+
+        if (taskId < 1 || taskId > TaskManager.getNumTasks()) {
+            throw new InvalidTaskIdException(taskId);
+        }
+
+        final int taskIndex = taskId - 1;
+        final Task task = TaskManager.getTask(taskIndex);
+
+        Ui.removeTaskBegin();
+        Ui.listTaskDetails(taskId, task);
+
+        TaskManager.removeTask(taskIndex);
+        Ui.tasksCount(TaskManager.getNumTasks());
+    }
+
+    private static int getFirstTaskId(final String[] taskIds) {
         if (taskIds.length < 1) {
             throw new MissingTaskIdsException();
         }
@@ -113,18 +131,7 @@ public final class Runner {
             throw new InvalidTaskIdException(taskIdStr);
         }
 
-        if (taskId < 1 || taskId > TaskManager.getNumTasks()) {
-            throw new InvalidTaskIdException(taskId);
-        }
-
-        final int taskIndex = taskId - 1;
-        final Task task = TaskManager.getTask(taskIndex);
-
-        Ui.removeTaskBegin();
-        Ui.listTaskDetails(taskId, task);
-
-        TaskManager.removeTask(taskIndex);
-        Ui.tasksCount(TaskManager.getNumTasks());
+        return taskId;
     }
 
     private static void addEvent(final String eventName, final Map<String, String[]> eventArgs) {

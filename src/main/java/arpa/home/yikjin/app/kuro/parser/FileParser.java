@@ -1,23 +1,28 @@
-package arpa.home.yikjin.app.kuro.task;
+package arpa.home.yikjin.app.kuro.parser;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import arpa.home.yikjin.app.kuro.exception.io.InvalidFileLineException;
+import arpa.home.yikjin.app.kuro.task.Deadline;
+import arpa.home.yikjin.app.kuro.task.Event;
+import arpa.home.yikjin.app.kuro.task.Task;
+import arpa.home.yikjin.app.kuro.task.TaskType;
+import arpa.home.yikjin.app.kuro.task.Todo;
 
-class FileParser {
+public class FileParser {
     private static final Pattern CSV_DELIMITER = Pattern.compile("\\s*,\\s*");
     private Task parsedTask;
 
-    FileParser() {
+    public FileParser() {
         reset();
     }
 
-    void reset() {
+    public void reset() {
         parsedTask = null;
     }
 
-    static String parseTaskAsLine(final Task task) {
+    public static String parseTaskAsLine(final Task task) {
         final ArrayList<String> res = new ArrayList<>(3);
         final TaskType taskType = task.getTaskType();
 
@@ -43,11 +48,11 @@ class FileParser {
         return String.join(",", res);
     }
 
-    Task getParsedTask() {
+    public Task getParsedTask() {
         return parsedTask;
     }
 
-    void parseLineAsTask(final String line) {
+    public void parseLineAsTask(final String line) {
         if (line.isBlank()) {
             return;
         }
