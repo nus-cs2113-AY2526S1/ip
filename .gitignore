@@ -3,6 +3,7 @@
 /out/
 /*.iml
 
+*.class
 # Gradle build files
 /.gradle/
 /build/
@@ -15,3 +16,10 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+
+src/main/java/data/
+
+*.jar
+src/main/java/META-INF/
+src/main/java/out
+src/main/java/.idea/
