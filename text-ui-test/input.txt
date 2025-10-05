@@ -1,0 +1,16 @@
+todo bake cake
+todo read book
+list
+deadline return book /by 2025-12-25 1800
+event project meeting /from 2025-12-20 1400 /to 2025-12-20 1600
+list
+mark 1
+mark 2
+list
+unmark 1
+list
+find book
+find cake
+delete 3
+list
+bye
