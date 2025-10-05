@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
 
 import arpa.home.yikjin.app.kuro.command.InputCommand;
 
+/**
+ * Class to parse user input
+ */
 public final class InputParser {
     private static final int INIT_POS_ARGS_CAPACITY = 5;
     private static final int INIT_NAMED_ARGS_CAPACITY = 2;
@@ -19,6 +22,9 @@ public final class InputParser {
     private InputCommand command;
     private String rawCommand;
 
+    /**
+     * Initialise the user input parser
+     */
     public InputParser() {
         rawCommand = "";
         command = InputCommand.INVALID;
@@ -26,6 +32,13 @@ public final class InputParser {
         namedArgs = new HashMap<>(INIT_NAMED_ARGS_CAPACITY);
     }
 
+    /**
+     * Convert an array to a string, seperated by a space
+     *
+     * @param args Array of strings to join
+     *
+     * @return Resulting string joined from array
+     */
     public static String mapArgsToString(final String[] args) {
         if (args == null) {
             return "";
@@ -34,6 +47,11 @@ public final class InputParser {
         return String.join(" ", args);
     }
 
+    /**
+     * Parse the user input line
+     *
+     * @param input Input line given by the user
+     */
     public void parse(final String input) {
         final String[] tokens = SPACES.split(input);
 
@@ -80,23 +98,48 @@ public final class InputParser {
         }
     }
 
+    /**
+     * String representation of debug view of parsed result
+     *
+     * @return Parsed user input for debugging
+     */
     @Override
     public String toString() {
         return rawCommand + "(" + command + "): " + positionalArgs + " | " + namedArgs;
     }
 
+    /**
+     * Get the user command name as-is
+     *
+     * @return User command name given
+     */
     public String getRawCommand() {
         return rawCommand;
     }
 
+    /**
+     * Get the parsed user command name
+     *
+     * @return Parsed user command name
+     */
     public InputCommand getCommand() {
         return command;
     }
 
+    /**
+     * Get the positional arguments as a string array
+     *
+     * @return Positional arguments as string array
+     */
     public String[] getPositionalArgs() {
         return positionalArgs.toArray(EMPTY_STRING_ARRAY);
     }
 
+    /**
+     * Get the named arguments as an unmodifiable map
+     *
+     * @return Named arguments parsed
+     */
     public Map<String, String[]> getNamedArgs() {
         return Collections.unmodifiableMap(namedArgs);
     }

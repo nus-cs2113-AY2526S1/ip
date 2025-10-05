@@ -7,13 +7,24 @@ import arpa.home.yikjin.app.kuro.exception.base.AppException;
 import arpa.home.yikjin.app.kuro.storage.FileManager;
 import arpa.home.yikjin.app.kuro.ui.Ui;
 
+/**
+ * Main entry point of Kuro
+ */
 final class Main {
+    /**
+     * Main entry method of Kuro
+     *
+     * @param args Command line arguments passed to Kuro
+     */
     public static void main(final String[] args) {
         init();
         commandRepl();
         Ui.close();
     }
 
+    /**
+     * Initialise Kuro by loading tasks from file, and greeting the user
+     */
     private static void init() {
         try {
             FileManager.loadFromDisk();
@@ -24,6 +35,9 @@ final class Main {
         Ui.greet();
     }
 
+    /**
+     * Main program loop of Kuro, to execute each command given interactively
+     */
     private static void commandRepl() {
         do {
             try {
