@@ -10,18 +10,34 @@ import arpa.home.yikjin.app.kuro.task.Task;
 import arpa.home.yikjin.app.kuro.task.TaskType;
 import arpa.home.yikjin.app.kuro.task.Todo;
 
+/**
+ * Class to parse the save file
+ */
 public class FileParser {
     private static final Pattern CSV_DELIMITER = Pattern.compile("\\s*,\\s*");
     private Task parsedTask;
 
+    /**
+     * Initialise the save file parser
+     */
     public FileParser() {
         reset();
     }
 
+    /**
+     * Clear the state of the parser
+     */
     public void reset() {
         parsedTask = null;
     }
 
+    /**
+     * Convert the task to the save file line format
+     *
+     * @param task Task to convert to save file
+     *
+     * @return Converted line
+     */
     public static String parseTaskAsLine(final Task task) {
         final ArrayList<String> res = new ArrayList<>(3);
         final TaskType taskType = task.getTaskType();
@@ -48,10 +64,20 @@ public class FileParser {
         return String.join(",", res);
     }
 
+    /**
+     * Get the resulting parsed task
+     *
+     * @return Parsed task
+     */
     public Task getParsedTask() {
         return parsedTask;
     }
 
+    /**
+     * Convert the given save file line to a task type
+     *
+     * @param line Line in save file format
+     */
     public void parseLineAsTask(final String line) {
         if (line.isBlank()) {
             return;
@@ -61,6 +87,11 @@ public class FileParser {
         parseSections(sections);
     }
 
+    /**
+     * Convert the given save file line fields to a task type
+     *
+     * @param sections Line fields in the save file format
+     */
     private void parseSections(final String[] sections) {
         if (sections.length < 3) {
             throw new InvalidFileLineException("expected at least 3 fields, got " + sections.length + " instead!");

@@ -19,10 +19,18 @@ import arpa.home.yikjin.app.kuro.task.TaskManager;
 import arpa.home.yikjin.app.kuro.task.Todo;
 import arpa.home.yikjin.app.kuro.ui.Ui;
 
+/**
+ * Command runner class
+ */
 public final class Runner {
     private static final InputParser PARSER = new InputParser();
     private static boolean isTerminateGiven = false;
 
+    /**
+     * Run the given user command
+     *
+     * @param commandStr Given user command line
+     */
     public static void runCommand(final String commandStr) {
         PARSER.parse(commandStr);
 
@@ -71,11 +79,20 @@ public final class Runner {
         }
     }
 
+    /**
+     * Terminate the program, setting the terminate flag to {@code true}
+     */
     private static void bye() {
         Ui.bye();
         isTerminateGiven = true;
     }
 
+    /**
+     * Add the deadline task type
+     *
+     * @param deadlineName Name of deadline to add
+     * @param deadlineArgs Named arguments passed to the deadline task type
+     */
     private static void addDeadline(final String deadlineName, final Map<String, String[]> deadlineArgs) {
         if (deadlineName.isEmpty()) {
             throw new MissingTaskNameException("deadline");
@@ -95,6 +112,11 @@ public final class Runner {
         addTask(deadline);
     }
 
+    /**
+     * Remove a task
+     *
+     * @param taskIds Task ID of task to delete
+     */
     private static void removeTask(final String[] taskIds) {
         final int taskId = getFirstTaskId(taskIds);
 
@@ -134,6 +156,12 @@ public final class Runner {
         return taskId;
     }
 
+    /**
+     * Add the event task type
+     *
+     * @param eventName Name of event to add
+     * @param eventArgs Named arguments passed to the event task type
+     */
     private static void addEvent(final String eventName, final Map<String, String[]> eventArgs) {
         if (eventName.isEmpty()) {
             throw new MissingTaskNameException("event");
@@ -163,6 +191,9 @@ public final class Runner {
         addTask(event);
     }
 
+    /**
+     * List all tasks
+     */
     private static void listTasks() {
         if (!TaskManager.hasTasks()) {
             throw new EmptyTaskListException();
@@ -179,10 +210,21 @@ public final class Runner {
         }
     }
 
+    /**
+     * Mark tasks as done
+     *
+     * @param taskIds Task IDs of tasks to mark as done
+     */
     private static void markTasksAsDone(final String[] taskIds) {
         markTasksAsDone(taskIds, true);
     }
 
+    /**
+     * Mark multiple tasks as done or undone
+     *
+     * @param taskIds Task IDs of tasks to mark as done or undone
+     * @param isDone  Whether the tasks are done
+     */
     private static void markTasksAsDone(final String[] taskIds, final boolean isDone) {
         if (taskIds.length < 1) {
             throw new MissingTaskIdsException();
@@ -199,6 +241,12 @@ public final class Runner {
         }
     }
 
+    /**
+     * Mark single task as done or undone
+     *
+     * @param taskIdStr Task ID of task to mark as done or undone
+     * @param isDone    Whether the task is done
+     */
     private static void markSingleTaskAsDone(final String taskIdStr, final boolean isDone) {
         final int taskId;
 
@@ -218,6 +266,11 @@ public final class Runner {
         Ui.listTaskDetails(taskId, task);
     }
 
+    /**
+     * Add the todo task type
+     *
+     * @param todoName Name of todo to add
+     */
     private static void addTodo(final String todoName) {
         if (todoName.isEmpty()) {
             throw new MissingTaskNameException("todo");
@@ -227,11 +280,21 @@ public final class Runner {
         addTask(todo);
     }
 
+    /**
+     * Add a task
+     *
+     * @param task Task to add
+     */
     private static void addTask(final Task task) {
         TaskManager.addTask(task);
         Ui.addedTask(task, TaskManager.getNumTasks());
     }
 
+    /**
+     * Get the termination flag to check if program should quit
+     *
+     * @return Termination flag
+     */
     public static boolean isTerminateGiven() {
         return isTerminateGiven;
     }
