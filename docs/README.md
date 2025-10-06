@@ -104,3 +104,16 @@ eg.
 delete 1
 removed: borrow book
 ```
+
+## Exiting Luke
+You can exit the program using the `bye` command.
+
+```
+bye
+
+eg.
+bye
+____________________________________________________________
+Bye Bye
+____________________________________________________________
+```
