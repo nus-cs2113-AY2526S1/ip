@@ -1,0 +1,8 @@
+todo eat marmalade
+event visit paddington gift store /from Wed 8pm /to 9pm
+deadline take piccadilly line to heathrow airport /by Wed 11pm
+mark 1
+list
+mark 2
+list
+bye
