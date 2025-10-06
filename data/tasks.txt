@@ -1,0 +1,11 @@
+T|true|play vid games
+D|false|hwww|wed
+T|false|helloo
+T|true|noway
+D|false|housework |mon
+D|false|wine|d
+E|false|gday|tue|wed
+T|false|stay happy
+D|false|homework|sun
+E|false|sleep|10pm|6am
+T|false|hap
