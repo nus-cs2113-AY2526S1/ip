@@ -1,0 +1,8 @@
+T | 0 | borrow library book
+D | 0 | return library book | [D][ ] return library book (by: Sunday)
+T | 1 | read book
+D | 0 | return book | [D][ ] return book (by: June 6th)
+T | 0 | join sports club
+T | 0 | borrow book
+D | 0 | return book | [D][ ] return book (by: Sunday)
+D | 0 | do homework | [D][ ] do homework (by: no idea :-p)
