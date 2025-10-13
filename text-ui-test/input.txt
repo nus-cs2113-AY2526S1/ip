@@ -1,0 +1,14 @@
+todo read book
+deadline return book /by Sunday
+event project meeting /from 2025-10-02 /to 2025-10-03
+list
+mark 2
+list
+unmark 2
+list
+delete 2
+list
+find book
+find return
+unknowncmd
+bye

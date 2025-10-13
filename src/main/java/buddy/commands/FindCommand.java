@@ -1,0 +1,36 @@
+package buddy.commands;
+
+import java.util.List;
+
+import buddy.storage.Storage;
+import buddy.tasks.Task;
+import buddy.tasks.TaskList;
+import buddy.ui.Ui;
+
+/**
+ * Finds tasks whose descriptions contain the supplied keyword.
+ */
+public class FindCommand extends Command {
+    private final String keyword;
+
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        List<Task> matches = tasks.find(keyword);
+        ui.listMatchingTasks(matches);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+}
