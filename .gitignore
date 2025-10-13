@@ -26,3 +26,6 @@ data/
 # Configuration files
 .vscode
 eclipse-java-formatter.xml
+
+# JAR files
+*.jar
