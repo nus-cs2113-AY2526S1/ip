@@ -11,7 +11,7 @@ public class Ui {
             "██║  ██║ " + "█████╗   " + "██╔██╗ ██║ " + "██╔██╗ ██║ " + "██║ " + "███████╗\n" +
             "██║  ██║ " + "███╔══╝  " + "██║╚██╗██║ " + "██║╚██╗██║ " + "██║ " + "╚════██║\n" +
             "██████╔╝ " + "███████╗ " + "██║ ╚████║ " + "██║ ╚████║ " + "██║ " + "███████║\n" +
-            "╚═════╝  " + "╚══════╝ " + "╚═╝  ╚═══╝ " + "╚═╝  ╚═══╝ " + "╚═╝ " + "╚══════╝\n";
+            "╚═════╝  " + "╚══════╝ " + "╚═╝  ╚═══╝ " + "╚═╝  ╚═══╝ " + "╚═╝ " + "╚══════╝";
 
 
     private final Scanner in = new Scanner(System.in);
@@ -20,7 +20,7 @@ public class Ui {
      * Prints a divider which is used to make readability easier for user.
      */
     public void showDivider() {
-        System.out.println("____________________________________________________________\n");
+        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -30,6 +30,10 @@ public class Ui {
      */
     public String readCommand() {
         return in.nextLine();
+    }
+
+    public void waitForInput() {
+        System.out.print("> ");
     }
 
     public void showLogo() {
@@ -42,7 +46,7 @@ public class Ui {
     public void showWelcome() {
         showDivider();
         showLogo();
-        System.out.println(" Yooo! I'm Dennis, PRETTY SICK LOGO HUH?!\n" + " Alright, What do you want? :|\n");
+        System.out.println(" Yooo! I'm Dennis, PRETTY SICK LOGO HUH?!\n" + " Alright, What do you want? :|");
         showDivider();
     }
 
@@ -97,8 +101,6 @@ public class Ui {
             System.out.println(" Here are the results containing {" + toFind + "}");
             showTaskList(matchingTasks);
         }
-
-
     }
 
     public void showTaskAdded(Task task) {

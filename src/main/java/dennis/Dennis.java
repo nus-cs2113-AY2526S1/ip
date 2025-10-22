@@ -27,6 +27,7 @@ public class Dennis {
             ui.showWelcome();
             boolean isExit = false;
             while (!isExit) {
+                ui.waitForInput();
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
