@@ -1,4 +1,3 @@
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import storage.TaskStorage;
 import exceptions.EmptyDescriptionException;
 import exceptions.WrongTaskNumberException;
 import tasks.Task;
-import util.DateTimeUtil;
 
 import parser.Parser;
 
