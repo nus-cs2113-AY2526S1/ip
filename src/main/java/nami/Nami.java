@@ -1,0 +1,128 @@
+package nami;
+/**
+ * Entry point and main loop for the Nami chatbot.
+ * Coordinates UI, storage, and in-memory task list.
+ */
+
+public class Nami {
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
+
+    /**
+     * Creates a Nami app wired to data/nami.txt for persistence.
+     */
+    public Nami() {
+        this.ui = new Ui();
+        this.storage = new Storage("data", "nami.txt");
+        this.tasks = new TaskList(storage.load());
+    }
+
+    /**
+     * Runs the blocking command loop until the user says {@code bye} or
+     * {@link Ui#readCommand()} reaches EOF. Delegates parsing and persistence to
+     * {@link Parser}, {@link TaskList}, and {@link Storage} respectively.
+     */
+    public void run() {
+        ui.showWelcome();
+        boolean exit = false;
+        while (!exit) {
+            String input = ui.readCommand();
+            if (input == null) break;
+            try {
+                Parser.Parsed p = Parser.parse(input);
+
+                switch (p.cmd) {
+                case "bye":
+                    exit = true;
+                    ui.showBye();
+                    break;
+
+                case "list":
+                    ui.showList(tasks.asList());
+                    break;
+
+                case "mark":
+                    ensureRange(p.index);
+                    Task markTarget = tasks.get(p.index - 1);
+                    if (markTarget.isDone()) {
+                        ui.showAlreadyMarked(markTarget);
+                    } else {
+                        markTarget.mark();
+                        storage.save(tasks.asList());
+                        ui.showMarked(markTarget);
+                    }
+                    break;
+
+                case "unmark":
+                    ensureRange(p.index);
+                    Task unmarkTarget = tasks.get(p.index - 1);
+                    if (!unmarkTarget.isDone()) {
+                        ui.showAlreadyUnmarked(unmarkTarget);
+                    } else {
+                        unmarkTarget.unmark();
+                        storage.save(tasks.asList());
+                        ui.showUnmarked(unmarkTarget);
+                    }
+                    break;
+
+                case "todo": {
+                    Task t = new ToDo(p.desc);
+                    tasks.add(t);
+                    storage.save(tasks.asList());
+                    ui.showAdded(t, tasks.size());
+                    break;
+                }
+
+                case "deadline": {
+                    Task t = new Deadline(p.desc, p.dueDate);
+                    tasks.add(t);
+                    storage.save(tasks.asList());
+                    ui.showAdded(t, tasks.size());
+                    break;
+                }
+
+                case "event": {
+                    Task t = new Event(p.desc, p.from, p.to);
+                    tasks.add(t);
+                    storage.save(tasks.asList());
+                    ui.showAdded(t, tasks.size());
+                    break;
+                }
+
+                case "delete":
+                    ensureRange(p.index);
+                    Task removed = tasks.remove(p.index - 1);
+                    storage.save(tasks.asList());
+                    ui.showDeleted(removed, tasks.size());
+                    break;
+
+                case "find":
+                    ui.showFind(tasks.findByKeyword(p.keyword));
+                    break;
+                }
+            } catch (NamiException e) {
+                ui.showError(e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Ensures a 1-based task index is present and within the current list size.
+     *
+     * @param idx Parsed task index from the user input.
+     * @throws NamiException if the index is missing, non-positive, or outside the list.
+     */
+    private void ensureRange(Integer idx) throws NamiException {
+        if (idx == null) throw new NamiException("Please provide a task number.");
+        if (idx <= 0) throw new NamiException("Task number must be a positive integer.");
+        if (tasks.size() == 0) throw new NamiException("Your list is empty. Add a task first (e.g., todo read book).");
+        if (idx > tasks.size()) {
+            throw new NamiException("Task number " + idx + " is out of range (1.." + tasks.size() + ").");
+        }
+    }
+
+    public static void main(String[] args) {
+        new Nami().run();
+    }
+}
