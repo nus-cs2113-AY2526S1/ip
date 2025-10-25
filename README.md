@@ -91,6 +91,8 @@ Example:
 search_by_date 12/10/2025 1700
 ```
 
+> For ***events***, they will be displayed as long as the time specified in the search_by_date command, is within the duration of the event (ie anytime in between the event's /from and /to).
+
 > For ***deadlines***, as long as they are due on the entered date,
 they will still be displayed even if the time differs.
 For example, a deadline at ```12/10/2025 2359``` will still appear when searching ```12/10/2025 1700```
@@ -102,6 +104,11 @@ search_by_keyword <KEYWORD>
 Example:
 ```
 search_by_keyword math quiz
+```
+
+### Exiting Tom
+```
+bye
 ```
 
 ### Error Handling
