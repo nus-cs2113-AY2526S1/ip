@@ -66,12 +66,6 @@ public class Ben {
                     System.out.println("Added: " + e);
                     break;
 
-//                case "mark":
-//                    int markIndex = Integer.parseInt(c.getArgs()) - 1;
-//                    tasks.get(markIndex).markDone();
-//                    System.out.println("Nice! I've marked this task as done:\n  " + tasks.get(markIndex));
-//                    break;
-
                 case "mark": {
                     try {
                         int index = Parser.parseOneBasedIndex(c.getArgs());
@@ -85,12 +79,6 @@ public class Ben {
                     break;
                 }
 
-//                case "unmark":
-//                    int unmarkIndex = Integer.parseInt(c.getArgs()) - 1;
-//                    tasks.get(unmarkIndex).markNotDone();
-//                    System.out.println("OK, I've marked this task as not done yet:\n  " + tasks.get(unmarkIndex));
-//                    break;
-
                 case "unmark": {
                     try {
                         int index = Parser.parseOneBasedIndex(c.getArgs());
@@ -103,13 +91,6 @@ public class Ben {
                     }
                     break;
                 }
-
-//                case "delete":
-//                    int deleteIndex = Integer.parseInt(c.getArgs()) - 1;
-//                    Task removed = tasks.delete(deleteIndex);
-//                    System.out.println("Noted. I've removed this task:\n  " + removed +
-//                            "\nNow you have " + tasks.size() + " tasks in the list.");
-
 
                 case "delete": {
                     try {
