@@ -1,3 +1,7 @@
+/**
+ * Represents a general task with a description and completion status.
+ * It is the base class for the other task types.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

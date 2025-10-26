@@ -16,38 +16,38 @@ public class Parser {
      * @return true if user enters "bye" to exit, false otherwise.
      * @throws DogeException If there is parsing or execution errors.
      */
-    public boolean parse(String input, TaskList tasks, Ui ui, Storage storage)  throws DogeException{
+    public boolean parse(String input, TaskList tasks, Ui ui, Storage storage) throws DogeException{
         if (input.trim().isEmpty()) {
             throw new UnknownCommandException();
         }
-        String[] inputParts = input.split(" ", 2); //only splits at the first " "
+        String[] inputParts = input.trim().split(" ", 2);
         String command = inputParts[0];
         switch (command) {
-            case "bye":
-                return true;
-            case "list":
-                ui.showTaskList(tasks.getTasks());
-                return false;
-            case "mark", "unmark":
-                toggleTaskStatus(command, inputParts, tasks, ui, storage);
-                return false;
-            case "todo", "deadline", "event":
-                addTask(command, inputParts, tasks, ui, storage);
-                return false;
-            case "delete":
-                deleteTask(inputParts, tasks, ui, storage);
-                return false;
-            case "find":
-                handleFind(inputParts, tasks, ui);
-                return false;
-            default:
-                throw new UnknownCommandException();
+        case "bye":
+            return true;
+        case "list":
+            ui.showTaskList(tasks.getTasks());
+            return false;
+        case "mark", "unmark":
+            toggleTaskStatus(command, inputParts, tasks, ui, storage);
+            return false;
+        case "todo", "deadline", "event":
+            addTask(command, inputParts, tasks, ui, storage);
+            return false;
+        case "delete":
+            deleteTask(inputParts, tasks, ui, storage);
+            return false;
+        case "find":
+            handleFind(inputParts, tasks, ui);
+            return false;
+        default:
+            throw new UnknownCommandException();
         }
     }
 
     private void handleFind (String[] inputParts, TaskList tasks, Ui ui) throws DogeException{
         if (inputParts.length < 2) {
-            throw new EmptyDescriptionException();
+            throw new MissingDetailsException();
         }
         String keyword = inputParts[1];
         ArrayList<Task> matchesFound = tasks.find(keyword);
@@ -57,9 +57,9 @@ public class Parser {
     private void addTask (String command, String[] inputParts, TaskList tasks, Ui ui, Storage storage)
             throws DogeException{
         if (inputParts.length == 1) {
-            throw new EmptyDescriptionException();
+            throw new MissingDetailsException();
         }
-        Task task = createTask(command, inputParts[1]);
+        Task task = createTask(command, inputParts[1].trim());
         tasks.add(task);
         ui.showNewTaskSummary(tasks.getTasks());
         storage.save(tasks.getTasks());
@@ -72,19 +72,19 @@ public class Parser {
         case "deadline":
             String[] deadlineParts = details.split(" /by ");
             if (deadlineParts.length < 2){
-                throw new EmptyDescriptionException();
+                throw new MissingDetailsException();
             }
-            return new Deadline(deadlineParts[0], deadlineParts[1]);
+            return new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
         case "event":
             String[] eventParts = details.split(" /from ");
             if (eventParts.length < 2){
-                throw new EmptyDescriptionException();
+                throw new MissingDetailsException();
             }
             String[] fromToParts = eventParts[1].split(" /to ");
             if (fromToParts.length < 2){
-                throw new EmptyDescriptionException();
+                throw new MissingDetailsException();
             }
-            return new Event(eventParts[0], fromToParts[0], fromToParts[1]);
+            return new Event(eventParts[0].trim(), fromToParts[0].trim(), fromToParts[1].trim());
         default:
             throw new UnknownCommandException();
         }
@@ -93,10 +93,10 @@ public class Parser {
     private void toggleTaskStatus(String command, String[] inputParts, TaskList tasks, Ui ui, Storage storage)
             throws DogeException{
         if (inputParts.length == 1) {
-            throw new EmptyDescriptionException();
+            throw new MissingDetailsException();
         }
         try {
-            int index = Integer.parseInt(inputParts[1]) - 1;
+            int index = Integer.parseInt(inputParts[1].trim()) - 1;
             if (index < 0 || index >= tasks.getTasks().size()) {
                 throw new InvalidIndexException();
             }
@@ -111,10 +111,10 @@ public class Parser {
 
     private void deleteTask (String[] inputParts, TaskList tasks, Ui ui, Storage storage) throws DogeException{
         if (inputParts.length == 1) {
-            throw new EmptyDescriptionException();
+            throw new MissingDetailsException();
         }
         try {
-            int index = Integer.parseInt(inputParts[1]) - 1;
+            int index = Integer.parseInt(inputParts[1].trim()) - 1;
             if (index < 0 || index >= tasks.getTasks().size()) {
                 throw new InvalidIndexException();
             }
@@ -151,24 +151,24 @@ public class Parser {
 
     private static Task createTaskFromFile(String type, String description, String[] lineParts){
         switch(type){
-            case "T":
-                return new ToDo(description);
-            case "D":
-                if (lineParts.length < 4){
-                    return null;
-                }
-                return new Deadline(description, lineParts[3]);
-            case "E":
-                if  (lineParts.length < 4){
-                    return null;
-                }
-                String[] eventTimes = lineParts[3].split(" to ");
-                if (eventTimes.length < 2){
-                    return null;
-                }
-                return new Event(description, eventTimes[0], eventTimes[1]);
-            default:
+        case "T":
+            return new ToDo(description);
+        case "D":
+            if (lineParts.length < 4){
                 return null;
+            }
+            return new Deadline(description, lineParts[3]);
+        case "E":
+            if  (lineParts.length < 4){
+                return null;
+            }
+            String[] eventTimes = lineParts[3].split(" to ");
+            if (eventTimes.length < 2){
+                return null;
+            }
+            return new Event(description, eventTimes[0], eventTimes[1]);
+        default:
+            return null;
         }
     }
 }
