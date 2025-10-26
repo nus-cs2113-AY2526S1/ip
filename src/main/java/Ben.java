@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class Ben {
             }
         }
 
-        public void run() {
+        public void run() throws BenException {
             ui.showWelcome();
             boolean isExit = false;
             while (!isExit) {
@@ -65,23 +66,65 @@ public class Ben {
                     System.out.println("Added: " + e);
                     break;
 
-                case "mark":
-                    int markIndex = Integer.parseInt(c.getArgs()) - 1;
-                    tasks.get(markIndex).markDone();
-                    System.out.println("Nice! I've marked this task as done:\n  " + tasks.get(markIndex));
-                    break;
+//                case "mark":
+//                    int markIndex = Integer.parseInt(c.getArgs()) - 1;
+//                    tasks.get(markIndex).markDone();
+//                    System.out.println("Nice! I've marked this task as done:\n  " + tasks.get(markIndex));
+//                    break;
 
-                case "unmark":
-                    int unmarkIndex = Integer.parseInt(c.getArgs()) - 1;
-                    tasks.get(unmarkIndex).markNotDone();
-                    System.out.println("OK, I've marked this task as not done yet:\n  " + tasks.get(unmarkIndex));
+                case "mark": {
+                    try {
+                        int index = Parser.parseOneBasedIndex(c.getArgs());
+                        Task task = tasks.mark(index);
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println("  " + task);
+                        storage.save(tasks.getTasks());
+                    } catch (BenException | IOException err) {
+                        ui.showError(err.getMessage());
+                    }
                     break;
+                }
 
-                case "delete":
-                    int deleteIndex = Integer.parseInt(c.getArgs()) - 1;
-                    Task removed = tasks.delete(deleteIndex);
-                    System.out.println("Noted. I've removed this task:\n  " + removed +
-                            "\nNow you have " + tasks.size() + " tasks in the list.");
+//                case "unmark":
+//                    int unmarkIndex = Integer.parseInt(c.getArgs()) - 1;
+//                    tasks.get(unmarkIndex).markNotDone();
+//                    System.out.println("OK, I've marked this task as not done yet:\n  " + tasks.get(unmarkIndex));
+//                    break;
+
+                case "unmark": {
+                    try {
+                        int index = Parser.parseOneBasedIndex(c.getArgs());
+                        Task task = tasks.unmark(index);
+                        System.out.println("OK, I've marked this task as not done yet:");
+                        System.out.println("  " + task);
+                        storage.save(tasks.getTasks());
+                    } catch (BenException | IOException err) {
+                        ui.showError(err.getMessage());
+                    }
+                    break;
+                }
+
+//                case "delete":
+//                    int deleteIndex = Integer.parseInt(c.getArgs()) - 1;
+//                    Task removed = tasks.delete(deleteIndex);
+//                    System.out.println("Noted. I've removed this task:\n  " + removed +
+//                            "\nNow you have " + tasks.size() + " tasks in the list.");
+
+
+                case "delete": {
+                    try {
+                        int index = Parser.parseOneBasedIndex(c.getArgs());
+                        Task removed = tasks.delete(index);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println("  " + removed);
+                        System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+                        storage.save(tasks.getTasks());
+                    } catch (BenException | IOException err) {
+                        ui.showError(err.getMessage());
+                    }
+                    break;
+                }
+
                 case "find":
                     String keyword = c.getArgs();
                     ArrayList<Task> results = tasks.findTasks(keyword);
@@ -114,7 +157,7 @@ public class Ben {
      * - Executes them on the task list
      * - Exits when the user issues the exit command
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws BenException {
             new Ben("./data/Ben.txt").run();
         }
 }

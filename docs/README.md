@@ -18,10 +18,10 @@ deadline return book /by June 6th
 Adds a task that occurs at a specific time.
 
 **Format:**
-event DESCRIPTION /at DATE TIME
+event DESCRIPTION /from start DATE AND TIME /to end DATE AND TIME
 
 **Example:**
-event project meeting /at Aug 6th 2-4pm
+event project meeting /from 4 July 2pm /to 4 July 4pm
 
 
 ## List Tasks
@@ -37,3 +37,21 @@ todo DESCRIPTION
 
 **Example:**  
 todo read book
+
+## Mark a Task as Done
+Marks a specific task as completed.
+
+**Format:**  
+mark INDEX
+
+**Example:**  
+mark 2
+
+## Unmark a Task
+Marks a specific task as not done.
+
+**Format:**  
+unmark INDEX
+
+**Example:**  
+unmark 2

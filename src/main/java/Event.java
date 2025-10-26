@@ -1,7 +1,7 @@
 //AI was used in creating this class
 /**
  * Represents a task with a description and a time range.
- * Example: "project meeting from 2-4pm".
+ * Example: "event project meeting /from 2pm /to 4pm".
  */
 public class Event extends Task {
     protected String from;

@@ -33,13 +33,11 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the list at the given index.
-     *
-     * @param index Index of the task to delete (0-based).
-     * @return The deleted task.
+     * Deletes and returns the task at the given 1-based index.
      */
-    public Task delete(int index) {
-        return tasks.remove(index);
+    public Task delete(int oneBasedIndex) throws BenException {
+        validateOneBasedIndex(oneBasedIndex);
+        return tasks.remove(oneBasedIndex - 1);
     }
 
     public Task get(int index) {
@@ -69,4 +67,39 @@ public class TaskList {
         }
         return results;
     }
+
+    private void validateOneBasedIndex(int index) throws BenException {
+        if (tasks.isEmpty()) {
+            throw new BenException("Your task list is empty.");
+        }
+        if (index < 1 || index > tasks.size()) {
+            throw new BenException(
+                    String.format("Index out of range. Please use 1 to %d.", tasks.size())
+            );
+        }
+    }
+
+    /**
+     * Marks the task at the given 1-based index as done.
+     */
+    public Task mark(int oneBasedIndex) throws BenException {
+        validateOneBasedIndex(oneBasedIndex);
+        Task t = tasks.get(oneBasedIndex - 1);
+        t.markDone();
+        return t;
+    }
+
+    /**
+     * Marks the task at the given 1-based index as not done.
+     */
+    public Task unmark(int oneBasedIndex) throws BenException {
+        validateOneBasedIndex(oneBasedIndex);
+        Task t = tasks.get(oneBasedIndex - 1);
+        t.markNotDone();
+        return t;
+    }
+
+
+
+
 }
