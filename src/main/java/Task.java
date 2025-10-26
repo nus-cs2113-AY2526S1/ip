@@ -1,3 +1,7 @@
+/**
+ * Represents a general task with a description and completion status.
+ * It is the base class for the other task types.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -22,7 +26,7 @@ public class Task {
      * @return Status icon string.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     /** Returns a string with a task and its doneness.

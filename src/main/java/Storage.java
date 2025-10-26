@@ -75,7 +75,7 @@ public class Storage {
         String doneStatus = task.isDone ? "1" : "0";
         if (task instanceof ToDo){
             return "T | " + doneStatus + " | "+ task.description;
-        } else if (task instanceof Deadline dTask){ //to access the "by" field
+        } else if (task instanceof Deadline dTask){
             return "D | " + doneStatus + " | "+ task.description + " | " + dTask.by;
         } else if (task instanceof Event eTask){
             return "E | " + doneStatus + " | "+ task.description + " | " + eTask.from + " to " + eTask.to;
