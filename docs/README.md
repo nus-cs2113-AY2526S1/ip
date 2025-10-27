@@ -1,30 +1,57 @@
-# Duke User Guide
+# Ben User Guide
 
-// Update the title above to match the actual product name
-
-// Product screenshot goes here
-
-// Product intro goes here
+Ben is a task management chatbot that helps you keep track of your todos, deadlines, and events — all from your command line.
 
 ## Adding deadlines
 
-// Describe the action and its outcome.
+Adds a task that must be done before/by a specific date.
 
-// Give examples of usage
+**Format:**
 
-Example: `keyword (optional arguments)`
+deadline DESCRIPTION /by DATE
 
-// A description of the expected outcome goes here
-
-```
-expected output
-```
-
-## Feature ABC
-
-// Feature details
+**Example:**
+deadline return book /by June 6th
 
 
-## Feature XYZ
+## Add an Event
+Adds a task that occurs at a specific time.
 
-// Feature details
+**Format:**
+event DESCRIPTION /from start DATE AND TIME /to end DATE AND TIME
+
+**Example:**
+event project meeting /from 4 July 2pm /to 4 July 4pm
+
+
+## List Tasks
+Lists all tasks currently in your list.
+
+**Format:**  list
+
+## Add a Todo
+Adds a simple task without a date/time.
+
+**Format:**  
+todo DESCRIPTION
+
+**Example:**  
+todo read book
+
+## Mark a Task as Done
+Marks a specific task as completed.
+
+**Format:**  
+mark INDEX
+
+**Example:**  
+mark 2
+
+## Unmark a Task
+Marks a specific task as not done.
+
+**Format:**  
+unmark INDEX
+
+**Example:**  
+unmark 2
