@@ -1,0 +1,17 @@
+todo breakfast
+deadline lunch /by 12pm
+event dinner /from 6pm /to 7pm
+list
+mark 1
+list
+unmark 1
+list
+todo
+deadline
+event supper
+todo
+random
+mark number
+delete 1
+list
+bye
