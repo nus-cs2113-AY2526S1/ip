@@ -1,0 +1,8 @@
+deadline submitting CS2113 assignment /by 28th October 2359
+todo go to the gym
+event CS2040C exam /from 6pm to 8pm
+mark 2
+delete 2
+list
+print
+find assignment
