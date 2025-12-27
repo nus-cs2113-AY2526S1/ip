@@ -1,0 +1,70 @@
+package berry.parser;
+
+import berry.command.AddDeadlineCommand;
+import berry.command.AddEventCommand;
+import berry.command.AddTodoCommand;
+import berry.command.Command;
+import berry.command.DeleteCommand;
+import berry.command.ExitCommand;
+import berry.command.FindCommand;
+import berry.command.ListCommand;
+import berry.command.MarkCommand;
+import berry.data.BerryException;
+
+/**
+ * Handles the parsing of user input into structured commands and task details.
+ */
+public class Parser {
+    // extractCommand method inspired by
+    // https://github.com/nus-cs2113-AY2526S1/personbook/blob/master/src/main/java/seedu/personbook/parser/Parser.java
+
+    /**
+     * Returns the command specified by the user.
+     * <p>
+     * This method instantiates the appropriate {@link Command} subclass.
+     * If the command is invalid, an error message is displayed.
+     *
+     * @param userInput The full string entered by the user.
+     * @return a Command object that represents the user's command.
+     * @throws ArrayIndexOutOfBoundsException If the user's command is invalid.
+     */
+    public static Command extractCommand(String userInput) {
+        String[] words = userInput.split(" ", 2);   // split the input into command and details
+        try {
+            switch (words[0].trim()) {
+            case "list":
+                return new ListCommand();
+            case "todo":
+                return new AddTodoCommand(words[1]);
+            case "deadline":
+                return new AddDeadlineCommand(words[1]);
+            case "event":
+                return new AddEventCommand(words[1]);
+            case "unmark":
+                return new MarkCommand(words[1], false);
+            case "mark":
+                return new MarkCommand(words[1], true);
+            case "delete":
+                return new DeleteCommand(words[1]);
+            case "find":
+                return new FindCommand(words[1]);
+            case "bye":
+                return new ExitCommand();
+            default:
+                throw new BerryException("Sorry, I'm not sure what you want me to do ._.");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ArrayIndexOutOfBoundsException("Invalid command! Please enter the details required.");
+        }
+    }
+
+    /**
+     * Extracts the task details from the user input.
+     *
+     * @param taskDetailsInput The part of the user's input string that contains only the task details.
+     * @return an array of strings representing the extracted task details.
+     */
+    public static String[] splitDetails(String taskDetailsInput) {
+        return taskDetailsInput.split("/");
+    }
+}
