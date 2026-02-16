@@ -1,0 +1,8 @@
+Task 1
+todo Todo 1
+deadline Deadline 1 /by string
+event Event 1 /from string /to string
+list
+mark 3
+list
+bye
