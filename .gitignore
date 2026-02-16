@@ -1,7 +1,14 @@
+# Compiled class files
+*.class
+
 # IDEA files
 /.idea/
 /out/
 /*.iml
+src/main/java/META-INF/
+
+# Storage
+data/
 
 # Gradle build files
 /.gradle/
