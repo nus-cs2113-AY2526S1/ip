@@ -1,0 +1,35 @@
+package helio.command;
+
+import helio.ui.Ui;
+import helio.storage.Storage;
+import helio.task.TaskList;
+import helio.task.Deadline;
+
+/**
+ * Adds a {@code Deadline} task with a description and due date/time.
+ * Usage: {@code deadline <description> /by <yyyy-MM-dd[ HHmm]>}
+ */
+public class AddDeadlineCommand extends Command {
+    private final String args;
+
+    public AddDeadlineCommand(String args) {
+        this.args = args == null ? "" : args.trim();
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        String[] p = args.split("\\s*/by\\s*", 2);
+        if (p.length < 2 || p[0].trim().isEmpty() || p[1].trim().isEmpty()) {
+            ui.showError("Deadline must be: deadline <desc> /by <yyyy-MM-dd>");
+            return;
+        }
+        try {
+            Deadline t = new Deadline(p[0], p[1]); // parses LocalDate
+            tasks.addTask(t);
+            ui.showTaskAdded(t, tasks.size());
+            storage.save(tasks);
+        } catch (IllegalArgumentException ex) {
+            ui.showError(ex.getMessage());
+        }
+    }
+}
