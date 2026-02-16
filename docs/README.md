@@ -1,30 +1,123 @@
-# Duke User Guide
+# Bob User Guide
 
-// Update the title above to match the actual product name
+Bob is a simple task manager chatbot. You can add, list, mark, find, and delete tasks!
+There are 3 types of tasks:
+- **Todo** - a task to be done with no deadline
+- **Deadline** - a task that has a deadline
+- **Event** - a task that has a start and end time
+Commands:
 
-// Product screenshot goes here
-
-// Product intro goes here
-
-## Adding deadlines
-
-// Describe the action and its outcome.
-
-// Give examples of usage
-
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
-
+### 1. Add a Todo
 ```
-expected output
+todo DESCRIPTION
+```
+Adds a todo task.  
+Example:
+```
+todo read book
 ```
 
-## Feature ABC
+---
 
-// Feature details
+### 2. Add a Deadline
+```
+deadline DESCRIPTION /by DATE
+```
+Adds a task with a deadline.  
+Example:
+```
+deadline return book /by Sunday
+```
 
+---
 
-## Feature XYZ
+### 3. Add an Event
+```
+event DESCRIPTION /from START /to END
+```
+Adds an event task with start and end times.  
+Example:
+```
+event meeting /from 2pm /to 4pm
+```
 
-// Feature details
+---
+
+### 4. List all tasks
+```
+list
+```
+Shows all tasks you have added.  
+Example:
+```
+list
+```
+
+---
+
+### 5. Mark a task as done
+```
+mark TASK_NUMBER
+```
+Marks the given task as completed.  
+Example:
+```
+mark 2
+```
+
+---
+
+### 6. Unmark a task
+```
+unmark TASK_NUMBER
+```
+Marks the given task as **not done**.  
+Example:
+```
+unmark 2
+```
+
+---
+
+### 7. Delete a task
+```
+delete TASK_NUMBER
+```
+Deletes the task from the list.  
+Example:
+```
+delete 3
+```
+
+---
+
+### 8. Find tasks by keyword
+```
+find KEYWORD
+```
+Searches for tasks that contain the keyword.  
+Example:
+```
+find book
+```
+
+---
+
+### 9. Exit the program
+```
+bye
+```
+Closes Bob.  
+Example:
+```
+bye
+```
+
+---
+
+## Saving
+
+- Your tasks are automatically saved to a file (`data/bob.txt`).
+- When you run Bob again, it will load your previous tasks.
+
+---
