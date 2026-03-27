@@ -1,0 +1,29 @@
+package dennis.command;
+
+import dennis.storage.Storage;
+import dennis.task.Task;
+import dennis.taskList.TaskList;
+import dennis.ui.Ui;
+
+public class UnmarkCommand extends Command {
+    private Integer index;
+
+    public UnmarkCommand(Integer index) {
+        this.index = index;
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        // check that index is in bounds
+        if (index < 0 || index >= tasks.size()) {
+            String format = " unmark #\n" + " Where # is a valid task number\n";
+            ui.showErrorInvalidCommand("unmark " + (index+1), format);
+            return;
+        }
+
+        tasks.unmark(index);
+        Task unmarkedTask = tasks.get(index);
+        ui.showTaskUnmarked(unmarkedTask);
+        storage.save(tasks.getAll());
+    }
+}
