@@ -1,0 +1,14 @@
+task
+todo a
+todo b
+todo c
+deadline this /by then
+event soemthing /from now /to later
+list
+mark 1
+mark 3
+mark 1
+todo
+mark
+deadline
+event
