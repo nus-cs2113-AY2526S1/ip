@@ -1,0 +1,41 @@
+abcde
+list
+Todo
+Todo water plants
+abcde
+list
+Deadline
+Deadline test1
+Deadline test2 /by
+Deadline test3 /by arg
+deadline submit assignment /by 05/06/2023 2359
+abcde
+list
+Event
+Event test1
+Event test2 /from /to
+Event test3 /from arg /to
+Event test4 /from /to arg
+Event test5 /from arg1 /to arg2
+event concert /from 01/01/2025 1900 /to 01/01/2025 0000
+abcde
+list
+mark 4
+unmark 4
+mark 1
+mark 2
+mark 3
+mark 4
+unmark 1
+unmark 2
+unmark 3
+unmark 4
+find water
+find concert
+list
+delete 3
+delete 2
+delete 1
+list
+bye
+
