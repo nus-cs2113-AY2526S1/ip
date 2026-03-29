@@ -1,0 +1,15 @@
+Echo
+Hello World
+Esc
+D-mail
+This is a secret message
+El Psy Kongroo
+List
+todo finish homework
+deadline project /by Monday
+event party /from 6pm /to 9pm
+list
+mark 1
+unmark 1
+Bye
+Disconnect
