@@ -1,0 +1,2 @@
+T | 0 | gym
+E | 1 | gym with bro | 10pm | 11pm
