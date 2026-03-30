@@ -1,7 +1,54 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+  _____ _            _
+ / ____| |          (_)
+| |    | | _____   ___ ___
+| |    | |/ _ \ \ / / / __|
+| |____| | (_) \ V /| \__ \
+ \_____|_|\___/ \_/ |_|___/
+What do you want from me this time?
+__________________________________________________________
+1.[T][ ] wash dishes
+2.[D][ ] water the plants (by: Tuesday 4pm)
+__________________________________________________________
+Deleted all Tasks
+__________________________________________________________
+There are currently no active tasks!
+__________________________________________________________
+added: [T][ ] wash dishes
+You currently have 1 tasks in your list
+__________________________________________________________
+added: [T][ ] hang clothes
+You currently have 2 tasks in your list
+__________________________________________________________
+added: [D][ ] water the plants (by: Tuesday 4pm)
+You currently have 3 tasks in your list
+__________________________________________________________
+added: [E][ ] SC Meeting (from: 8pm to: 10pm)
+You currently have 4 tasks in your list
+__________________________________________________________
+Don't give me nonsense! Re-enter!
+__________________________________________________________
+1.[T][ ] wash dishes
+2.[T][ ] hang clothes
+3.[D][ ] water the plants (by: Tuesday 4pm)
+4.[E][ ] SC Meeting (from: 8pm to: 10pm)
+__________________________________________________________
+Marked Task 2 successfully!
+[T][X] hang clothes
+__________________________________________________________
+Marked Task 3 successfully!
+[D][X] water the plants (by: Tuesday 4pm)
+__________________________________________________________
+Deleted the task: 2.[T][X] hang clothes
+You currently have 3 tasks in your list
+__________________________________________________________
+Deleted the task: 3.[E][ ] SC Meeting (from: 8pm to: 10pm)
+You currently have 2 tasks in your list
+__________________________________________________________
+1.[T][ ] wash dishes
+2.[D][X] water the plants (by: Tuesday 4pm)
+__________________________________________________________
+Saving tasks to file...
+Successfully saved all Tasks
+__________________________________________________________
+Bye. Don't come again!
